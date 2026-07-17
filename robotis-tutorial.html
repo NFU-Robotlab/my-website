@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>階段三：Robotis 套件 - NFU IRS Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        /* 自訂動畫：模擬馬達輪子模式旋轉 */
+        @keyframes spin-clockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-counterclockwise {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        .animate-spin-cw {
+            animation: spin-clockwise var(--spin-duration, 2s) linear infinite;
+        }
+        .animate-spin-ccw {
+            animation: spin-counterclockwise var(--spin-duration, 2s) linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">NFU IRS Lab</span>
+                    <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-md border border-slate-700 hidden sm:inline-block">Robotis 訓練 v1.0</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="training.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                        ← 返回訓練首頁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Banner -->
+    <header class="bg-gradient-to-b from-slate-900 to-slate-950 text-white py-12 px-4 relative overflow-hidden border-b border-slate-800">
+        <!-- 背景幾何裝飾 -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.12),transparent_45%)]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="px-3 py-1 text-xs font-semibold bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20 uppercase tracking-wider">ROBOTIS SUITE & AX-12 MOTOR</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">階段三：Robotis 套件操作與程式控制</h1>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+                學習使用 RoboPlus 軟硬體套件，設定、偵錯並撰寫控制程式以控制智慧伺服馬達，為實體機械手臂與移動載具開發打下扎實基礎。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 快速導覽側邊欄 -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start space-y-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">頁面目錄</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="#roboplus-manager" class="block py-1.5 text-indigo-600 hover:text-indigo-800 font-medium transition-colors">🔌 一、RoboPlus Manager</a>
+                        </li>
+                        <li>
+                            <a href="#motor-modes" class="block py-1.5 text-slate-600 hover:text-indigo-600 pl-3 border-l border-slate-200 transition-colors">⚙️ 關節與輪子模式</a>
+                        </li>
+                        <li>
+                            <a href="#motor-simulator" class="block py-1.5 text-indigo-600 hover:text-indigo-800 font-semibold pl-3 border-l border-indigo-200 transition-colors">🎮 互動：馬達虛擬運作儀</a>
+                        </li>
+                        <li>
+                            <a href="#roboplus-task" class="block py-1.5 text-slate-600 hover:text-indigo-600 pl-3 border-l border-slate-200 transition-colors">📝 二、RoboPlus Task 撰寫</a>
+                        </li>
+                        <li>
+                            <a href="#code-example" class="block py-1.5 text-slate-600 hover:text-indigo-600 pl-6 border-l border-slate-200 transition-colors">💻 燒錄與按鈕控制範例</a>
+                        </li>
+                        <li>
+                            <a href="#troubleshooting" class="block py-1.5 text-slate-600 hover:text-indigo-600 pl-3 border-l border-slate-200 transition-colors">🛠️ UNKNOWN 馬達排障</a>
+                        </li>
+                        <li class="pt-2 border-t border-slate-100">
+                            <a href="#verification-section" class="block py-1.5 text-emerald-600 hover:text-emerald-800 font-bold transition-colors">🏆 階段驗收任務</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 內容主體 -->
+            <div class="lg:col-span-9 space-y-12">
+
+                <!-- 一、RoboPlus Manager -->
+                <section id="roboplus-manager" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <div class="bg-gradient-to-r from-indigo-600 to-blue-600 p-6 text-white">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🔌</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">一、RoboPlus Manager（硬體偵錯與設定）</h2>
+                                <p class="text-indigo-100 text-xs mt-0.5">控制器的硬體連線、馬達 ID 分配與運轉模式校準</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            在開始編寫動作邏輯前，我們必須先使用 RoboPlus Manager 與控制器進行通訊，檢測目前線路上的馬達狀態、ID 是否衝突，並進行初次轉向與模式測試。
+                        </p>
+
+                        <!-- 連接引導步驟 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">1</span>
+                                實機硬體連線配置
+                            </h4>
+                            <p class="text-slate-600 text-xs leading-relaxed pl-7">
+                                1. 準備一台 <strong>CM-530 控制器</strong>，以及至少一顆 <strong>AX-12(A) 序列智慧馬達</strong>。<br>
+                                2. 使用專用的 <strong>3-Pin 傳輸線</strong> 連接控制器與馬達（馬達可採用序列式 Daisy-chain 串接）。<br>
+                                3. 使用 USB 傳輸線將 CM-530 連接至電腦，接上 <strong>9V ~ 12V 電源</strong>，並將控制器上的電源切換開關開啟。
+                            </p>
+                            <div class="max-w-md mx-auto rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-white mt-2">
+                                <img src="https://1.bp.blogspot.com/-KLyF24RRlCA/YFwZQQzBexI/AAAAAAAAAfI/zHGCvbyp8cUegHPTCGWP7GrsAmfNpAJJQCPcBGAsYHg/w400-h299/MX530.png" alt="CM-530 連線示意" class="w-full h-auto" onerror="this.src='https://placehold.co/500x350/e2e8f0/64748b?text=CM-530+Controller+Setup'">
+                                <div class="p-2 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">▲ 實驗室常用的 CM-530 控制器</div>
+                            </div>
+                        </div>
+
+                        <!-- 軟體開啟與COM Port連接 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">2</span>
+                                軟體啟動與通訊序列埠連線
+                            </h4>
+                            <p class="text-slate-600 text-xs leading-relaxed pl-7">
+                                1. 開啟電腦上的 <strong>RoboPlus</strong> 主程式，在中間的標籤頁選取「BIOLOID」，並點擊 <strong>「RoboPlus Manager」</strong> 啟動連線視窗。
+                            </p>
+                            <div class="max-w-md mx-auto rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-white">
+                                <img src="https://1.bp.blogspot.com/-NrjL7EmsBL8/YFwZQRNncuI/AAAAAAAAAfI/zlktxG81QqcmCJUA5UF1wDcGbjiUEg6GwCPcBGAsYHg/s16000/%25E6%2593%25B7%25E5%258F%2596.PNG" alt="RoboPlus Manager 啟動" class="w-full h-auto" onerror="this.src='https://placehold.co/500x300/e2e8f0/64748b?text=RoboPlus+Launch+BIOLOID'">
+                                <div class="p-2 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">▲ RoboPlus 套件整合開發環境</div>
+                            </div>
+                            
+                            <p class="text-slate-600 text-xs leading-relaxed pl-7 mt-3">
+                                2. 在 RoboPlus Manager 視窗左上角的下拉選單中選取控制器的 COM Port。你可以在 Windows 的「裝置管理員 ➔ 連接埠 (COM 和 LPT)」中找到 COM 編號，或直接點選 <strong>「Auto Search」</strong> 讓程式自動偵測。<br>
+                                3. 確認 COM 設定正確後，按下旁邊的 <strong>「Connect」</strong> 開始通訊。
+                            </p>
+                            <div class="max-w-md mx-auto rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-white">
+                                <img src="https://1.bp.blogspot.com/--1lPrJ4TLlI/YFwZQQSyDrI/AAAAAAAAAfI/W4CTYcriRhcmcD4LtH15Ap_gpR-9jmwqQCPcBGAsYHg/s16000/RP-COM.png" alt="COM Port 選擇" class="w-full h-auto" onerror="this.src='https://placehold.co/500x120/e2e8f0/64748b?text=RoboPlus+Manager+COM+Select'">
+                                <div class="p-2 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">▲ 通訊埠連線選單</div>
+                            </div>
+                        </div>
+
+                        <!-- 連線成功與馬達模式 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">3</span>
+                                取得馬達清單與模式測試
+                            </h4>
+                            <p class="text-slate-600 text-xs leading-relaxed pl-7">
+                                連線成功後，左側會列出當前 CM-530 串接到的所有裝置資訊。對目標馬達點擊後即可進行設定。
+                            </p>
+                            <div class="max-w-md mx-auto rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-white">
+                                <img src="https://1.bp.blogspot.com/-m_1ViZJsmRs/YFwZQWqUQPI/AAAAAAAAAfI/O1eDZgPS6Sk8gjqylhBmEh0ZdvILIj2KACPcBGAsYHg/s16000/RP-Connected1.png" alt="RoboPlus Manager 連線成功" class="w-full h-auto" onerror="this.src='https://placehold.co/500x300/e2e8f0/64748b?text=Manager+Connected+List'">
+                                <div class="p-2 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">▲ 連線成功之馬達清單</div>
+                            </div>
+
+                            <p class="text-slate-600 text-xs leading-relaxed pl-7 mt-4" id="motor-modes">
+                                <strong>AX-12(A) 智慧序列馬達具有兩種關鍵控制模式：</strong>
+                            </p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-7 mt-2">
+                                <div class="p-3 bg-white rounded-lg border border-slate-200">
+                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-bold text-[10px]">JOINT 關節模式</span>
+                                    <h5 class="font-bold text-xs text-slate-800 mt-2">適合機器人關節</h5>
+                                    <p class="text-slate-500 text-[11px] mt-1 leading-relaxed">
+                                        角度範圍：<strong>0° ~ 300°</strong><br>
+                                        對應控制數值：<strong>0 ~ 1023</strong><br>
+                                        控制中心點（150°）：<strong>512</strong><br>
+                                        <span class="text-indigo-600 font-semibold">⚠️ 機械手臂組裝前，務必先將馬達轉至 512 物理中心點，否則會跑位！</span>
+                                    </p>
+                                    <img src="https://1.bp.blogspot.com/-onR6Fm_Fn0k/YFwZQa-88pI/AAAAAAAAAfI/fBvNWGtg2IAVk6BHGyZXbDb9E01BjLC6wCPcBGAsYHg/s16000/RP-Connected3.png" alt="關節模式" class="w-full h-auto mt-2 rounded border" onerror="this.src='https://placehold.co/400x200/e2e8f0/64748b?text=Joint+Mode+Panel'">
+                                </div>
+
+                                <div class="p-3 bg-white rounded-lg border border-slate-200">
+                                    <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded font-bold text-[10px]">WHEEL 輪子模式</span>
+                                    <h5 class="font-bold text-xs text-slate-800 mt-2">適合車輪與螺旋槳</h5>
+                                    <p class="text-slate-500 text-[11px] mt-1 leading-relaxed">
+                                        支援 <strong>360° 連續無間斷旋轉</strong><br>
+                                        轉向控制：<strong>CW (順時針)</strong> 或 <strong>CCW (逆時針)</strong><br>
+                                        速度控制範圍：<strong>0 ~ 1023</strong> (0代表停止轉動，1023代表全速運轉)<br>
+                                        <span class="text-indigo-600 font-semibold">適合用於動力行進輪。</span>
+                                    </p>
+                                    <img src="https://1.bp.blogspot.com/-1j9aCzzWjI0/YFwZQX8-fII/AAAAAAAAAfI/nDdeqI7pNdczM6KYbvhsH5AriKAC1go_QCPcBGAsYHg/s16000/RP-whell.png" alt="輪子模式" class="w-full h-auto mt-2 rounded border" onerror="this.src='https://placehold.co/400x200/e2e8f0/64748b?text=Wheel+Mode+Panel'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 警告提示 -->
+                        <div class="bg-red-50 border-l-4 border-red-500 p-3.5 rounded-r-xl text-xs text-red-700">
+                            🚨 <strong>連線釋放原則：</strong> 使用完 RoboPlus Manager 進行馬達校正與 ID 檢視後，<strong>請務必點擊 Disconnect 進行斷線</strong>！否則 CM-530 的序列通訊埠會被此視窗持續佔用，導致接下來的 Task 程式燒錄或 C# 連線出現「通訊埠拒絕存取」的錯誤。
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 互動式：馬達虛擬運作儀 -->
+                <section id="motor-simulator" class="bg-slate-900 text-white rounded-2xl shadow-lg border border-slate-800 overflow-hidden scroll-mt-20">
+                    <div class="p-6 bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🎮</span>
+                            <div>
+                                <h3 class="text-lg font-bold">AX-12(A) 控制暫存器與運轉虛擬模擬器</h3>
+                                <p class="text-xs text-indigo-400 mt-0.5">免插電！透過拉桿，即時感受關節 0-1023 與輪子模式的控制數值變化與實際物理運作</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-8">
+                        <!-- 模式切換鈕 -->
+                        <div class="flex justify-center gap-3">
+                            <button id="sim-btn-joint" onclick="toggleSimMode('joint')" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-lg text-xs transition-all shadow-md">
+                                🔄 JOINT 關節控制模式
+                            </button>
+                            <button id="sim-btn-wheel" onclick="toggleSimMode('wheel')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-xs transition-all">
+                                ⚙️ WHEEL 輪子連續旋轉
+                            </button>
+                        </div>
+
+                        <!-- 模擬主操作介面 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            
+                            <!-- 左側控制面板 -->
+                            <div class="space-y-6">
+                                <!-- Joint Mode Controller -->
+                                <div id="panel-joint" class="space-y-4">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold text-indigo-400">控制暫存器：Goal Position (暫存器地址 30)</span>
+                                        <span class="bg-indigo-900/50 text-indigo-300 px-2 py-0.5 rounded font-mono border border-indigo-800/50">0 - 1023</span>
+                                    </div>
+                                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-center">
+                                        <div class="text-3xl font-mono font-bold text-indigo-400" id="joint-val-display">512</div>
+                                        <div class="text-[10px] text-slate-400 mt-1">對應實際物理角度：<span id="joint-deg-display" class="font-bold text-white">150.0°</span> (中心點)</div>
+                                    </div>
+                                    <div>
+                                        <input type="range" id="joint-slider" min="0" max="1023" value="512" oninput="updateJointSimulator(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                                        <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                                            <span>0 (0°)</span>
+                                            <span>512 (150°)</span>
+                                            <span>1023 (300°)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Wheel Mode Controller -->
+                                <div id="panel-wheel" class="space-y-4 hidden">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold text-emerald-400">控制暫存器：Moving Speed (暫存器地址 32)</span>
+                                        <span class="bg-emerald-950/50 text-emerald-300 px-2 py-0.5 rounded font-mono border border-emerald-900/50">0 - 1023</span>
+                                    </div>
+                                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-center">
+                                        <div class="text-3xl font-mono font-bold text-emerald-400" id="wheel-val-display">0</div>
+                                        <div class="text-[10px] text-slate-400 mt-1">
+                                            旋轉方向：<span id="wheel-dir-display" class="font-bold text-white">停止 (Stop)</span> | 
+                                            模擬速度：<span id="wheel-speed-pct" class="font-bold text-white">0%</span>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <label class="text-[11px] text-slate-400">旋轉方向 (Direction)：</label>
+                                            <div class="flex gap-2 mt-1">
+                                                <button id="dir-cw" onclick="changeWheelDir('CW')" class="flex-1 py-1.5 bg-emerald-600 text-white rounded text-[10px] font-bold transition-colors">CW (順時針旋轉)</button>
+                                                <button id="dir-ccw" onclick="changeWheelDir('CCW')" class="flex-1 py-1.5 bg-slate-800 text-slate-400 rounded text-[10px] font-bold transition-colors">CCW (逆時針旋轉)</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="text-[11px] text-slate-400">速度數值拉桿：</label>
+                                            <input type="range" id="wheel-slider" min="0" max="1023" value="0" oninput="updateWheelSimulator(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                                            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                                                <span>0 (停止)</span>
+                                                <span>512 (中速)</span>
+                                                <span>1023 (極速)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 右側 SVG 物理馬達繪圖與動畫 -->
+                            <div class="flex flex-col items-center justify-center bg-slate-950 p-6 rounded-2xl border border-slate-800 min-h-[250px] relative">
+                                <span class="absolute top-3 right-3 text-[10px] bg-slate-900 border border-slate-800 text-slate-400 px-2 py-0.5 rounded font-mono">馬達實體視覺狀態</span>
+                                
+                                <div class="w-40 h-40 relative">
+                                    <!-- 馬達方框主體 -->
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <!-- 黑盒主體 -->
+                                        <rect x="15" y="15" width="70" height="70" rx="6" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+                                        <rect x="25" y="5" width="50" height="10" rx="2" fill="#0f172a" opacity="0.8"/>
+                                        <circle cx="50" cy="50" r="38" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+                                        
+                                        <!-- 三個螺絲固定孔 -->
+                                        <circle cx="25" cy="25" r="3" fill="#334155"/>
+                                        <circle cx="75" cy="25" r="3" fill="#334155"/>
+                                        <circle cx="25" cy="75" r="3" fill="#334155"/>
+                                        <circle cx="75" cy="75" r="3" fill="#334155"/>
+                                    </svg>
+
+                                    <!-- 旋轉輸出舵盤 (Rotational Horn) - 由 JS 控制旋轉角度與動畫 -->
+                                    <div id="motor-horn" class="absolute inset-0 flex items-center justify-center" style="transform: rotate(0deg); transition: transform 0.1s ease-out;">
+                                        <svg viewBox="0 0 100 100" class="w-28 h-28">
+                                            <!-- 舵盤圓盤 -->
+                                            <circle cx="50" cy="50" r="28" fill="#475569" stroke="#64748b" stroke-width="2"/>
+                                            <circle cx="50" cy="50" r="16" fill="#1e293b"/>
+                                            
+                                            <!-- 中心齒軸 -->
+                                            <circle cx="50" cy="50" r="6" fill="#94a3b8"/>
+                                            <!-- 齒輪凹凸刻線 -->
+                                            <line x1="50" y1="22" x2="50" y2="28" stroke="#f43f5e" stroke-width="3" stroke-linecap="round"/>
+                                            <circle cx="50" cy="25" r="2" fill="#fff"/>
+                                            
+                                            <line x1="22" y1="50" x2="28" y2="50" stroke="#334155" stroke-width="2"/>
+                                            <line x1="72" y1="50" x2="78" y2="50" stroke="#334155" stroke-width="2"/>
+                                            <line x1="50" y1="72" x2="50" y2="78" stroke="#334155" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-[11px] text-slate-400 mt-4 text-center">
+                                    🔴 <strong class="text-rose-500">紅色指針</strong> 代表馬達 0° (控制數值為 0) 的起始基準點位置
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 二、RoboPlus Task -->
+                <section id="roboplus-task" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 text-white border-b border-slate-700">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">📝</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">二、RoboPlus Task（結構化指令程式撰寫）</h2>
+                                <p class="text-slate-400 text-xs mt-0.5">如何透過樹狀結構邏輯，不寫複雜 C/C++ 即能快速燒錄邏輯</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            與一般嵌入式系統需手寫程式碼不同，Robotis 提供圖形與指令混合的 <strong>RoboPlus Task</strong>。我們只需要透過「雙擊空行 ➔ 選擇語法塊 ➔ 設定暫存器數值」即能自動編譯成燒錄檔。
+                        </p>
+
+                        <!-- Step by Step -->
+                        <div class="space-y-6">
+                            <!-- Step 1 -->
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center font-mono text-xs">1</div>
+                                    <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-800">建立專案與控制器綁定</h4>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                        在 RoboPlus 標籤頁開啟 <strong>RoboPlus Task</strong>。點選任意一行，在跳出的視窗中將 Firmware Version 選擇為 <code>1.0</code>，再於下方控制器中選擇 <strong>「CM-530」</strong> 以綁定對應的暫存器腳位。
+                                    </p>
+                                    <div class="mt-3 rounded-lg overflow-hidden border border-slate-200 max-w-sm">
+                                        <img src="https://1.bp.blogspot.com/-su1GYBQGivQ/YF1piGrZh_I/AAAAAAAAAhY/IMOPP18ZvMY8tGLXTxZlEa_2Os0gx-iMwCPcBGAsYHg/s16000/Version.png" alt="選擇CM-530" class="w-full h-auto" onerror="this.src='https://placehold.co/400x200/e2e8f0/64748b?text=Select+CM-530+in+Task'">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center font-mono text-xs">2</div>
+                                    <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-800">理解核心語法結構與功能</h4>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                        雙擊空白行時會跳出指令清單。在開發機械手臂時，最基礎且必須包含的框架如下：
+                                    </p>
+                                    <div class="mt-3 rounded-lg overflow-hidden border border-slate-200 max-w-sm">
+                                        <img src="https://1.bp.blogspot.com/-XglEUmE-giU/YF1rnMYkdBI/AAAAAAAAAiI/j302mWALcugjGppKnY1myv58q--ltvoDQCPcBGAsYHg/s16000/%25E6%2593%25B7%25E5%258F%2596.PNG" alt="語法清單" class="w-full h-auto" onerror="this.src='https://placehold.co/400x200/e2e8f0/64748b?text=Task+Instructions+Menu'">
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-xs">
+                                        <div class="p-3 bg-slate-50 rounded border border-slate-200">
+                                            <code class="font-bold text-indigo-700">START PROGRAM</code>
+                                            <p class="text-slate-500 text-[11px] mt-1">程式的核心進入點。如同 C 語言的 <code class="font-mono bg-white px-0.5 border rounded">main()</code>，所有指令必須置於其下方。</p>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 rounded border border-slate-200">
+                                            <code class="font-bold text-indigo-700">ENDLESS LOOP</code>
+                                            <p class="text-slate-500 text-[11px] mt-1">無限循環區。所有即時監控、感測器讀取與狀態更新動作，均需放置於此循環中。</p>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 rounded border border-slate-200">
+                                            <code class="font-bold text-indigo-700">? = ? (指定狀態)</code>
+                                            <p class="text-slate-500 text-[11px] mt-1">變數或暫存器設定。例如：將馬達 1 號 (ID 1) 的 Goal Position 設定為指定數值。</p>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 rounded border border-slate-200">
+                                            <code class="font-bold text-indigo-700">WAIT WHILE (延遲等待)</code>
+                                            <p class="text-slate-500 text-[11px] mt-1">搭配內建的 <strong>Timer</strong> 作為 Delay。設定 Timer 值後，程式會暫停並等待計時結束才繼續下一動作。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex gap-4" id="code-example">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 h-6 bg-slate-800 text-white rounded-full flex items-center justify-center font-mono text-xs">3</div>
+                                </div>
+                                <div class="w-full">
+                                    <h4 class="font-bold text-sm text-slate-800">範例程式碼實作：按鈕控制馬達</h4>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                        以下是一個經典的控制案例：讀取 CM-530 上的方向按鈕，以不同旋轉方向和速度來驅動馬達。
+                                    </p>
+                                    
+                                    <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 mt-3 max-w-2xl text-xs text-indigo-900 space-y-2">
+                                        <p class="font-bold">🎯 程式邏輯設定：</p>
+                                        <ul class="list-disc list-inside space-y-1 pl-1 text-[11px] text-indigo-800">
+                                            <li>當按下控制器上的 <strong>「U（上）」</strong> 鍵 ➔ 驅動 ID 1 馬達以 <strong>512 速度 順時針 (CW) 旋轉</strong>。</li>
+                                            <li>當按下控制器上的 <strong>「D（下）」</strong> 鍵 ➔ 驅動 ID 1 馬達以 <strong>512 速度 逆時針 (CCW) 旋轉</strong>。</li>
+                                            <li>其餘情況（未按按鍵） ➔ <strong>馬達停止旋轉</strong> (速度設為 0)。</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 max-w-2xl">
+                                        <div class="rounded-lg overflow-hidden border border-slate-200 bg-slate-50 p-2">
+                                            <img src="https://1.bp.blogspot.com/-PqLOREtsteA/YF11KeTJklI/AAAAAAAAAjM/jm4EjYU0oiUArE4GGUVeX4QGnL7TFfCwACPcBGAsYHg/s16000/%25E6%2593%25B7%25E5%258F%2596-example.PNG" alt="按鈕控制碼" class="w-full h-auto" onerror="this.src='https://placehold.co/300x180/e2e8f0/64748b?text=Task+Example+Code'">
+                                            <div class="p-1.5 text-[10px] text-slate-500 text-center italic mt-1">▲ 按鍵條件控制範例</div>
+                                        </div>
+                                        <div class="rounded-lg overflow-hidden border border-slate-200 bg-slate-50 p-2">
+                                            <img src="https://1.bp.blogspot.com/-cxyDcKVqrlM/YF11KRAybII/AAAAAAAAAjM/lvRjWxbMvrk3xqPMiYBfFr9p34soQtVqgCPcBGAsYHg/w640-h102/%25E6%2593%25B7%25E5%258F%2596-delay.PNG" alt="延遲實作" class="w-full h-auto" onerror="this.src='https://placehold.co/300x180/e2e8f0/64748b?text=Task+Delay+Code'">
+                                            <div class="p-1.5 text-[10px] text-slate-500 text-center italic mt-1">▲ 定時器 (Timer) 延遲寫法</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 燒錄步驟 -->
+                                    <div class="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-2xl space-y-2">
+                                        <h5 class="text-xs font-bold text-slate-700">🚀 燒錄與實機運行程序</h5>
+                                        <ol class="list-decimal list-inside text-[11px] text-slate-600 space-y-1.5 pl-1 leading-relaxed">
+                                            <li>完成語法撰寫後，點選上方工具列的 <strong>紅色勾勾 (✔️)</strong> 進行語法靜態檢測。</li>
+                                            <li>點擊 <strong>綠色向下箭頭 (⬇️)</strong> 燒錄 G-Code 直至燒錄完成。</li>
+                                            <li><strong>控制器程序啟動：</strong><br>
+                                                • 連續按壓 CM-530 上的 <strong>「MODE」</strong> 按鈕，切換模式直到左下角的 <strong>「PLAY」指示燈亮起紅燈</strong>。<br>
+                                                • 按下右側的 <strong>「START」</strong> 啟動，馬達即會進入程式設定邏輯，此時按壓 U/D 按鈕即可實現實機運轉控制！
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 故障排除：UNKNOWN馬達排除 -->
+                <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <div class="bg-red-950 text-white p-6 border-b border-red-900">
+                        <h3 class="text-lg font-bold flex items-center gap-2">
+                            <span>🛠️</span> 實驗室常見故障排除：解決 UNKNOWN 馬達錯誤
+                        </h3>
+                        <p class="text-red-300 text-xs mt-0.5">控制器通訊時，Manager 無法辨識馬達型號並顯示 UNKNOWN 之自我修復指南</p>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6 text-xs">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            這是實驗室學弟妹<strong>最常遇到的硬體故障</strong>！當馬達的韌體混亂，或鮑率 (Baud Rate) 與 CM-530 預設不相符時，RoboPlus Manager 會在連線清單中將馬達標記為黃色的 <strong>UNKNOWN (未知裝置)</strong>，這會導致 Task 程式與 SDK 無法讀取任何暂存器值。
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <!-- 排障步驟 -->
+                            <div class="space-y-3">
+                                <h4 class="font-bold text-slate-800 text-sm">💡 UNKNOWN 馬達韌體修復 SOP：</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-slate-600 leading-relaxed pl-1">
+                                    <li>關閉控制器電源，拔掉所有其他無關的馬達線路，<strong>只保留該顆故障馬達單獨連接 CM-530</strong>。</li>
+                                    <li>開啟 RoboPlus Manager，點選上方工具列的 <strong>「Firmware Recovery (韌體恢復)」</strong> 工具。</li>
+                                    <li>照著畫面上的精靈指示，拔除電源插頭後再重新接上，強制控制器發送特殊的重設引導廣播。</li>
+                                    <li>選取你的馬達型號 (AX-12A)，讓軟體自動為馬達<strong>重新刷寫全新原廠韌體</strong>，並重置 ID 至 1 號、鮑率還原為預設的 1 Mbps。</li>
+                                </ol>
+                            </div>
+
+                            <!-- 影片教學 -->
+                            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-3">
+                                <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded font-bold text-[10px]">🎥 故障排除實機錄影教學</span>
+                                <p class="text-[11px] text-slate-500 leading-relaxed">
+                                    當馬達找不到時不要慌張，點擊下方連結觀看實驗室錄製的 UNKNOWN 馬達修復操作流程：
+                                </p>
+                                <a href="https://youtu.be/ixw8P0qHBxM?si=qDkmqG8t_7aFLnug" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2 font-bold text-xs transition-colors shadow shadow-red-200">
+                                    📺 觀看 UNKNOWN 馬達解決教學影片 ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 驗收項目 -->
+                <section id="verification-section" class="bg-gradient-to-br from-emerald-950 to-teal-950 text-white rounded-2xl shadow-xl border-2 border-emerald-500 overflow-hidden scroll-mt-20">
+                    <div class="p-6 bg-emerald-900/50 border-b border-emerald-800">
+                        <h3 class="text-lg font-bold flex items-center gap-2 text-emerald-400">
+                            🏆 階段驗收：驗收-3 控制機械手臂
+                        </h3>
+                        <p class="text-emerald-200 text-xs mt-0.5">驗收前請先與負責學長姐預約實機操作評分時間</p>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-4 text-xs leading-relaxed text-slate-300">
+                        <p class="text-sm">
+                            利用 RoboPlus 軟硬體套件控制你先前在 3D 建模與設備加工階段中，<strong>自行組裝與製作完成的實體機械手臂（需帶有夾爪或雙節連桿機構）</strong>。
+                        </p>
+
+                        <div class="bg-black/30 p-4 rounded-xl border border-emerald-800/50 space-y-3">
+                            <h4 class="font-bold text-emerald-400 text-sm">🎯 驗收合格基準：</h4>
+                            <ul class="list-disc list-inside space-y-2 text-slate-300">
+                                <li><strong>基本連線 (20%)</strong>：能使用 RoboPlus Manager 正確讀取所有機械手臂上所安裝之 AX-12(A) 馬達 ID 與狀態。</li>
+                                <li><strong>關節初始化 (30%)</strong>：程式啟動時，機械手臂的所有關節必須自動回歸預設的初始站立姿態（對應 Goal Position 各項暫存器位置設定）。</li>
+                                <li><strong>基本動作展示 (50%)</strong>：新進人員撰寫 RoboPlus Task 條件程式，按壓 CM-530 上的方向控制按鈕，能展示機械手臂做出<strong>關節彎曲、夾爪開合或抓取物體</strong>的控制動作。</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-emerald-900/10 border-l-2 border-emerald-500 rounded text-[11px] text-emerald-300 space-y-1">
+                            <strong>🔩 螺絲歸類與分類記錄（非常重要）：</strong>
+                            <p>在組裝與後續拆解你的手臂零件時，<strong>必須將你所用到的所有螺絲規格（例如 M2 × 10mm、M3 × 8mm 等）以列表形式記錄在你的筆記或報告中</strong>，以便在拆解復歸後，能夠將所有螺絲按照正確的長度規格分類放回零件盒中。未確實分類將直接取消驗收資格！</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾宣告 -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-500 py-8 text-center text-xs">
+        <p>© 2026 國立虎尾科技大學 智能與機器人系統實驗室 - NFU IRS Lab. All Rights Reserved.</p>
+        <p class="mt-2 text-slate-600">本教學網頁內容與安全機制為實驗室內部教育訓練專屬，未經授權禁止外流。</p>
+    </footer>
+
+    <!-- JavaScript 互動功能邏輯 -->
+    <script>
+        // 馬達模擬器狀態變數
+        let simMode = 'joint'; // 'joint' or 'wheel'
+        let wheelDirection = 'CW'; // 'CW' or 'CCW'
+        let wheelSpeed = 0;
+
+        // 頁面初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateJointSimulator(512); // 預設 512
+        });
+
+        // 1. 模式切換邏輯
+        function toggleSimMode(mode) {
+            simMode = mode;
+            const btnJoint = document.getElementById('sim-btn-joint');
+            const btnWheel = document.getElementById('sim-btn-wheel');
+            const panelJoint = document.getElementById('panel-joint');
+            const panelWheel = document.getElementById('panel-wheel');
+            const motorHorn = document.getElementById('motor-horn');
+
+            if (mode === 'joint') {
+                btnJoint.className = "px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-lg text-xs transition-all shadow-md";
+                btnWheel.className = "px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-xs transition-all";
+                panelJoint.classList.remove('hidden');
+                panelWheel.classList.add('hidden');
+                
+                // 停止連續旋轉
+                motorHorn.style.animation = 'none';
+                updateJointSimulator(document.getElementById('joint-slider').value);
+            } else {
+                btnJoint.className = "px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-xs transition-all";
+                btnWheel.className = "px-5 py-2.5 bg-emerald-600 text-white font-bold rounded-lg text-xs transition-all shadow-md";
+                panelJoint.classList.add('hidden');
+                panelWheel.classList.remove('hidden');
+                
+                updateWheelSimulator(document.getElementById('wheel-slider').value);
+            }
+        }
+
+        // 2. 關節模式拉桿控制
+        function updateJointSimulator(val) {
+            document.getElementById('joint-val-display').innerText = val;
+            
+            // 0 - 1023 對應 0° - 300°
+            const angle = (val * 300 / 1023).toFixed(1);
+            document.getElementById('joint-deg-display').innerText = `${angle}°`;
+
+            // SVG 轉向 (CSS 旋轉屬性)
+            const motorHorn = document.getElementById('motor-horn');
+            // 我們將 0 點對應旋轉 -150deg 到 150deg 範圍，視覺會比較對稱，中心點剛好朝上
+            const rotDegrees = (val * 300 / 1023) - 150;
+            motorHorn.style.transform = `rotate(${rotDegrees}deg)`;
+        }
+
+        // 3. 輪子模式方向與速度拉桿控制
+        function changeWheelDir(dir) {
+            wheelDirection = dir;
+            const btnCw = document.getElementById('dir-cw');
+            const btnCcw = document.getElementById('dir-ccw');
+
+            if (dir === 'CW') {
+                btnCw.className = "flex-1 py-1.5 bg-emerald-600 text-white rounded text-[10px] font-bold transition-colors";
+                btnCcw.className = "flex-1 py-1.5 bg-slate-800 text-slate-400 rounded text-[10px] font-bold transition-colors";
+            } else {
+                btnCw.className = "flex-1 py-1.5 bg-slate-800 text-slate-400 rounded text-[10px] font-bold transition-colors";
+                btnCcw.className = "flex-1 py-1.5 bg-emerald-600 text-white rounded text-[10px] font-bold transition-colors";
+            }
+            updateWheelSimulator(document.getElementById('wheel-slider').value);
+        }
+
+        function updateWheelSimulator(val) {
+            wheelSpeed = parseInt(val);
+            document.getElementById('wheel-val-display').innerText = val;
+
+            const speedPct = Math.round((wheelSpeed / 1023) * 100);
+            document.getElementById('wheel-speed-pct').innerText = `${speedPct}%`;
+
+            const motorHorn = document.getElementById('motor-horn');
+
+            if (wheelSpeed === 0) {
+                document.getElementById('wheel-dir-display').innerText = "停止 (Stop)";
+                motorHorn.style.animation = 'none';
+            } else {
+                const dirText = wheelDirection === 'CW' ? '順時針 (Clockwise)' : '逆時針 (Counterclockwise)';
+                document.getElementById('wheel-dir-display').innerText = dirText;
+
+                // 速度越高，動畫週期秒數越短
+                // 1023 ➔ 0.3s (超快), 1 ➔ 10s (極慢)
+                const duration = 10 - (wheelSpeed / 1023) * 9.7;
+                motorHorn.style.setProperty('--spin-duration', `${duration}s`);
+                
+                if (wheelDirection === 'CW') {
+                    motorHorn.className = "absolute inset-0 flex items-center justify-center animate-spin-cw";
+                } else {
+                    motorHorn.className = "absolute inset-0 flex items-center justify-center animate-spin-ccw";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
