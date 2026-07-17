@@ -154,7 +154,7 @@
                                     <div class="pb-4">
                                         <h4 class="font-bold text-sm text-slate-800">軟體端繪圖與匯出</h4>
                                         <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                                            在 Onshape、AutoCAD 或 Illustrator 中完成 2D 向量設計。請確保線段都是<strong>封閉曲線</strong>，並匯出成 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.dxf</code> 或 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.svg</code> 格式。
+                                            在 Onshape、Inventor中完成 2D 向量設計。請確保線段都是<strong>封閉曲線</strong>，並匯出成 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.dxf</code> 或 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.svg</code> 格式。
                                         </p>
                                     </div>
                                 </div>
@@ -165,12 +165,25 @@
                                         <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
                                         <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
                                     </div>
-                                    <div class="pb-4">
-                                        <h4 class="font-bold text-sm text-slate-800">匯入 LightBurn / RDWorks 設定參數</h4>
+                                    <div class="pb-4 w-full">
+                                        <h4 class="font-bold text-sm text-slate-800">雷切機開機</h4>
                                         <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                                            開啟雷切排版軟體，依材質厚度設定「速度 (Speed)」與「最大功率 (Max Power)」。
-                                            <br>💡 <strong class="text-slate-700">經驗公式：</strong> 壓克力雕刻建議高速度低功率；3mm 木板切割通常設定速度 15-20 mm/s、功率 55%-65%。
+                                            開機前先確認鑰匙開關是否已開啟，且緊急停機按鈕「STOP」沒有被按下。<br>
+                                            雷切機相關的設備總共有 4 個，使用時請直接按下總開關即可，分別為：
                                         </p>
+                                        <ul class="list-disc list-inside text-xs text-slate-600 mt-2 space-y-1 pl-2 font-medium">
+                                            <li>💧 水冷機</li>
+                                            <li>🌀 水冷液幫補</li>
+                                            <li>🌪️ 排風扇</li>
+                                            <li>⚡ 雷射切割機</li>
+                                        </ul>
+                                        <!-- 圖片放置區 -->
+                                        <div class="mt-4 max-w-md rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+                                            <img src="螢幕擷取畫面 2026-07-17 145517.png" alt="雷切開機總開關與關聯設備" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/600x400/e2e8f0/64748b?text=Please+Upload+Your+Image'">
+                                            <div class="p-2.5 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">
+                                                💡 提示：你可以將代碼中的 <code>src="https://placehold.co/..."</code> 替換為你的實機照片路徑（例如 <code>images/laser-switch.jpg</code>）
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
