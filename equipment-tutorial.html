@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設備教學與安全守則 - NFU IRS Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent">NFU IRS Lab</span>
+                    <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-md border border-slate-700 hidden sm:inline-block">設備指南 v1.2</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="training.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                        ← 返回訓練首頁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Banner -->
+    <header class="bg-slate-900 text-white py-12 px-4 relative overflow-hidden border-b border-slate-800">
+        <!-- 背景幾何裝飾 -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12),transparent_45%)]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider">LAB EQUIPMENT MANUAL</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">實驗室基本設備操作指南</h1>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+                在設計好機器人 3D 模型後，必須透過雷射切割機與 3D 列印機將其實體化。操作高危險或精密機台前，請務必詳閱並嚴格遵守安全規範。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 快速導覽側邊欄 (Desktop Only) -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start space-y-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">頁面目錄</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="#laser-cutter" class="block py-1.5 text-blue-600 hover:text-blue-800 font-medium transition-colors">⚡ 一、雷射切割機守則</a>
+                        </li>
+                        <li>
+                            <a href="#forbidden-materials" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🛑 禁切材質資料庫</a>
+                        </li>
+                        <li>
+                            <a href="#laser-sop" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🛠️ 雷切標準操作流程</a>
+                        </li>
+                        <li>
+                            <a href="#safety-quiz-section" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">📝 安全線上測驗</a>
+                        </li>
+                        <li class="pt-2 border-t border-slate-100">
+                            <a href="#3d-printer" class="block py-1.5 text-blue-600 hover:text-blue-800 font-medium transition-colors">🖨️ 二、3D 列印機指南</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 內容主體 -->
+            <div class="lg:col-span-9 space-y-12">
+
+                <!-- 一、雷射切割機 (Laser Cutter) -->
+                <section id="laser-cutter" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <!-- 標題欄 -->
+                    <div class="bg-gradient-to-r from-red-500 to-orange-500 p-6 text-white">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">⚡</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">一、雷射切割機操作與安全守則</h2>
+                                <p class="text-red-100 text-xs mt-0.5">高功率 CO2 雷射具備極高起火與劇毒煙霧風險，操作時請隨時保持警覺</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <!-- 核心三大安全鐵則 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-red-50 border border-red-200 rounded-xl p-4 flex flex-col justify-between">
+                                <span class="text-2xl mb-2">👁️</span>
+                                <h4 class="font-bold text-red-900 text-sm">人在機在，嚴禁離開</h4>
+                                <p class="text-red-700 text-xs mt-1 leading-relaxed">
+                                    高達 90% 的雷切起火事故皆因使用者離開機台、滑手機或聊天所致。切割過程中，視線絕不離開火苗點。
+                                </p>
+                            </div>
+                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-col justify-between">
+                                <span class="text-2xl mb-2">🌪️</span>
+                                <h4 class="font-bold text-amber-900 text-sm">抽風與空壓機必開</h4>
+                                <p class="text-amber-700 text-xs mt-1 leading-relaxed">
+                                    未開強效抽風會導致煙霧堆積，損壞高價反射鏡片。未開空壓機（吹氣輔助）則會使切割處直接起火。
+                                </p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-col justify-between">
+                                <span class="text-2xl mb-2">🧯</span>
+                                <h4 class="font-bold text-blue-900 text-sm">火警應變與滅火器</h4>
+                                <p class="text-blue-700 text-xs mt-1 leading-relaxed">
+                                    若發生起火，第一時間按下「緊急停止鈕」，切勿用水澆淋電子儀器，立刻使用實驗室配置的 CO2 滅火器。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 禁切材質與即時查詢工具 -->
+                        <div id="forbidden-materials" class="border-t border-slate-100 pt-6">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 mb-3">
+                                <span class="text-red-500">🛑</span> 實驗室禁切材質安全資料庫
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                部分塑膠受高熱分解後，會釋放出<strong>鹽酸、劇毒氯氣、氰化氫或有害焦油</strong>，不僅會讓操作人員中毒，更會在短短幾次切割內徹底鏽蝕機台導軌與反光鏡片。
+                            </p>
+
+                            <!-- 互動查詢組件 -->
+                            <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">輸入欲切材質名稱，快速查詢安全性：</label>
+                                <div class="relative">
+                                    <input type="text" id="materialInput" placeholder="例如：壓克力, PVC, 木板, Teflon, ABS..." class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                    <span class="absolute right-3 top-3 text-slate-400 text-sm">🔍</span>
+                                </div>
+                                <!-- 查詢結果展示區 -->
+                                <div id="searchResult" class="hidden p-3.5 rounded-lg border text-xs leading-relaxed transition-all">
+                                    <!-- 動態生成內容 -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 標準操作 SOP -->
+                        <div id="laser-sop" class="border-t border-slate-100 pt-6">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">
+                                <span>🛠️</span> 雷射切割機標準作業流程 (SOP)
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <!-- Step 1 -->
+                                <div class="flex gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                                        <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <h4 class="font-bold text-sm text-slate-800">軟體端繪圖與匯出</h4>
+                                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                            在 Onshape、AutoCAD 或 Illustrator 中完成 2D 向量設計。請確保線段都是<strong>封閉曲線</strong>，並匯出成 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.dxf</code> 或 <code class="bg-slate-100 px-1 py-0.5 rounded text-red-600 font-mono">.svg</code> 格式。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="flex gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                                        <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <h4 class="font-bold text-sm text-slate-800">匯入 LightBurn / RDWorks 設定參數</h4>
+                                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                            開啟雷切排版軟體，依材質厚度設定「速度 (Speed)」與「最大功率 (Max Power)」。
+                                            <br>💡 <strong class="text-slate-700">經驗公式：</strong> 壓克力雕刻建議高速度低功率；3mm 木板切割通常設定速度 15-20 mm/s、功率 55%-65%。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="flex gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                                        <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <h4 class="font-bold text-sm text-slate-800">實機調整焦距與開啟輔助裝置</h4>
+                                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                            1. 將板材置於雷切蜂巢板上。<br>
+                                            2. 使用<strong>焦距量塊</strong>放置於雷射頭與板材表面之間，電動調整 Z 軸高度至恰好接觸，以維持最佳聚焦功率。<br>
+                                            3. <span class="text-red-600 font-semibold">開機前，務必親自確認強效抽風排煙馬達與氣泵空壓機是否正常運轉。</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="flex gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800">切割結束之安全靜置</h4>
+                                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                            切割完成後，<span class="text-amber-600 font-semibold">請勿立刻打開上蓋</span>。此時機箱內充滿焦油酸霧，請靜待抽風機持續運轉 1-2 分鐘，排淨濃煙後再開啟掀蓋拿取成品，避免吸入有害化學氣體。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 雷切安全驗收測驗 (互動模組) -->
+                        <div id="safety-quiz-section" class="border-t border-slate-100 pt-6">
+                            <div class="bg-slate-900 text-white p-6 rounded-xl border border-slate-800">
+                                <h3 class="text-lg font-bold flex items-center gap-2 mb-2 text-sky-400">
+                                    ✍️ 雷切安全實機操作自我測驗
+                                </h3>
+                                <p class="text-slate-400 text-xs mb-4">
+                                    新進人員必須 100% 答對此測驗，才具有向實驗室學長姐申請雷切機實機考核實作的資格。
+                                </p>
+
+                                <!-- 測驗展示區 -->
+                                <div id="quizContainer" class="space-y-4">
+                                    <!-- 題目1 -->
+                                    <div class="quiz-item" data-answer="1">
+                                        <p class="text-sm font-semibold mb-2">Q1. 當雷射切割機正常切割木板時，因為需要切一小時，你可以怎麼做？</p>
+                                        <div class="grid grid-cols-1 gap-2 text-xs text-slate-300">
+                                            <button onclick="selectOption(this, 0)" class="option-btn text-left p-2.5 bg-slate-800 rounded border border-slate-700 hover:bg-slate-700 transition-colors">A. 離開實驗室去上廁所或買飲料，時間到了再回來拿。</button>
+                                            <button onclick="selectOption(this, 1)" class="option-btn text-left p-2.5 bg-slate-800 rounded border border-slate-700 hover:bg-slate-700 transition-colors">B. 全程守在機台旁專注監控，視線絕不離開雷射頭與板材，防止突然起火。</button>
+                                            <button onclick="selectOption(this, 2)" class="option-btn text-left p-2.5 bg-slate-800 rounded border border-slate-700 hover:bg-slate-700 transition-colors">C. 坐在隔壁桌滑手機打電動，有聞到煙味再過來看。</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 控制按鈕與結果 -->
+                                <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                    <div id="quizStatus" class="text-xs font-semibold text-amber-400">
+                                        請作答上方第 1 題以進行評量
+                                    </div>
+                                    <button onclick="submitQuizAnswer()" id="quizActionBtn" class="w-full sm:w-auto px-6 py-2 bg-sky-500 hover:bg-sky-600 text-slate-900 font-bold rounded-lg text-sm transition-all shadow-md">
+                                        下一題 ➔
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- 二、3D 列印機 (3D Printer) -->
+                <section id="3d-printer" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <!-- 標題欄 -->
+                    <div class="bg-gradient-to-r from-blue-600 to-sky-600 p-6 text-white">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🖨️</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">二、3D 列印機操作與切片軟體設定</h2>
+                                <p class="text-sky-100 text-xs mt-0.5">熱熔沉積 (FDM) 製造技術是我們快速產出機械連桿與客製化外殼的主要利器</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            實驗室目前提供多台精密 FDM 3D 列印機。3D 列印的成敗與列印件的結構強度，高度仰賴<strong>切片軟體 (Slicer)</strong> 的參數調整與機台硬體校準（第一層附著度）。
+                        </p>
+
+                        <!-- 切片四大黃金參數 -->
+                        <div class="border-t border-slate-100 pt-6">
+                            <h3 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="text-blue-500">⚙️</span> 1. 切片軟體參數設定指南 (以 Cura / PrusaSlicer 為例)
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        層高 (Layer Height) — 解析度控制
+                                    </h4>
+                                    <p class="text-slate-500 mt-1.5 leading-relaxed">
+                                        決定列印成品的精緻度與速度。<br>
+                                        • <strong>常用設定：</strong> <code class="bg-white border px-1 text-slate-700 rounded font-mono">0.2 mm</code> (標準實用) / <code class="bg-white border px-1 text-slate-700 rounded font-mono">0.12 mm</code> (精密外觀)。
+                                    </p>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        填充率與填充樣式 (Infill)
+                                    </h4>
+                                    <p class="text-slate-500 mt-1.5 leading-relaxed">
+                                        決定零件內部空心處的支撐密度。<br>
+                                        • <strong>非結構外殼：</strong> <code class="bg-white border px-1 text-slate-700 rounded font-mono">15% - 20%</code> (Grid 網格填充)。<br>
+                                        • <strong class="text-slate-700">承受應力連桿：</strong> <code class="bg-white border px-1 text-slate-700 rounded font-mono">40% - 60%</code> (強烈推薦選用 <strong>Gyroid 迴轉體</strong> 填充，具備最佳三維等向剪切力強度)。
+                                    </p>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        列印與熱床溫度 (Temperature)
+                                    </h4>
+                                    <p class="text-slate-500 mt-1.5 leading-relaxed">
+                                        隨線材材質不同而設定。<br>
+                                        • <strong>PLA 線材：</strong> 噴嘴 <code class="bg-white border px-1 text-slate-700 rounded font-mono">195°C - 215°C</code>，熱床 <code class="bg-white border px-1 text-slate-700 rounded font-mono">50°C - 60°C</code>。<br>
+                                        • <strong>PETG 線材：</strong> 噴嘴 <code class="bg-white border px-1 text-slate-700 rounded font-mono">230°C - 245°C</code>，熱床 <code class="bg-white border px-1 text-slate-700 rounded font-mono">70°C - 80°C</code> (適用於高溫或室外件)。
+                                    </p>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        支撐架構 (Support) 與附著設定
+                                    </h4>
+                                    <p class="text-slate-500 mt-1.5 leading-relaxed">
+                                        若懸空角度大於 45-50 度，必須開啟支撐，推薦選用新型<strong>樹狀支撐 (Tree Support)</strong>，好拆且不易傷主體。<br>
+                                        附著部分：底板抓附差時，可將附著類型設為 <strong>Brim</strong> (外緣邊緣擴展) 避免翹邊翹角。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 實機校準重點 -->
+                        <div class="border-t border-slate-100 pt-6">
+                            <h3 class="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="text-blue-500">🔧</span> 2. 實機調平與保養黃金法則
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-xs text-slate-600 leading-relaxed pl-1">
+                                <li><strong>第一層調平紙感 (A4 Paper Test)</strong>：在機台熱床四角進行手動或自動補償調平時，噴嘴與熱床間隙應能「恰好夾住一張 A4 紙並能被拉動但帶有些微阻力」。太緊會刮傷PEI鋼板板材，太鬆則會導致模型中途脫落變成「炒米粉」。</li>
+                                <li><strong>列印前清潔</strong>：熱床沾有指紋油汙時，底層附著力會大幅下降。在每次列印啟動前，請使用 <strong>95% 酒精</strong> 噴灑在擦拭紙上，將鋼板表面指紋污垢徹底清淨。</li>
+                                <li><strong>安全防火守則</strong>：離開實驗室前，確保列印機機箱周遭沒有易燃廢塑料紙屑。若要連夜無人監控列印，必須開啟具有自動斷電（Thermal Runaway Protection）安全功能的指定機型。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾宣告 -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-500 py-8 text-center text-xs">
+        <p>© 2026 國立虎尾科技大學 智能與機器人系統實驗室 - NFU IRS Lab. All Rights Reserved.</p>
+        <p class="mt-2 text-slate-600">本教學網頁內容與安全機制為實驗室內部教育訓練專屬，未經授權禁止外流。</p>
+    </footer>
+
+    <!-- JavaScript 互動功能邏輯 -->
+    <script>
+        // ==================== 1. 禁切材質查詢系統 ====================
+        const materialsDb = [
+            { 
+                names: ['壓克力', 'acrylic', 'pmma'], 
+                safe: true, 
+                msg: '<strong>✅ 安全材質！</strong> 非常適合雷射切割與雕刻。切口透明且完美平滑。注意：若厚度過大（>8mm）或速度調得太慢仍有悶燒風險。' 
+            },
+            { 
+                names: ['木板', '密集板', '合板', 'mdf', 'wood', 'plywood'], 
+                safe: true, 
+                msg: '<strong>✅ 安全材質！</strong> 切割時會產生些許焦碳焦黑感，屬於正常現象。請務必開啟空壓機強效吹氣，防止木材悶燒起火。' 
+            },
+            { 
+                names: ['皮革', '真皮', 'leather'], 
+                safe: true, 
+                msg: '<strong>✅ 安全材質（限天然真皮）！</strong> 可以切割與雕刻。但會散發極度難聞的燒焦臭味，請務必確認室外強力排風系統已全載運轉。<strong>注意：人造皮（通常含PVC）禁切！</strong>' 
+            },
+            { 
+                names: ['紙板', '紙張', 'cardboard', 'paper'], 
+                safe: true, 
+                msg: '<strong>✅ 安全材質！</strong> 切割速度極快。但燃點極低，請採用極低功率並全程看守，防止紙張瞬間竄火。' 
+            },
+            { 
+                names: ['pvc', '聚氯乙烯', '膠卷', '黑膠'], 
+                safe: false, 
+                msg: '<strong>❌ 劇毒！嚴禁切割！</strong> 燃燒分解會產生極毒的<strong>氯氣 (Chlorine Gas)</strong>，極易吸入人體引發中毒。同時釋放強酸鹽酸霧，會使切割機的反光鏡片、精密導軌及結構在兩天內<strong>徹底腐蝕生鏽</strong>，造成十萬元級設備損毀。' 
+            },
+            { 
+                names: ['abs'], 
+                safe: false, 
+                msg: '<strong>❌ 嚴禁切割！</strong> ABS 高溫熔融會產生黏稠流狀，並且會釋放出高度致癌的<strong>氰化氫劇毒氣體</strong>與焦油，容易黏附並汙染雷射對焦透鏡。' 
+            },
+            { 
+                names: ['teflon', '聚四氟乙烯', 'ptfe', '鐵氟龍'], 
+                safe: false, 
+                msg: '<strong>❌ 劇毒！嚴禁切割！</strong> 高熱會釋放強腐蝕性與劇毒的<strong>氟化氫與氟氣 (Fluorine Gas)</strong>，會造成人員致命化學灼傷與肺部積水。' 
+            },
+            { 
+                names: ['碳纖維', 'carbon fiber'], 
+                safe: false, 
+                msg: '<strong>❌ 嚴禁切割！</strong> 碳纖維內含環氧樹脂，受雷射灼燒時會噴發大量的濃烈黑煙與微米碳纖維絲，極易被操作人員吸入肺部造成永久性損傷，且易導致機台反光鏡鍍膜報銷。' 
+            },
+            { 
+                names: ['聚碳酸酯', 'polycarbonate', 'pc', 'lexan', '壓克力板(防彈)'], 
+                safe: false, 
+                msg: '<strong>❌ 嚴禁切割！</strong> 燃燒極快且不易切斷，高熱切口會迅速炭化熔黑，釋放大量有害焦油油煙，並嚴重毀壞光學反光系統。' 
+            }
+        ];
+
+        const materialInput = document.getElementById('materialInput');
+        const searchResult = document.getElementById('searchResult');
+
+        materialInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (!query) {
+                searchResult.classList.add('hidden');
+                return;
+            }
+
+            // 尋找匹配項目
+            const match = materialsDb.find(item => 
+                item.names.some(name => name.includes(query) || query.includes(name))
+            );
+
+            searchResult.classList.remove('hidden');
+            if (match) {
+                if (match.safe) {
+                    searchResult.className = "p-3.5 rounded-lg border text-xs leading-relaxed transition-all bg-emerald-50 border-emerald-200 text-emerald-800";
+                    searchResult.innerHTML = match.msg;
+                } else {
+                    searchResult.className = "p-3.5 rounded-lg border text-xs leading-relaxed transition-all bg-red-50 border-red-200 text-red-800";
+                    searchResult.innerHTML = match.msg;
+                }
+            } else {
+                searchResult.className = "p-3.5 rounded-lg border text-xs leading-relaxed transition-all bg-amber-50 border-amber-200 text-amber-800";
+                searchResult.innerHTML = "<strong>⚠️ 查無此材質資料：</strong> 若為不知名塑膠或複合板材，在未經實驗室學長或指導教授確認簽收前，<strong>一律視為禁切材質</strong>，切勿私自測試冒險！";
+            }
+        });
+
+
+        // ==================== 2. 雷切安全線上互動測驗 ====================
+        const quizQuestions = [
+            {
+                q: "Q1. 當雷射切割機進行切割中，因為程序需要切很久（如一小時），你應該怎麼做？",
+                options: [
+                    "A. 離開實驗室去上廁所、買飲料或回宿舍躺著，等時間到了再回來拿成品。",
+                    "B. 全程守在切割機台旁邊專注監控，視線絕不離開雷射頭與工件，防止突然起火。",
+                    "C. 坐在隔壁桌滑手機打排位賽，等有聞到刺鼻的煙味再起身過來看。"
+                ],
+                correct: 1
+            },
+            {
+                q: "Q2. 實驗室強烈禁止切割哪種含有「氯元素」的塑膠材質，因為它分解會釋放致命劇毒氣體並鏽蝕整台精密設備？",
+                options: [
+                    "A. 壓克力板 (Acrylic)",
+                    "B. 聚氯乙烯 (PVC) 或是含有 PVC 成分的人工皮革",
+                    "C. 原木板材或密集板 (Wood)"
+                ],
+                correct: 1
+            },
+            {
+                q: "Q3. 如果在切割過程中，突然發現板材起火燃燒，第一個最正確的應變步驟是什麼？",
+                options: [
+                    "A. 立刻打開機箱蓋子，用力吹氣把火吹熄。",
+                    "B. 不管它繼續切，反正雷切溫度本來就很高，切完火自己就會熄滅了。",
+                    "C. 立刻按下實機的「紅色緊急停止鈕 (Emergency Stop)」，切斷雷射供電，並通知旁人協助防火。"
+                ],
+                correct: 2
+            },
+            {
+                q: "Q4. 關於雷切輔助設備的檢查，以下哪一項敘述是正確的操作守則？",
+                options: [
+                    "A. 可以不開吹氣空壓機，因為雷射光束本身就能直接把材質蒸發乾淨。",
+                    "B. 開機切削前，必須檢查確認「強效排煙系統」與「吹氣空壓機」皆在正常運作中，缺一不可。",
+                    "C. 抽風排煙機很吵，為了不打擾實驗室學長姐討論報告，最好偷偷把它關小或不開。"
+                ],
+                correct: 1
+            },
+            {
+                q: "Q5. 當螢幕顯示雷射切割完全結束後，應該怎麼做？",
+                options: [
+                    "A. 立刻將安全掀蓋打開，第一時間拿取成品以免耽誤下一位組員的時間。",
+                    "B. 不要去碰它，直接離開實驗室，等半天過後讓它慢慢放涼。",
+                    "C. 稍微靜待 1~2 分鐘，讓有毒煙霧被抽風機完全抽淨至室外後，再開蓋拿取，保障自身呼吸道安全。"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let selectedOptionIndex = null;
+        let userScore = 0;
+
+        function loadQuestion(index) {
+            const quizContainer = document.getElementById('quizContainer');
+            const quizStatus = document.getElementById('quizStatus');
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            selectedOptionIndex = null;
+
+            if (index < quizQuestions.length) {
+                const qData = quizQuestions[index];
+                let optionsHtml = '';
+                qData.options.forEach((opt, idx) => {
+                    optionsHtml += `
+                        <button onclick="selectOption(this, ${idx})" class="option-btn text-left p-3 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-500 transition-all text-xs text-slate-300">
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                quizContainer.innerHTML = `
+                    <div class="space-y-3">
+                        <p class="text-sm font-semibold text-slate-100">${qData.q}</p>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+                quizStatus.innerHTML = `<span class="text-slate-400">目前進度：${index + 1} / ${quizQuestions.length}</span>`;
+                quizActionBtn.innerText = index === quizQuestions.length - 1 ? "送出評量並確認結果" : "下一題 ➔";
+                quizActionBtn.className = "w-full sm:w-auto px-6 py-2 bg-slate-700 text-slate-400 font-bold rounded-lg text-sm cursor-not-allowed transition-all shadow-md";
+                quizActionBtn.disabled = true;
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function selectOption(button, optionIndex) {
+            // 清除同組按鈕的高亮
+            const siblings = button.parentNode.querySelectorAll('.option-btn');
+            siblings.forEach(sib => {
+                sib.className = "option-btn text-left p-3 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-500 transition-all text-xs text-slate-300";
+            });
+
+            // 高亮選中按鈕
+            button.className = "option-btn text-left p-3 bg-blue-600 rounded-lg border border-blue-400 text-white font-medium transition-all text-xs shadow-inner";
+            selectedOptionIndex = optionIndex;
+
+            // 啟用下一步按鈕
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            quizActionBtn.className = "w-full sm:w-auto px-6 py-2 bg-sky-500 hover:bg-sky-600 text-slate-900 font-bold rounded-lg text-sm transition-all shadow-md cursor-pointer";
+            quizActionBtn.disabled = false;
+        }
+
+        function submitQuizAnswer() {
+            if (selectedOptionIndex === null) return;
+
+            // 驗證答案
+            const currentQ = quizQuestions[currentQuestionIndex];
+            if (selectedOptionIndex === currentQ.correct) {
+                userScore++;
+            }
+
+            currentQuestionIndex++;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function showQuizResults() {
+            const quizContainer = document.getElementById('quizContainer');
+            const quizStatus = document.getElementById('quizStatus');
+            const quizActionBtn = document.getElementById('quizActionBtn');
+
+            quizActionBtn.classList.add('hidden');
+
+            if (userScore === quizQuestions.length) {
+                // 100% 答對，頒發數位證書
+                localStorage.setItem('laser_safety_passed', 'true');
+                quizStatus.innerHTML = `<span class="text-emerald-400 font-bold">🎉 恭喜！您已 100% 答對全部安全問題。</span>`;
+                
+                quizContainer.innerHTML = `
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-6 rounded-xl border-2 border-emerald-500 shadow-xl text-center space-y-4 max-w-lg mx-auto">
+                        <div class="text-4xl">🏆</div>
+                        <h4 class="text-lg font-extrabold text-emerald-400 tracking-tight uppercase">NFU IRS Lab 設備安全認證</h4>
+                        <p class="text-slate-100 font-semibold text-xl border-b border-dashed border-slate-700 pb-3">雷射切割安全學科合格證書</p>
+                        
+                        <div class="text-left space-y-1.5 text-xs text-slate-300 px-4 py-3 bg-black/40 rounded-lg font-mono">
+                            <p>• 認證項目：CO2 雷射切割安全學科檢定</p>
+                            <p>• 通過分數：100% (5/5 題答對)</p>
+                            <p>• 實作權限：符合實機考核操作申請資格</p>
+                            <p class="text-slate-400">• 核發流水號：IRS-${Math.floor(Math.random() * 900000 + 100000)}</p>
+                        </div>
+                        
+                        <p class="text-slate-400 text-[10px] leading-relaxed">
+                            請將此合格證書頁面截圖，並在向學長姐申請機台實作時主動展示，以證明您已詳閱所有安全防範指南。
+                        </p>
+                        
+                        <button onclick="restartQuiz()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded transition-colors">
+                            🔄 重新測驗
+                        </button>
+                    </div>
+                `;
+            } else {
+                // 有答錯，請重來
+                quizStatus.innerHTML = `<span class="text-red-400 font-bold">⚠️ 很遺憾，您有題目答錯了 (得分: ${userScore}/${quizQuestions.length})。</span>`;
+                quizContainer.innerHTML = `
+                    <div class="p-6 text-center space-y-4 max-w-md mx-auto">
+                        <div class="text-3xl">❌</div>
+                        <h4 class="text-base font-bold text-slate-100">未達安全上機門檻 (必須 100% 答對)</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            實驗室高功率雷射不容許任何操作疏忽。建議重新研讀上方<strong>「人在機在、人在機在、人在機在」</strong>等核心守則，點擊下方按鈕重新發起挑戰。
+                        </p>
+                        <button onclick="restartQuiz()" class="w-full py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-lg transition-colors shadow">
+                            🔄 重新開始挑戰安全測驗
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            selectedOptionIndex = null;
+            userScore = 0;
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            quizActionBtn.classList.remove('hidden');
+            loadQuestion(0);
+        }
+
+        // 頁面加載時自動啟動測驗
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion(0);
+        });
+    </script>
+</body>
+</html>
