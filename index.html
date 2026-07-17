@@ -1,68 +1,399 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFU IRS Lab</title>
+    <title>NFU IRS Lab // GATEWAY</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron (科技風) & Noto Sans TC (繁中黑體) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: Arial, "Microsoft JhengHei", sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
+            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
+            background-color: #030208;
+            overflow-x: hidden;
+            position: relative;
         }
-        header {
-            background-color: #1e293b;
-            color: white;
-            padding: 2.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        /* 賽博龐克科技掃描線與網格 */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 127, 0.03), rgba(0, 240, 255, 0.03), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 6px 100%;
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0.8;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 1px;
+
+        /* 科技藍與螢光粉背光暈染 */
+        .neon-glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.08);
         }
-        .subtitle {
-            margin-top: 0.5rem;
-            color: #94a3b8;
-            font-size: 1.1rem;
+        .neon-glow-pink {
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.25), inset 0 0 15px rgba(255, 0, 127, 0.08);
         }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .neon-text-pink {
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.3);
         }
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
+        .neon-text-cyan {
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.3);
         }
-        /* 按鈕樣式設計 */
-        .btn {
-            display: inline-block;
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+
+        /* 未來風切角按鈕 */
+        .clip-cyber {
+            clip-path: polygon(0 0, 92% 0, 100% 30%, 100% 100%, 8% 100%, 0 70%);
         }
-        .btn:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        .clip-cyber-sm {
+            clip-path: polygon(0 0, 94% 0, 100% 25%, 100% 100%, 6% 100%, 0 75%);
         }
-        .section-title {
-            margin-top: 0;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem;
+
+        /* Glitch 抖動動畫特效 */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 1px) }
+            40% { transform: translate(-1px, -1px) }
+            60% { transform: translate(1px, 2px) }
+            80% { transform: translate(2px, -1px) }
+            100% { transform: translate(0) }
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.2s linear infinite;
+        }
+
+        /* 矩陣雷切掃描線效果 */
+        @keyframes laser-sweep {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .laser-sweep-line {
+            animation: laser-sweep 4s linear infinite;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+    <!-- 頂部霓虹邊框導覽 -->
+    <header class="border-b-2 border-cyan-500/30 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30 font-mono tracking-widest animate-pulse">
+                    SYS_STATUS: ACTIVE
+                </span>
+                <span class="text-lg font-black tracking-widest bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+                    NFU IRS LAB
+                </span>
+            </div>
+            
+            <!-- 音效開關、GitHub 連結 -->
+            <div class="flex items-center gap-4">
+                <button id="audio-toggle-btn" onclick="toggleAudio()" class="p-2 border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 rounded-md transition-all flex items-center gap-2 text-xs" title="切換系統音訊">
+                    <span id="audio-icon" class="text-base">🔇</span>
+                    <span class="font-mono tracking-wider hidden sm:inline">AUDIO: OFF</span>
+                </button>
+                <a href="https://github.com/nfu-irs-lab" target="_blank" rel="noopener noreferrer" class="text-sm font-mono text-cyan-400 hover:text-cyan-300 transition-colors hidden sm:block">
+                    [ GITHUB_ADDR // ]
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
+        
+        <!-- 左側：系統狀態儀表板與黑客終端機 -->
+        <section class="lg:col-span-5 space-y-6">
+            
+            <!-- 實時狀態面板 -->
+            <div class="bg-slate-950/90 border-2 border-cyan-500/40 rounded-xl p-5 neon-glow-cyan relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-16 h-16 pointer-events-none">
+                    <div class="absolute top-0 right-0 w-2 h-2 bg-cyan-400"></div>
+                    <div class="absolute top-0 right-0 w-10 h-[1px] bg-cyan-400"></div>
+                    <div class="absolute top-0 right-0 w-[1px] h-10 bg-cyan-400"></div>
+                </div>
+                
+                <h3 class="text-cyan-400 font-bold text-xs tracking-widest font-mono flex items-center gap-2 mb-4">
+                    <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping"></span>
+                    SYSTEM_DIAGNOSTICS // 系統核心負載
+                </h3>
+                
+                <div class="grid grid-cols-2 gap-4 font-mono text-[11px] text-slate-400 border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <p>BUS VOLTAGE: <span class="text-emerald-400 font-bold">12.0 V</span></p>
+                        <p class="mt-1">DYNAMIXEL ID: <span class="text-amber-400 font-bold">AX-12A (Active)</span></p>
+                    </div>
+                    <div>
+                        <p>NETWORK FLOW: <span class="text-cyan-400 font-bold" id="flow-rate">312 kb/s</span></p>
+                        <p class="mt-1">SYS_TEMP: <span class="text-pink-500 font-bold">41.2 °C</span></p>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-slate-400 font-mono space-y-2">
+                    <div class="flex justify-between">
+                        <span>NEURAL LINK INTEGRITY</span>
+                        <span class="text-cyan-400">99.2%</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-900 border border-cyan-500/30 rounded overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-cyan-500 to-purple-500 animate-pulse" style="width: 99.2%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 動態命令終端機 -->
+            <div class="bg-slate-950 border-2 border-pink-500/40 rounded-xl p-5 neon-glow-pink font-mono text-xs flex flex-col justify-between min-h-[280px] relative">
+                <div class="absolute top-0 right-0 w-full h-[1px] bg-pink-500/40 laser-sweep-line"></div>
+                
+                <div>
+                    <div class="flex items-center justify-between text-pink-500 font-bold border-b border-pink-500/20 pb-2 mb-3">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-pink-500 rounded-full animate-pulse"></span>
+                            TERMINAL_CONSOLE_V1.5
+                        </span>
+                        <button onclick="bootSystem()" class="text-[10px] bg-pink-500/10 hover:bg-pink-500/30 border border-pink-500/40 text-pink-400 px-2 py-0.5 rounded cursor-pointer transition-all">
+                            SYSTEM BOOT
+                        </button>
+                    </div>
+                    <div id="terminal-log" class="space-y-1.5 text-slate-300 max-h-[160px] overflow-y-auto pr-1 scrollbar-thin">
+                        <p class="text-slate-500">&gt; NFU IRS LAB OS LOADING...</p>
+                        <p class="text-cyan-400">&gt; SECURITY PROTOCOLS: VERIFIED</p>
+                        <p class="text-slate-400">&gt; READY FOR MISSION. ENTER COMMANDS OR BOOT SYSTEM.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-2 border-t border-pink-500/20 flex items-center gap-2">
+                    <span class="text-pink-500 font-bold">&gt;</span>
+                    <input type="text" id="terminal-input" onkeydown="handleTerminalInput(event)" placeholder="輸入 help、status、clear 或 boot..." class="w-full bg-transparent text-slate-100 focus:outline-none placeholder:text-slate-700 font-mono text-xs">
+                </div>
+            </div>
+        </section>
+
+        <!-- 右側：歡迎卡片與訓練連結 -->
+        <section class="lg:col-span-7 space-y-6">
+            
+            <!-- 歡迎卡片 -->
+            <div onmouseenter="playSynth('hover')" class="bg-slate-950/80 border-2 border-cyan-500/30 rounded-2xl p-6 md:p-8 neon-glow-cyan relative overflow-hidden transition-all duration-300">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl"></div>
+                
+                <div class="border-l-4 border-cyan-400 pl-4 mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-widest text-slate-100 neon-text-cyan">
+                        歡迎來到 NFU IRS Lab
+                    </h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">
+                        [ INTRO // 智慧型機器人系統實驗室 ]
+                    </p>
+                </div>
+                
+                <p class="text-slate-300 text-sm leading-relaxed font-light font-sans mb-6">
+                    本網站用於展示實驗室的研究成果、專案簡介與新進成員培訓資源。我們專注於高溫/高扭矩伺服馬達通訊控制、連桿機構力學設計，以及 Windows GUI 機械手臂操作平台的開源與研究。
+                </p>
+                
+                <div class="p-4 bg-slate-900/60 rounded-xl border border-cyan-500/20 text-xs text-cyan-300/90 font-mono leading-relaxed">
+                    💡 <span class="font-bold text-white">SYSTEM NOTICE // 成員必讀：</span><br>
+                    新進專題生與碩一成員，請務必按照「Training Roadmap」排程依序完成基礎考核。
+                </div>
+            </div>
+
+            <!-- 快速連結卡片 -->
+            <div onmouseenter="playSynth('hover')" class="bg-slate-950/80 border-2 border-pink-500/30 rounded-2xl p-6 md:p-8 neon-glow-pink relative overflow-hidden transition-all duration-300">
+                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl"></div>
+                
+                <div class="border-l-4 border-pink-500 pl-4 mb-6">
+                    <h2 class="text-xl sm:text-2xl font-black tracking-widest text-slate-100 neon-text-pink">
+                        實驗室專區 // TRAINING
+                    </h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">
+                        [ PORTAL // 新進人員核心訓練地圖 ]
+                    </p>
+                </div>
+
+                <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                    進入系統後，你將解鎖 Onshape 3D 建模、雷射切割安全學科認證、Robotis 套件操作以及 C# 實機馬達控制等四大核心訓練。
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-900">
+                    <span class="text-xs text-slate-500 font-mono tracking-wider">[ INTERFACE_READY // 2026-07-17 ]</span>
+                    
+                    <a href="training.html" onclick="playSynth('click')" class="w-full sm:w-auto text-center clip-cyber bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-400 hover:to-cyan-400 text-slate-950 font-black text-sm px-8 py-3.5 tracking-widest transition-all glitch-hover shadow-lg">
+                        🎓 新進人員訓練 &gt;
+                    </a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- 頁尾宣告 -->
+    <footer class="border-t border-slate-900 bg-slate-950/90 text-slate-600 py-6 text-center text-[10px] font-mono relative z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>NFU INTELLIGENT & ROBOTIC SYSTEMS LABORATORY // SECURED PORTAL 1.5</p>
+            <p class="mt-1 text-slate-700">© 2026 國立虎尾科技大學 智能與機器人系統實驗室. AUTHORIZED PERSONNEL ONLY.</p>
+        </div>
+    </footer>
+
+    <!-- Audio & Terminal Scripts -->
+    <script>
+        let isAudioEnabled = false;
+        let audioCtx = null;
+
+        // 初始化 Web Audio API (遵守瀏覽器安全限制)
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleAudio() {
+            initAudio();
+            isAudioEnabled = !isAudioEnabled;
+            
+            const btn = document.getElementById('audio-toggle-btn');
+            const icon = document.getElementById('audio-icon');
+            
+            if (isAudioEnabled) {
+                icon.innerText = "🔊";
+                btn.className = "p-2 border border-pink-500 bg-pink-500/20 text-white rounded-md transition-all flex items-center gap-2 text-xs neon-glow-pink";
+                btn.querySelector('span:last-child').innerText = "AUDIO: ON";
+                playSynth('boot');
+                logTerminal("AUDIO_LINK: ACTIVE // 音訊合成引擎已加載");
+            } else {
+                icon.innerText = "🔇";
+                btn.className = "p-2 border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 rounded-md transition-all flex items-center gap-2 text-xs";
+                btn.querySelector('span:last-child').innerText = "AUDIO: OFF";
+                logTerminal("AUDIO_LINK: OFFLINE // 音訊模組已關閉");
+            }
+        }
+
+        // 未來風 8-bit 合成音效
+        function playSynth(type) {
+            if (!isAudioEnabled || !audioCtx) return;
+
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'hover') {
+                    // 超短高頻科技嗶聲
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1400, now);
+                    gain.gain.setValueAtTime(0.03, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+                    osc.start(now);
+                    osc.stop(now + 0.06);
+                } else if (type === 'click') {
+                    // 雷射頻率下滑音
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(1800, now);
+                    osc.frequency.exponentialRampToValueAtTime(80, now + 0.25);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'boot') {
+                    // 系統開機和弦
+                    const notes = [293.66, 349.23, 440.00, 587.33]; // Dm 和弦
+                    notes.forEach((freq, idx) => {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.frequency.setValueAtTime(freq, now + idx * 0.06);
+                        g.gain.setValueAtTime(0.05, now + idx * 0.06);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.4);
+                        o.start(now + idx * 0.06);
+                        o.stop(now + idx * 0.06 + 0.4);
+                    });
+                }
+            } catch (e) {
+                console.warn("Audio Context execution failed", e);
+            }
+        }
+
+        // 黑客終端機日誌輸出
+        function logTerminal(text, type = 'normal') {
+            const logBox = document.getElementById('terminal-log');
+            const p = document.createElement('p');
+            p.className = type === 'error' ? 'text-pink-500 font-bold' : (type === 'success' ? 'text-cyan-400 font-semibold' : 'text-slate-300');
+            p.innerText = `> ${text}`;
+            logBox.appendChild(p);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // 終端開機程序
+        function bootSystem() {
+            initAudio();
+            playSynth('boot');
+            const logBox = document.getElementById('terminal-log');
+            logBox.innerHTML = ""; // 清空
+            
+            logTerminal("INITIALIZING BOOT_SEQUENCE...", 'normal');
+            setTimeout(() => logTerminal("LOADING CORE CONFIGS... SUCCESS", 'success'), 300);
+            setTimeout(() => logTerminal("ESTABLISHING USB LINK ON COM3 (57600)...", 'normal'), 600);
+            setTimeout(() => logTerminal("AX-12A MA_MOTOR DETECTED [ID: 1]", 'success'), 900);
+            setTimeout(() => logTerminal("CO2 LASER PRESSURE CHECK... 100% OK", 'success'), 1200);
+            setTimeout(() => logTerminal("SYSTEMS RUNNING STABLE AT 41.2 °C.", 'success'), 1500);
+        }
+
+        // 處理終端輸入
+        function handleTerminalInput(e) {
+            if (e.key === 'Enter') {
+                initAudio();
+                playSynth('click');
+                
+                const input = document.getElementById('terminal-input');
+                const cmd = input.value.trim().toLowerCase();
+                
+                if (cmd === "") return;
+                
+                logTerminal(`USER@IRS_OS:~$ ${input.value}`, 'normal');
+                input.value = ""; // 清空
+                
+                setTimeout(() => {
+                    if (cmd === 'help') {
+                        logTerminal("COMMAND_LIST:", 'success');
+                        logTerminal("  help   - 顯示指令清單");
+                        logTerminal("  status - 查詢馬達與設備連線狀態");
+                        logTerminal("  clear  - 清除控制台日誌紀錄");
+                        logTerminal("  boot   - 執行系統核心初始化");
+                    } else if (cmd === 'status') {
+                        logTerminal("SYSTEMS: ACTIVE // TTL LINK: VERIFIED // PORT: ONLINE", 'success');
+                    } else if (cmd === 'clear') {
+                        document.getElementById('terminal-log').innerHTML = "";
+                        logTerminal("CONSOLE SCRUBBED.");
+                    } else if (cmd === 'boot') {
+                        bootSystem();
+                    } else {
+                        logTerminal(`UNKNOWN COMMAND: '${cmd}'`, 'error');
+                        logTerminal("輸入 'help' 以取得可用指令清單。", 'normal');
+                    }
+                }, 250);
+            }
+        }
+
+        // 隨機模擬流量變化
+        setInterval(() => {
+            const flow = document.getElementById('flow-rate');
+            if (flow) {
+                const randomFlow = Math.floor(Math.random() * 200 + 200);
+                flow.innerText = `${randomFlow} kb/s`;
+            }
+        }, 3000);
+    </script>
+</body>
+</html>            padding-bottom: 0.5rem;
             color: #1e293b;
         }
     </style>
