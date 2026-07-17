@@ -39,6 +39,31 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+        /* 按鈕樣式設計 */
+        .btn {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+        .section-title {
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            color: #1e293b;
         }
     </style>
 </head>
@@ -46,15 +71,26 @@
 
     <header>
         <h1>NFU IRS Lab</h1>
-        <p class="subtitle">智能與機器人系統實驗室 | Intelligent & Robotic Systems Lab</p>
+        <p class="subtitle">智慧型機器人系統實驗室 | Intelligent Robot System Laboratory</p>
     </header>
 
     <div class="container">
+        <!-- 簡介卡片 -->
         <div class="card">
-            <h2>歡迎來到 NFU IRS Lab</h2>
-            <p>本網站用於展示實驗室的研究成果、研究專案與相關資訊。</p>
+            <h2 class="section-title">歡迎來到 NFU IRS Lab</h2>
+            <p>本網站用於展示實驗室的研究成果、專案簡介與新進成員培訓資源。</p>
+        </div>
+
+        <!-- 快速連結卡片 -->
+        <div class="card">
+            <h2 class="section-title">實驗室專區</h2>
+            <p>請點擊下方按鈕前往新進人員訓練專區：</p>
+            <!-- 點擊會跳轉到 training.html 頁面 -->
+            <a href="training.html" class="btn">🎓 新進人員訓練</a>
         </div>
     </div>
 
+</body>
+</html>
 </body>
 </html>
