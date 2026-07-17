@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 列印教學與切片軟體設定 - NFU IRS Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">NFU IRS Lab</span>
+                    <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-md border border-slate-700 hidden sm:inline-block">列印指南 v1.5</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="training.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                        ← 返回訓練首頁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Banner -->
+    <header class="bg-gradient-to-b from-slate-900 to-slate-950 text-white py-12 px-4 relative overflow-hidden border-b border-slate-800">
+        <!-- 背景幾何裝飾 -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.12),transparent_45%)]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 uppercase tracking-wider">3D PRINTER & SLICER TUTORIAL</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">3D 列印機操作與切片軟體設定</h1>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+                熱熔沉積 (FDM) 製造技術是我們快速產出連桿、夾爪與客製化外殼的主要利器。在列印前，請務必掌握切片參數與實機調平指南。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 快速導覽側邊欄 -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start space-y-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3">頁面目錄</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="#printer-intro" class="block py-1.5 text-blue-600 hover:text-blue-800 font-medium transition-colors">🖨️ 一、認識實驗室機台</a>
+                        </li>
+                        <li>
+                            <a href="#filament-helper" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🔥 常用耗材參數庫</a>
+                        </li>
+                        <li>
+                            <a href="#get-stl" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">📐 1. 取得 STL 檔案</a>
+                        </li>
+                        <li>
+                            <a href="#slicer-setup" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">💻 2. 設定切片軟體</a>
+                        </li>
+                        <li>
+                            <a href="#prep-print" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🔧 3. 準備與手動調平</a>
+                        </li>
+                        <li>
+                            <a href="#start-print" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🚀 4. 進行列印與監控</a>
+                        </li>
+                        <li>
+                            <a href="#post-print" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🧹 5. 取件與復歸程序</a>
+                        </li>
+                        <li>
+                            <a href="#troubleshooting" class="block py-1.5 text-slate-600 hover:text-blue-600 pl-3 border-l border-slate-200 transition-colors">🛠️ 3D 列印疑難排解</a>
+                        </li>
+                        <li class="pt-2 border-t border-slate-100">
+                            <a href="#quiz-section" class="block py-1.5 text-indigo-600 hover:text-indigo-800 font-semibold transition-colors">📝 線上安全評量</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 內容主體 -->
+            <div class="lg:col-span-9 space-y-12 animate-fade-in">
+
+                <!-- 一、認識實驗室 3D 列印機 -->
+                <section id="printer-intro" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🖨️</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">一、認識實驗室 3D 列印機</h2>
+                                <p class="text-blue-100 text-xs mt-0.5">實驗室主力設備與切片平台介紹</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            實驗室目前提供多台精密熱熔沉積 (FDM) 3D 列印機，依專案結構強度、材料適性與顏色需求，請選擇最合適的機型與切片軟體：
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Bambu X1-Carbon -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                                <div>
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[10px] font-bold">主力高速旗艦機</span>
+                                    <h4 class="font-bold text-slate-800 text-sm mt-1.5">Bambu X1-Carbon Combo</h4>
+                                    <p class="text-slate-500 text-xs mt-1 leading-relaxed">
+                                        支援 AMS 4 色多色列印、銀色黑箱全封閉式、配備高溫噴嘴與雷達自動調平，適用絕大多數精密工程料件。
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-200 text-[11px] font-mono text-slate-600 flex justify-between">
+                                    <span>💻 切片軟體: Bambu Studio</span>
+                                    <span class="text-emerald-600">● 運行中</span>
+                                </div>
+                            </div>
+
+                            <!-- Creality CR-5 Pro -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                                <div>
+                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[10px] font-bold">工業級大尺寸</span>
+                                    <h4 class="font-bold text-slate-800 text-sm mt-1.5">Creality CR-5 Pro</h4>
+                                    <p class="text-slate-500 text-xs mt-1 leading-relaxed">
+                                        白框藍箱封閉箱體、配備強化玻璃列印平台、手動調平。列印範圍大且溫控穩定。
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-200 text-[11px] font-mono text-slate-600 flex justify-between">
+                                    <span>💻 切片軟體: Cura</span>
+                                    <span class="text-emerald-600">● 運行中</span>
+                                </div>
+                            </div>
+
+                            <!-- Creality Ender-5 Pro -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                                <div>
+                                    <span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-[10px] font-bold">開放式結構</span>
+                                    <h4 class="font-bold text-slate-800 text-sm mt-1.5">Creality Ender-5 Pro</h4>
+                                    <p class="text-slate-500 text-xs mt-1 leading-relaxed">
+                                        黑色無箱開放式結構、雙 Y 軸同步傳動、手動調平。適合列印 PLA 等不縮水耗材。
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-200 text-[11px] font-mono text-slate-600 flex justify-between">
+                                    <span>💻 切片軟體: Cura</span>
+                                    <span class="text-emerald-600">● 運行中</span>
+                                </div>
+                            </div>
+
+                            <!-- Creality CR-30 -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                                <div>
+                                    <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-[10px] font-bold">無限長度履帶機</span>
+                                    <h4 class="font-bold text-slate-800 text-sm mt-1.5">Creality CR-30 3DPrintMill</h4>
+                                    <p class="text-slate-500 text-xs mt-1 leading-relaxed">
+                                        黑色斜角履帶平台，可不限長度連續列印或批次量產，適合列印超長懸臂與機械手臂大支撐件。
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-200 text-[11px] font-mono text-slate-600 flex justify-between">
+                                    <span>💻 切片軟體: CrealityBelt / Cura</span>
+                                    <span class="text-emerald-600">● 運行中</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 停用備註 -->
+                        <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-500">
+                            ⚠️ <strong>已停用維護中設備：</strong> UP BOX+（維護後可使用，UP Studio 切片，專印 ABS） | ATOM 2.5 EX/FX。
+                        </div>
+
+                        <!-- 互動材質查詢組件 -->
+                        <div id="filament-helper" class="border-t border-slate-100 pt-6">
+                            <h3 class="text-base font-bold text-slate-800 flex items-center gap-2 mb-3">
+                                <span class="text-blue-500">🔥</span> 實驗室常用 3D 列印耗材快速查詢系統
+                            </h3>
+                            <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                                選擇你想使用的耗材材質，快速取得最穩定的切片黃金參數與平台調校建議，大幅減少「炒米粉」的發生率：
+                            </p>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                                <button onclick="selectFilament('PLA')" id="btn-PLA" class="filament-btn py-2 px-3 bg-blue-600 text-white font-semibold rounded-lg text-xs transition-all shadow-sm">PLA (聚乳酸)</button>
+                                <button onclick="selectFilament('PETG')" id="btn-PETG" class="filament-btn py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-all">PETG (改性聚酯)</button>
+                                <button onclick="selectFilament('ABS')" id="btn-ABS" class="filament-btn py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-all">ABS (丙烯腈苯乙烯)</button>
+                                <button onclick="selectFilament('TPU')" id="btn-TPU" class="filament-btn py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-all">TPU (軟質彈性體)</button>
+                            </div>
+
+                            <div id="filamentResult" class="p-4 rounded-xl border bg-blue-50/50 border-blue-200 transition-all">
+                                <!-- JS 動態填充 -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 二、標準作業 SOP 流程 -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 text-white border-b border-slate-700">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🛠️</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-bold">二、3D 列印標準作業流程 (SOP)</h2>
+                                <p class="text-slate-400 text-xs mt-0.5">從 3D 設計、參數切片到實機取件的 5 大核心步驟</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-12">
+                        
+                        <!-- Step 1: 取得 STL 檔案 -->
+                        <div id="get-stl" class="flex gap-4 scroll-mt-24">
+                            <div class="flex flex-col items-center">
+                                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                                <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                            </div>
+                            <div class="pb-4 w-full">
+                                <h4 class="font-bold text-sm text-slate-800">取得 STL 檔案</h4>
+                                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                    3D 列印機需要讀取 STL 檔。若你的機械零件是使用 <strong>Onshape</strong> 繪製，可以將滑鼠移到下方元件列的目標元件，按下滑鼠右鍵點擊 <strong>「匯出」</strong>。
+                                </p>
+                                
+                                <div class="mt-3 rounded-lg overflow-hidden border border-slate-200 max-w-md bg-slate-50">
+                                    <img src="https://1.bp.blogspot.com/-X1lSfXJWSEo/YFn1FmfBAJI/AAAAAAAAAW4/pKJuCXIQoRQCqu_p5Zq6qMWdW8OgYZjVwCPcBGAsYHg/s16000/01-onshape%25E5%258C%25AF%25E5%2587%25BA1.png" alt="Onshape匯出" class="w-full h-auto" onerror="this.src='https://placehold.co/600x300/e2e8f0/64748b?text=Onshape+Export+STL'">
+                                    <div class="p-2 bg-slate-100 text-[10px] text-slate-500 text-center italic border-t border-slate-200">▲ Onshape 匯出介面點選步驟</div>
+                                </div>
+
+                                <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                                    請務必設定正確的匯出參數，以防列印尺寸產生偏差：
+                                </p>
+                                <ul class="list-disc list-inside text-xs text-slate-500 mt-1.5 space-y-1 pl-2 font-mono">
+                                    <li>格式：<strong>STL</strong></li>
+                                    <li>STL 格式：<strong>二進制 (Binary)</strong></li>
+                                    <li>單位：<strong>Millimeter (公釐)</strong> <span class="text-red-500 font-semibold">(實驗室習慣 MMGS 制，選錯會縮小25.4倍)</span></li>
+                                    <li>解析度：精細 / 自行決定</li>
+                                </ul>
+
+                                <div class="mt-3 rounded-lg overflow-hidden border border-slate-200 max-w-sm">
+                                    <img src="https://1.bp.blogspot.com/-PmdzrisaDxI/YFn1FmTfmVI/AAAAAAAAAW4/PROqaxx-WY0rF-MFRvbk0NUgzIbguN2hwCPcBGAsYHg/w400-h383/02-onshape%25E5%258C%25AF%25E5%2587%25BASTL%25E8%25A8%25AD%25E5%25AE%259A1.png" alt="STL 匯出設定" class="w-full h-auto" onerror="this.src='https://placehold.co/400x380/e2e8f0/64748b?text=STL+Export+Settings'">
+                                    <div class="p-2 bg-slate-50 text-[10px] text-slate-500 text-center italic border-t border-slate-100">▲ Onshape 匯出 STL 對話框設定</div>
+                                </div>
+
+                                <div class="bg-blue-50 border-l-2 border-blue-500 p-2.5 rounded text-[11px] text-blue-800 mt-3">
+                                    💡 <strong>若使用 SolidWorks：</strong> 請直接開啟目標模型的檔案，另存新檔 (Save As)，在檔案格式下拉選單中選擇「STL」並確認即可。
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: 設定切片軟體 -->
+                        <div id="slicer-setup" class="flex gap-4 scroll-mt-24">
+                            <div class="flex flex-col items-center">
+                                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                                <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                            </div>
+                            <div class="pb-4 w-full">
+                                <h4 class="font-bold text-sm text-slate-800">設定切片軟體並轉換為 G-Code</h4>
+                                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                    3D 列印機無法直接讀取 STL 檔，必須使用切片軟體將模型水平切成無數個薄層，產生路徑程式碼 G-Code (.gcode)。
+                                </p>
+
+                                <!-- 雙切片軟體切換卡片 -->
+                                <div class="mt-4 border border-slate-200 rounded-xl overflow-hidden max-w-2xl bg-slate-50">
+                                    <div class="bg-slate-200 px-4 py-2 flex justify-between items-center border-b border-slate-300">
+                                        <span class="text-xs font-bold text-slate-700">🖥️ 選擇切片軟體教學分頁</span>
+                                        <div class="flex gap-1.5">
+                                            <button onclick="switchSlicerTab('cura')" id="tab-cura" class="slicer-tab px-3 py-1 bg-white text-slate-800 border border-slate-300 text-[11px] font-bold rounded shadow-sm">🔴 Ultimaker Cura</button>
+                                            <button onclick="switchSlicerTab('bambu')" id="tab-bambu" class="slicer-tab px-3 py-1 bg-slate-100 text-slate-500 text-[11px] font-bold rounded">⚫ Bambu Studio</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cura Content -->
+                                    <div id="content-cura" class="slicer-content p-4 space-y-3">
+                                        <p class="text-xs text-slate-600 leading-relaxed">
+                                            Cura 是傳統機台（CR-5 Pro, Ender-5, CR-30）的主要切片軟體。可於實驗室 NAS 下載。
+                                        </p>
+                                        <ul class="list-disc list-inside text-xs text-slate-500 space-y-1 pl-1">
+                                            <li><strong>機台新增：</strong> 首次開啟請選擇對應的列印機型號，以取得預設噴嘴尺寸與熱床原點設定。</li>
+                                            <li><strong>參數設定：</strong> 基本設定採用「推薦」即可，列印複雜結構時再勾選「支撐結構」與「附著邊緣（Brim）」。</li>
+                                            <li><strong>分層檢視：</strong> 切片完成後，從右下角「準備」轉換為「分層檢視」，拖曳滑桿觀察噴嘴在每一層的移動軌跡。確認無誤後點擊「儲存檔案」輸出成 G-Code 檔。</li>
+                                        </ul>
+                                        <div class="rounded-lg overflow-hidden border border-slate-200 max-w-md mx-auto">
+                                            <img src="https://1.bp.blogspot.com/-TTJjUNSidy0/YFn1Fr-FooI/AAAAAAAAAW4/fzBvqrs0kZs7WhGooczqQFXVI7hcVqhnACPcBGAsYHg/s1842/03-Cura%25E8%25A8%25AD%25E5%25AE%259A1.png" alt="Cura UI" class="w-full h-auto" onerror="this.src='https://placehold.co/500x300/e2e8f0/64748b?text=Cura+Software+UI'">
+                                        </div>
+                                        <!-- YouTube 嵌入示範 -->
+                                        <div class="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                                            <h5 class="text-xs font-bold text-red-800 flex items-center gap-1.5">🎬 Cura 官方切片與參數設定影片</h5>
+                                            <p class="text-[11px] text-red-700 mt-1">參考以下示範影片，了解最基礎的切片原理與支撐調整：</p>
+                                            <a href="https://youtu.be/dQmnk84itwM" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white rounded px-2.5 py-1 text-[10px] font-bold transition-colors">
+                                                📺 觀看 Cura 基礎切片教學影片 ↗
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bambu Content -->
+                                    <div id="content-bambu" class="slicer-content p-4 space-y-3 hidden">
+                                        <p class="text-xs text-slate-600 leading-relaxed">
+                                            Bambu Studio 是專為 Bambu Lab X1-Carbon 設計的高速多色切片軟體，支援雲端跨網路傳輸（免插拔 SD 卡）。
+                                        </p>
+                                        <div class="rounded-lg overflow-hidden border border-slate-200 max-w-md mx-auto mb-3">
+                                            <img src="https://i.imgur.com/rNYrdt7.png" alt="Bambu Studio UI" class="w-full h-auto" onerror="this.src='https://placehold.co/500x300/e2e8f0/64748b?text=Bambu+Studio+UI'">
+                                        </div>
+                                        <ol class="list-decimal list-inside text-xs text-slate-500 space-y-1.5 pl-1">
+                                            <li><strong>登入帳號：</strong> 開啟軟體並以實驗室帳號登入：<br><code class="bg-slate-200 px-1.5 py-0.5 rounded text-blue-800 font-mono text-[11px]">nfurobotlab.member@gmail.com</code></li>
+                                            <li><strong>調整列印板：</strong> 噴嘴選擇 <code class="bg-white border px-1 font-mono text-slate-700 rounded">Bambu Lab X1 Carbon 0.4 nozzle</code>，列印床類型務必選取 <code class="bg-white border px-1 font-mono text-slate-700 rounded">Textured PEI Plate (紋理PEI)</code>。</li>
+                                            <li><strong>同步耗材 (AMS)：</strong> 在 Filament（耗材）列中，點擊自動同步圖示，讀取機台上插置的實際耗材顏色與規格。</li>
+                                            <li><strong>切片與傳輸：</strong> 點選右上角「切片（Slice）」，切片完後直接點擊「發送（Send）」，模型將會透過 Wi-Fi 發送至機台，並進入排隊等待序列。</li>
+                                        </ol>
+                                        <div class="rounded-lg overflow-hidden border border-slate-200 max-w-sm mx-auto mt-2">
+                                            <img src="https://i.imgur.com/q6PeUtc.png" alt="AMS Sync" class="w-full h-auto" onerror="this.src='https://placehold.co/300x150/e2e8f0/64748b?text=AMS+Sync+Menu'">
+                                            <div class="p-1 bg-slate-100 text-[9px] text-slate-500 text-center italic border-t border-slate-200">▲ 自動同步並讀取 AMS 耗材槽設定</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: 準備與手動調平 -->
+                        <div id="prep-print" class="flex gap-4 scroll-mt-24">
+                            <div class="flex flex-col items-center">
+                                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                                <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                            </div>
+                            <div class="pb-4 w-full">
+                                <h4 class="font-bold text-sm text-slate-800">準備列印與手動調平 (A4 Paper Test)</h4>
+                                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                    Bambu X1-Carbon 支援雷達全自動調平，但 <strong>Ender-5 Pro 與 CR-5 Pro</strong> 必須在列印前進行手動調平，噴嘴高度過高或過低都會造成首層失敗，甚至損毀設備！
+                                </p>
+
+                                <div class="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-xl max-w-xl">
+                                    <h5 class="text-xs font-bold text-indigo-900 flex items-center gap-1.5">📝 經典四角手動調平口訣</h5>
+                                    <ol class="list-decimal list-inside text-xs text-indigo-700 mt-2 space-y-1 pl-1">
+                                        <li>在面板上點選 <strong>Auto Home (自動回原點)</strong>，定位完成。</li>
+                                        <li>點選 <strong>Disable Steppers (關閉步進馬達)</strong> 以允許手動推拉噴嘴與熱床。</li>
+                                        <li>手動將噴嘴移到列印平台 4 個角落螺絲上方。</li>
+                                        <li>在噴嘴與熱床間墊上一張 A4 白紙，來回抽動白紙，感受摩擦阻力：<br>
+                                            • <strong class="text-indigo-900">螺母向上轉（順時針）</strong> ➔ 平台向下（間距變大/阻力變小）。<br>
+                                            • <strong class="text-indigo-900">螺母向下轉（逆時針）</strong> ➔ 平台向上（間距變小/阻力變大）。
+                                        </li>
+                                        <li>調整至白紙能被拉動但「帶有些微均勻摩擦阻力」時，即可開始列印並監控第一層。</li>
+                                    </ol>
+                                </div>
+
+                                <!-- YouTube 調平嵌入 -->
+                                <div class="mt-3 p-3.5 bg-amber-50 border border-amber-200 rounded-xl max-w-xl">
+                                    <h5 class="text-xs font-bold text-amber-800 flex items-center gap-1.5">🎬 實機調平教學影片</h5>
+                                    <p class="text-[11px] text-amber-700 mt-1">如果你不確定摩擦力的大小感受，請務必觀看以下官方調平教學：</p>
+                                    <a href="https://youtu.be/2kmvb49FlUs" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white rounded px-3 py-1.5 text-xs font-bold transition-all shadow-sm">
+                                        📺 觀看 3D 列印機手動調平示範影片 ↗
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: 進行列印與首層監控 -->
+                        <div id="start-print" class="flex gap-4 scroll-mt-24">
+                            <div class="flex flex-col items-center">
+                                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                                <div class="w-0.5 flex-1 bg-slate-200 my-1"></div>
+                            </div>
+                            <div class="pb-4 w-full">
+                                <h4 class="font-bold text-sm text-slate-800">傳輸檔案與首層監控</h4>
+                                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                    傳統機台無法讀取中文檔名！<strong>請務必將檔案命名為英文、數字或底線。</strong>
+                                </p>
+                                <ul class="list-disc list-inside text-xs text-slate-500 mt-2 space-y-1 pl-1">
+                                    <li><strong>SD 卡插入：</strong> 將 SD 卡插回列印機並開啟電源，於面板選單選擇 <code class="bg-slate-100 px-1 text-slate-800 rounded font-mono">Print From SD</code> 並選取你的檔案。</li>
+                                    <li><strong>加熱等待：</strong> 噴嘴與熱床開始緩慢加熱。當兩者皆達到預設溫度後，列印機將會進行回原點、排膠等準備，接著正式開始列印。</li>
+                                    <li><strong>👀 第一層死守原則（重要）：</strong> 第一層的附著度決定了整件作品的成敗。列印啟動後的 <strong>前 5 分鐘</strong> 絕不容許離開機台！如果發現塑料起翹、拖絲或沒黏住，請立刻按下 <strong>Stop Print / Pause</strong> 停止，排除故障後再重新開始。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: 取件與復歸程序 -->
+                        <div id="post-print" class="flex gap-4 scroll-mt-24">
+                            <div class="flex flex-col items-center">
+                                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">5</div>
+                            </div>
+                            <div class="pb-4 w-full">
+                                <h4 class="font-bold text-sm text-slate-800">列印完成、取件與關機復歸</h4>
+                                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                    列印完成聽到提示音後，切勿著急！請嚴格遵守以下取件安全準則：
+                                </p>
+                                <ul class="list-disc list-inside text-xs text-slate-500 mt-2 space-y-2 pl-1">
+                                    <li><strong>降溫取板：</strong> 請先等待噴嘴溫度降至 <strong>100°C 以下</strong>、熱床降溫後，再取出列印底板。</li>
+                                    <li><strong>微彎卸件：</strong> 對於 PEI 彈性鋼板，雙手握住鋼板向外、向內輕微對折折彎，打印件即可自然起翹並輕鬆脫落。<strong>嚴禁在機台上直接使用鏟刀大力刮鏟！</strong>（這會導致熱床結構變形、PEI 表面刮痕報銷）。對於 CR-5 Pro 玻璃平台則可配合鏟刀小心刮取。</li>
+                                    <li><strong>廢料清潔與復歸：</strong> 用刮刀將鋼板上多餘的裙邊（Skirt/Brim）與裙帶塑料清除，並放回列印機內。確保平台四周沒有雜亂耗材紙屑。</li>
+                                    <li><strong>關閉電源：</strong> 關閉列印機電源，將工具放回零件盒中。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 三、3D 列印疑難排解診斷器 -->
+                <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
+                    <div class="bg-slate-900 text-white p-6 border-b border-slate-800">
+                        <h3 class="text-lg font-bold flex items-center gap-2">
+                            <span>🛠️</span> 3D 列印實機故障即時排除診斷器
+                        </h3>
+                        <p class="text-slate-400 text-xs mt-0.5">點擊下方常見問題，立刻取得實驗室學長的調校與排除對策</p>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-3 text-xs">
+                        <!-- Problem 1 -->
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button onclick="toggleTrouble(1)" class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 flex justify-between items-center transition-colors">
+                                <span>⚠️ 問題 1：列印件第一層無法附著、底座起翹（或「炒米粉」）</span>
+                                <span id="arrow-1" class="text-slate-400 transition-transform">▼</span>
+                            </button>
+                            <div id="trouble-content-1" class="p-4 bg-white border-t border-slate-100 hidden leading-relaxed text-slate-600 space-y-2">
+                                <p><strong>💡 診斷對策：</strong></p>
+                                <ol class="list-decimal list-inside space-y-1 pl-1 text-[11px]">
+                                    <li><strong>間距太大：</strong> 重新使用 A4 紙調平四角，稍微將旋鈕放鬆使熱床上升（調緊與噴嘴間隙）。</li>
+                                    <li><strong>鋼板沾油：</strong> 手指上的油脂會嚴重降低 PEI 板抓附力。請用 <strong>95% 酒精</strong> 噴灑於無塵紙上徹底擦拭鋼板。</li>
+                                    <li><strong>附著增強：</strong> 在切片軟體中將 Adhesion 改為 <strong>Brim</strong>（外緣擴展），增加模型與平台的基礎接觸面積。</li>
+                                    <li><strong>熱床溫度：</strong> 嘗試將熱床溫度調高 5°C。</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Problem 2 -->
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button onclick="toggleTrouble(2)" class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 flex justify-between items-center transition-colors">
+                                <span>⚠️ 問題 2：列印時噴嘴不出料（空轉、喀喀響）</span>
+                                <span id="arrow-2" class="text-slate-400 transition-transform">▼</span>
+                            </button>
+                            <div id="trouble-content-2" class="p-4 bg-white border-t border-slate-100 hidden leading-relaxed text-slate-600 space-y-2">
+                                <p><strong>💡 診斷對策：</strong></p>
+                                <ol class="list-decimal list-inside space-y-1 pl-1 text-[11px]">
+                                    <li><strong>噴嘴堵塞（最常見）：</strong> 將噴嘴加熱至 230°C，使用針灸用細鋼針從噴嘴口向上疏通，或進行「冷拉 (Cold Pull)」拔除積碳。</li>
+                                    <li><strong>擠出機過緊/齒輪磨損：</strong> 檢查擠出齒輪是否有咬死，清除齒縫中的線材粉塵。</li>
+                                    <li><strong>列印溫度過低：</strong> 塑料無法充分熔融，請在切片中適度提高噴嘴溫度 10°C。</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Problem 3 -->
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button onclick="toggleTrouble(3)" class="w-full text-left px-4 py-3 bg-slate-50 hover:bg-slate-100 font-bold text-slate-700 flex justify-between items-center transition-colors">
+                                <span>⚠️ 問題 3：模型表面嚴重拉絲（毛邊與拖絲）</span>
+                                <span id="arrow-3" class="text-slate-400 transition-transform">▼</span>
+                            </button>
+                            <div id="trouble-content-3" class="p-4 bg-white border-t border-slate-100 hidden leading-relaxed text-slate-600 space-y-2">
+                                <p><strong>💡 診斷對策：</strong></p>
+                                <ol class="list-decimal list-inside space-y-1 pl-1 text-[11px]">
+                                    <li><strong>回抽 (Retraction) 設定：</strong> 在切片軟體中開啟「回抽」，並增加回抽距離。傳統近端擠出設為 1-2mm，遠端設為 4-6mm。</li>
+                                    <li><strong>溫度過高：</strong> 熔融塑料太稀，移動時會自動滴漏。將噴嘴溫度調低 5°C - 10°C。</li>
+                                    <li><strong>線材受潮：</strong> 線材吸水受高熱產生氣泡與溢漏，請將線材放進烤箱或防潮箱烘乾。</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 四、3D 列印安全學科線上評量 (互動模組) -->
+                <section id="quiz-section" class="border-t border-slate-100 pt-6 scroll-mt-20">
+                    <div class="bg-indigo-950 text-white p-6 rounded-2xl border-2 border-indigo-900 shadow-lg">
+                        <h3 class="text-lg font-bold flex items-center gap-2 mb-2 text-indigo-300">
+                            ✍️ 3D 列印安全操作學科測驗
+                        </h3>
+                        <p class="text-slate-400 text-xs mb-4">
+                            新進人員必須 100% 答對此測驗，才可解鎖實驗室中大型機台（如 Bambu X1-C）的操作與 G-Code 傳輸權限。
+                        </p>
+
+                        <!-- 測驗題目展示區 -->
+                        <div id="quizContainer" class="space-y-4">
+                            <!-- JS 動態加載題目 -->
+                        </div>
+
+                        <!-- 控制面板 -->
+                        <div class="mt-6 pt-4 border-t border-indigo-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div id="quizStatus" class="text-xs font-semibold text-amber-400">
+                                請作答上方題目以進行評量
+                            </div>
+                            <button onclick="submitQuizAnswer()" id="quizActionBtn" class="w-full sm:w-auto px-6 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg text-sm transition-all shadow-md">
+                                下一題 ➔
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾宣告 -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-500 py-8 text-center text-xs">
+        <p>© 2026 國立虎尾科技大學 智能與機器人系統實驗室 - NFU IRS Lab. All Rights Reserved.</p>
+        <p class="mt-2 text-slate-600">本教學網頁內容與安全機制為實驗室內部教育訓練專屬，未經授權禁止外流。</p>
+    </footer>
+
+    <!-- JavaScript 互動功能邏輯 -->
+    <script>
+        // ==================== 1. 耗材材質查詢引擎 ====================
+        const filamentDb = {
+            'PLA': {
+                nozzle: '190°C - 215°C',
+                bed: '50°C - 60°C',
+                fan: '100% (全程開啟)',
+                speed: '60 - 250 mm/s (易於高速列印)',
+                msg: '<strong>✅ 適合初學者與無應力件！</strong> PLA 收縮率極低，幾乎不需要封閉式機箱。層間結合度良好，列印尺寸精確，適合列印外殼防護、模型本體等結構。',
+                style: 'bg-blue-50/50 border-blue-200 text-blue-900'
+            },
+            'PETG': {
+                nozzle: '230°C - 245°C',
+                bed: '70°C - 80°C',
+                fan: '30% - 50% (不可開過大，否則會影響層間黏合)',
+                speed: '50 - 150 mm/s (略具黏性)',
+                msg: '<strong>✅ 推薦結構件、夾爪與連桿件！</strong> 具備極佳的韌性與抗衝擊性，耐溫性比 PLA 高。注意：PETG 容易有拉絲（Stringing）與表面滴膠問題，回抽距離需稍微增加。',
+                style: 'bg-slate-50 border-slate-300 text-slate-900'
+            },
+            'ABS': {
+                nozzle: '240°C - 260°C',
+                bed: '90°C - 110°C',
+                fan: '0% - 20% (強烈禁止開風扇，極易因冷卻收縮而翹邊翹角)',
+                speed: '40 - 100 mm/s',
+                msg: '<strong>❌ 高收縮率、具刺鼻氣味！</strong> 必須在 <strong>Bambu X1-C 或 CR-5 Pro 等封閉箱體機台</strong>中列印，否則極易因室溫溫差翹曲開裂。列印時排氣扇必須全開，並保持室內通風。',
+                style: 'bg-amber-50 border-amber-300 text-amber-900'
+            },
+            'TPU': {
+                nozzle: '220°C - 235°C',
+                bed: '45°C - 60°C',
+                fan: '80% - 100%',
+                speed: '20 - 40 mm/s (必須慢速列印，防止軟質線材在擠出機內纏繞)',
+                msg: '<strong>✅ 適合緩衝墊、防滑腳墊與吸震零件！</strong> TPU 屬於高彈性軟料。建議使用 <strong>近端擠出機 (Direct Drive)</strong> 列印，切勿在遠端進料機型上列印。回抽必須關閉或限制，列印速度須保持極慢。',
+                style: 'bg-purple-50 border-purple-200 text-purple-900'
+            }
+        };
+
+        function selectFilament(type) {
+            // 清除按鈕高亮
+            const buttons = document.querySelectorAll('.filament-btn');
+            buttons.forEach(btn => {
+                btn.className = "filament-btn py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-all";
+            });
+
+            // 高亮選中的按鈕
+            const selectedBtn = document.getElementById(`btn-${type}`);
+            selectedBtn.className = "filament-btn py-2 px-3 bg-blue-600 text-white font-semibold rounded-lg text-xs transition-all shadow-sm";
+
+            // 輸出結果
+            const resultBox = document.getElementById('filamentResult');
+            const data = filamentDb[type];
+            resultBox.className = `p-4 rounded-xl border transition-all ${data.style}`;
+            resultBox.innerHTML = `
+                <div class="space-y-2 text-xs">
+                    <p class="text-sm font-bold">${type} 耗材最佳建議參數：</p>
+                    <div class="grid grid-cols-2 gap-4 my-2 border-b border-slate-200/60 pb-2">
+                        <div>🔥 噴嘴溫度: <strong>${data.nozzle}</strong></div>
+                        <div>🌡️ 熱床溫度: <strong>${data.bed}</strong></div>
+                        <div>🌪️ 切片風扇: <strong>${data.fan}</strong></div>
+                        <div>🏃 建議速度: <strong>${data.speed}</strong></div>
+                    </div>
+                    <p class="leading-relaxed mt-2">${data.msg}</p>
+                </div>
+            `;
+        }
+
+        // 初始化加載 PLA
+        selectFilament('PLA');
+
+        // ==================== 2. 切片軟體 Tab 切換 ====================
+        function switchSlicerTab(tab) {
+            const tabs = document.querySelectorAll('.slicer-tab');
+            const contents = document.querySelectorAll('.slicer-content');
+
+            tabs.forEach(t => {
+                t.className = "slicer-tab px-3 py-1 bg-slate-100 text-slate-500 text-[11px] font-bold rounded";
+            });
+            contents.forEach(c => {
+                c.classList.add('hidden');
+            });
+
+            const activeTab = document.getElementById(`tab-${tab}`);
+            const activeContent = document.getElementById(`content-${tab}`);
+
+            if (tab === 'cura') {
+                activeTab.className = "slicer-tab px-3 py-1 bg-white text-slate-800 border border-slate-300 text-[11px] font-bold rounded shadow-sm";
+            } else {
+                activeTab.className = "slicer-tab px-3 py-1 bg-slate-800 text-white border border-slate-700 text-[11px] font-bold rounded shadow-sm";
+            }
+            activeContent.classList.remove('hidden');
+        }
+
+        // ==================== 3. 疑難排解伸縮卡片 ====================
+        function toggleTrouble(id) {
+            const content = document.getElementById(`trouble-content-${id}`);
+            const arrow = document.getElementById(`arrow-${id}`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // ==================== 4. 3D 列印線上測驗系統 ====================
+        const quizQuestions = [
+            {
+                q: "Q1. 在 Onshape 中導出 STL 檔時，關於「單位」的設定，哪一項最正確？",
+                options: [
+                    "A. 應該選擇英吋 (Inch)，這是列印機的國際通用單位。",
+                    "B. 必須點選公釐 (Millimeter)，否則匯入切片軟體時尺寸會發生巨大縮放偏差。",
+                    "C. 隨便選都沒關係，切片軟體會完全自動修復與對齊比例。"
+                ],
+                correct: 1
+            },
+            {
+                q: "Q2. 列印開始後最關鍵的「黃金前五分鐘」，您應該進行什麼動作？",
+                options: [
+                    "A. 立刻離開實驗室去吃飯，列印很費時不用在旁邊等。",
+                    "B. 專注監控第一層列印情況，確認塑料有完美附著於平台，防止中途起翹、炒米粉。",
+                    "C. 拿出砂紙與尖嘴鉗去清理平台另一側，防止殘料擋住噴嘴。"
+                ],
+                correct: 1
+            },
+            {
+                q: "Q3. 當使用傳統 Creality 手動調平機台時，如果白紙夾在噴嘴與熱床間，拉動時「完全沒有阻力，非常順暢」，這代表？",
+                options: [
+                    "A. 間距太近（熱床過高），必須將底盤螺母向下擰（逆時針）使平台上升。",
+                    "B. 這是最完美的對焦聚焦狀態，可以立刻輸出 G-code 開始列印。",
+                    "C. 間距太遠（熱床過低），第一層塑料將無法附著而起翹，需將螺母向擰調整使平台上升。"
+                ],
+                correct: 2
+            },
+            {
+                q: "Q4. 關於 PEI 彈性鋼板取件與保養，以下哪一項動作是「嚴重禁止」的？",
+                options: [
+                    "A. 列印完成且平台降溫後，把鋼板取下，用雙手向內、外輕折讓作品自動彈開。",
+                    "B. 當鋼板沾到指紋或微塵時，使用 95% 酒精擦拭清潔。",
+                    "C. 當模型還黏在機台熱床上的鋼板上時，直接使用鋒利鐵鏟大力刮拔成品。"
+                ],
+                correct: 2
+            },
+            {
+                q: "Q5. 當列印 ABS 等高收縮率線材時，以下哪一項切片設定與操作是正確的？",
+                options: [
+                    "A. 必須在 Bambu X1-C 等「全封閉式機箱」中列印，且強烈建議切片時將風扇關閉以防收縮起翹。",
+                    "B. 必須使用 Ender-5 Pro 開放式機台，並把周圍風扇開滿 100% 以利快速冷卻結晶。",
+                    "C. 熱床溫度越低越好（如設定為室溫），可以省電並防止高溫軟化變形。"
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let selectedOptionIndex = null;
+        let userScore = 0;
+
+        function loadQuestion(index) {
+            const quizContainer = document.getElementById('quizContainer');
+            const quizStatus = document.getElementById('quizStatus');
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            selectedOptionIndex = null;
+
+            if (index < quizQuestions.length) {
+                const qData = quizQuestions[index];
+                let optionsHtml = '';
+                qData.options.forEach((opt, idx) => {
+                    optionsHtml += `
+                        <button onclick="selectOption(this, ${idx})" class="option-btn text-left p-3 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-500 transition-all text-xs text-slate-300">
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                quizContainer.innerHTML = `
+                    <div class="space-y-3">
+                        <p class="text-sm font-semibold text-slate-100">${qData.q}</p>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+                quizStatus.innerHTML = `<span class="text-slate-400">目前進度：${index + 1} / ${quizQuestions.length}</span>`;
+                quizActionBtn.innerText = index === quizQuestions.length - 1 ? "送出評量並確認結果" : "下一題 ➔";
+                quizActionBtn.className = "w-full sm:w-auto px-6 py-2 bg-indigo-900 text-indigo-400 font-bold rounded-lg text-sm cursor-not-allowed transition-all shadow-md";
+                quizActionBtn.disabled = true;
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function selectOption(button, optionIndex) {
+            const siblings = button.parentNode.querySelectorAll('.option-btn');
+            siblings.forEach(sib => {
+                sib.className = "option-btn text-left p-3 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:border-slate-500 transition-all text-xs text-slate-300";
+            });
+
+            button.className = "option-btn text-left p-3 bg-blue-600 rounded-lg border border-blue-400 text-white font-medium transition-all text-xs shadow-inner";
+            selectedOptionIndex = optionIndex;
+
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            quizActionBtn.className = "w-full sm:w-auto px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg text-sm transition-all shadow-md cursor-pointer";
+            quizActionBtn.disabled = false;
+        }
+
+        function submitQuizAnswer() {
+            if (selectedOptionIndex === null) return;
+
+            const currentQ = quizQuestions[currentQuestionIndex];
+            if (selectedOptionIndex === currentQ.correct) {
+                userScore++;
+            }
+
+            currentQuestionIndex++;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function showQuizResults() {
+            const quizContainer = document.getElementById('quizContainer');
+            const quizStatus = document.getElementById('quizStatus');
+            const quizActionBtn = document.getElementById('quizActionBtn');
+
+            quizActionBtn.classList.add('hidden');
+
+            if (userScore === quizQuestions.length) {
+                // 100% 答對，頒發證書
+                localStorage.setItem('3d_printing_safety_passed', 'true');
+                quizStatus.innerHTML = `<span class="text-emerald-400 font-bold">🎉 恭喜！您已 100% 答對所有 3D 列印考核問題。</span>`;
+                
+                quizContainer.innerHTML = `
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 p-6 rounded-xl border-2 border-emerald-500 shadow-xl text-center space-y-4 max-w-lg mx-auto">
+                        <div class="text-4xl">🏆</div>
+                        <h4 class="text-lg font-extrabold text-emerald-400 tracking-tight uppercase">NFU IRS Lab 3D 列印證照</h4>
+                        <p class="text-slate-100 font-semibold text-xl border-b border-dashed border-slate-700 pb-3">FDM 3D 列印學科檢定合格證書</p>
+                        
+                        <div class="text-left space-y-1.5 text-xs text-slate-300 px-4 py-3 bg-black/40 rounded-lg font-mono">
+                            <p>• 認證項目：3D 列印與切片設定安全學科</p>
+                            <p>• 通過分數：100% (5/5 答對)</p>
+                            <p>• 實作權限：符合實機調平與雲端列印考核資格</p>
+                            <p class="text-slate-400">• 核發流水號：3DPR-${Math.floor(Math.random() * 900000 + 100000)}</p>
+                        </div>
+                        
+                        <p class="text-slate-400 text-[10px] leading-relaxed">
+                            請將此合格證書頁面截圖，並在向學長姐申請 3D 列印實機（包含 Bambu X1-C 進退料）實作時出示。
+                        </p>
+                        
+                        <button onclick="restartQuiz()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded transition-colors">
+                            🔄 重新測驗
+                        </button>
+                    </div>
+                `;
+            } else {
+                quizStatus.innerHTML = `<span class="text-red-400 font-bold">⚠️ 很遺憾，您有題目答錯了 (得分: ${userScore}/${quizQuestions.length})。</span>`;
+                quizContainer.innerHTML = `
+                    <div class="p-6 text-center space-y-4 max-w-md mx-auto">
+                        <div class="text-3xl">❌</div>
+                        <h4 class="text-base font-bold text-slate-100">未達安全上機門檻 (必須 100% 答對)</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            3D 列印噴嘴高達 260°C，且調平間距稍有不慎即會造成鋼板不可逆的刮傷。請仔細研讀上方 A4 紙張調平、Brim 附著、與 TPU 慢速列印原則，再試一次！
+                        </p>
+                        <button onclick="restartQuiz()" class="w-full py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-lg transition-colors shadow">
+                            🔄 重新開始挑戰安全測驗
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            selectedOptionIndex = null;
+            userScore = 0;
+            const quizActionBtn = document.getElementById('quizActionBtn');
+            quizActionBtn.classList.remove('hidden');
+            loadQuestion(0);
+        }
+
+        // 頁面加載時自動啟動
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion(0);
+        });
+    </script>
+</body>
+</html>
