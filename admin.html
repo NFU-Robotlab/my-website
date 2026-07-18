@@ -68,7 +68,6 @@
     </header>
 
     <!-- 主內容區 -->
-    <!-- STREAMING_CHUNK: 建立歡迎面板區，並標註正確的虎科統編 64967512... -->
     <main class="max-w-4xl mx-auto px-4 py-10 w-full flex-grow space-y-8 relative z-10">
         
         <!-- 核心歡迎區 -->
@@ -83,7 +82,6 @@
         </section>
 
         <!-- 行政事務文檔導覽網格 -->
-        <!-- STREAMING_CHUNK: 渲染 11 大導覽卡片按鈕，並對齊 Web Audio 事件... -->
         <section class="space-y-6">
             <div class="border-l-4 border-orange-500 pl-4">
                 <h3 class="text-lg font-extrabold text-slate-900">📂 行政事務文檔導覽</h3>
@@ -220,7 +218,6 @@
     </main>
 
     <!-- 文檔閱讀器滑出式 Modal -->
-    <!-- STREAMING_CHUNK: 建立升級大尺寸文檔顯示視窗，排除 markdown 反引號衝突... -->
     <div id="doc-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-fade-in">
         <div class="backdrop-blur-glass border border-white/60 bg-white/90 rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] flex flex-col relative overflow-hidden shadow-2xl font-sans">
             
@@ -254,7 +251,6 @@
     </footer>
 
     <!-- 行政文檔實體內容資料庫 -->
-    <!-- STREAMING_CHUNK: 彙整 11 大核心真實文檔，並採用不與 JS 樣板字面值衝突之 <code> 標籤... -->
     <script>
         const docDatabase = {
             'intro': `
@@ -560,7 +556,7 @@
                             <li>發票上各品項之品名需含有中文（如：無刷馬達、電源供應器），不能只有型號 or 英文品名。</li>
                             <li>在優先滿足第 1 點的情況下，發票和報價單等各處之品項、產品名稱/型號、價錢及數量等需一致，至少需要能夠清楚判斷爲相同之品項。</li>
                             <li>發票開立日期必須晚於<strong>報價單開立日期及學校請購流程完成日期</strong>。</li>
-                            <li>發票上需蓋有公司/負責人章或帶有前者之統一發票專用章，且不能爲影本。電子發票證明聯不在此限。</li>
+                            <li>發票上需蓋有公司/負責人章 or 帶有前者之統一發票專用章，且不能爲影本。電子發票證明聯不在此限。</li>
                             <li>發票上之字樣需清晰可見。</li>
                             <li>發票請務必打統編與抬頭（統編：64967512 / 抬頭：國立虎尾科技大學）。</li>
                         </ol>
@@ -797,7 +793,7 @@
                         <li>至「學校網站」、「總務處」、「事務組」、「科研採購資訊」下載財務勞務議價紀錄。</li>
                         <li>完成「財務勞務議價紀錄」，（相關問題請洽事務組謝廣和先生，分機 5227 / 直撥 05-6315227）。</li>
                         <li>將報價單及財務勞務議價紀錄附在該請購單上，送系辦。</li>
-                        <li>若請購完成，則此請購公文會送回系辦的老師信箱中.</li>
+                        <li>若請購完成，則此請購公文會送回系辦的老師信箱中。</li>
                     </ol>
                     <p class="text-[11px] sm:text-xs text-red-600 font-semibold italic mt-1">
                         * 注意：請注意報價單廠商和學校都設有有效期限，學校主計室的期限爲 1 個月。
@@ -823,7 +819,7 @@
                             <li>在「發票/收據日期」填入民國年月日的七碼日期（如：111年12月31日填爲<code class="font-mono bg-white px-1 border rounded">1111231</code>）。</li>
                         </ul>
                     </li>
-                    <li>確認右上方的「編輯經費」、「編輯品名」及「編輯受款人」的加總金額正確且一致。</li>
+                    <li>確認右上方的「編輯經費」、「編輯品名」及「編輯受款人’的加總金額正確且一致。</li>
                     <li>按下「存入」。</li>
                     <li>選擇列印「一般黏貼單」。系統會提示完成「財產增加單」，並繼續進行「連接財產增加單作業」。</li>
                     <li>勾選「財產（新增）」。</li>
@@ -874,7 +870,7 @@
                             <li>發票上各品項之品名需含有中文（如：無刷馬達、電源供應器），不能只有型號 or 英文品名。</li>
                             <li>在優先滿足第 1 點的情況下，發票和報價單等各處之品項、產品名稱/型號、價錢及數量等需一致，至少需要能夠清楚判斷爲相同之品項。</li>
                             <li>發票開立日期必須晚於<strong>報價單開立日期及學校請購流程完成日期</strong>。</li>
-                            <li>發票上需蓋有公司/負責人章或帶有前者之統一發票專用章，且不能爲影本。電子發票證明聯不在此限。</li>
+                            <li>發票上需蓋有公司/負責人章 or 帶有前者之統一發票專用章，且不能爲影本。電子發票證明聯不在此限。</li>
                             <li>發票上之字樣需清晰可見。</li>
                             <li>發票請打統編與抬頭。
                                 <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-400 space-y-0.5">
@@ -1175,10 +1171,143 @@
                 </div>
             `,
             'lecturer': `
-                <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-1">📄 6. 業師相關</h3>
-                <p class="text-xs text-slate-400 font-mono">[ INDUSTRY_EXPERTS_LECTURE // 業界專家授課與核銷 ]</p>
-                <div class="border-t border-slate-200 my-3"></div>
-                <p>外聘講師須填寫履歷表、領款收據並檢附活動集錦照片。</p>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">📄 6. 業師相關</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ LECTURER_REIMBURSE // 業師鐘點費與交通費核銷 ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                    有些計劃會要求需有業師授課演講（有編列業師鐘點費預算）。
+                </p>
+
+                <div class="p-3.5 bg-orange-500/10 border-l-4 border-orange-500 rounded-r-lg text-xs sm:text-sm text-slate-700 leading-relaxed mb-4 space-y-1">
+                    <p><strong>💡 業師請款必讀守則：</strong></p>
+                    <ul class="list-disc list-inside space-y-1 pl-1 text-[11px] sm:text-xs">
+                        <li>如果對方有要求以「學校對公司」的形式，而非「學校對業師個人」的形式處理的話，請另外詢問主計室。以下只適用「學校對業師個人」。</li>
+                        <li>可以同一位業師來演講多次不同主題。</li>
+                    </ul>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-700 font-bold mb-2">核銷要處理的文件有 4 種：</p>
+                <ul class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200 leading-relaxed mb-4">
+                    <li><strong>印領清冊：</strong> 鐘點費、交通費各一。</li>
+                    <li><strong>領款收據暨受領人資料表：</strong> 鐘點費、交通費各一。</li>
+                    <li><strong>業師應聘履歷表。</strong></li>
+                    <li><strong>活動集錦。</strong></li>
+                    <li class="list-none italic text-slate-400 text-[11px] sm:text-xs mt-1">* 備註：每個計劃要求的文件不一定相同，有些不會要求「業師應聘履歷表」或「活動集錦」等。</li>
+                </ul>
+
+                <!-- 1. 印領清冊 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-6 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    📝 1. 印領清冊
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+                    「鐘點費」與「交通費」需要分開來做成 2 份「印領清冊」。
+                </p>
+
+                <div class="space-y-4">
+                    <!-- 鐘點費 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-950 text-sm sm:text-base flex items-center gap-1.5">
+                            🪙 鐘點費請購登錄
+                        </p>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            至「無請購系統使用權限預作採購單」(登入自己的學校行政帳號)
+                        </p>
+                        <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-600 space-y-1.5 leading-relaxed pl-1">
+                            <li>選擇「預作請購」-&gt;「印領清冊/差旅費」-&gt;「印領清冊 (請輸入欲輸入之筆數50)」</li>
+                            <li>填寫「預計金額」（不含補充保費...）</li>
+                            <li>注意是否需要填入「欲轉給請購人代碼」</li>
+                            <li>「購案說明」填寫範例：<br>
+                                <span class="text-slate-500 font-mono text-[11px] sm:text-xs bg-white border px-1.5 py-0.5 rounded inline-block mt-0.5">
+                                    電子系王榮爵老師，(課程名稱)，(日期)聘請業界專家協同教學，於(教室)演講共XX小時。
+                                </span>
+                            </li>
+                            <li>選擇「所得代碼」爲「<span class="text-orange-600 font-semibold">(50)薪資所得</span>」</li>
+                            <li>選擇「清冊類別」爲「<strong>一般審查費/授課鐘點費</strong>」</li>
+                            <li>業師資料照實填入：
+                                <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-0.5">
+                                    <li>「保費身分別」：校外人士</li>
+                                    <li>「機關保費」：系統會自動生成</li>
+                                    <li>「說明」：填入上課日期時間地點</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- 交通費 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-950 text-sm sm:text-base flex items-center gap-1.5">
+                            🚗 交通費請購登錄
+                        </p>
+                        <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-600 space-y-1.5 leading-relaxed pl-1">
+                            <li>選擇「所得代碼」爲「<span class="text-orange-600 font-semibold">(00)免稅所得</span>」</li>
+                            <li>選擇「清冊類別」爲「<strong>交通費/招生試務工作費</strong>」</li>
+                            <li>填寫「說明」，填入地點路程等（例如：<code class="font-mono bg-white px-1 border rounded text-slate-700">臺北車站到斗南車站</code>）。</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 2. 領款收據暨受領人資料表 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    🧾 2. 領款收據暨受領人資料表
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+                    「鐘點費」與「交通費」需要分開來做成 2 份「領款收據暨受領人資料表」。
+                </p>
+                <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>到「<a href="http://account.nfu.edu.tw/files/11-1009-2831.php" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">主計室-下載專區</a>」下載本表「領款收據暨受領人資料表」。</li>
+                    <li>勾選付款方式：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-0.5">
+                            <li>如果要將款項直接付給業師，勾選「<strong>本款項尚未支付，請逕付受領人</strong>」。</li>
+                            <li>如果已由老師先行代墊，勾選「<strong>本款項已由本校教職員工代墊支付</strong>」，並填寫代墊人資料。</li>
+                        </ul>
+                    </li>
+                    <li>「所屬年月」、「費用別（鐘點費或交通費）」、「應領總金額」、「代扣所得稅」、「代扣個人補充保費」與「實領總金額」等照實填寫。
+                        <div class="mt-1 p-2 bg-white/60 border rounded text-[11px] sm:text-xs text-slate-500 italic">
+                            💡 範例：費用別：鐘點費。應領總金額：$6127。代扣所得稅：$0。代扣個人補充保費：127。實領總金額：$6000。
+                        </div>
+                    </li>
+                    <li>「費用別備註」依據各計劃填寫詳細的說明（例如：<code class="font-mono bg-white px-1 border rounded text-slate-700">10月28日，電子系王XX老師，機器人設計實務，業師授課</code>）。</li>
+                    <li>「受領人資料」請業師照實填寫。</li>
+                    <li><strong>請受領人於「受領人資料」處親自簽章</strong>（必須為親筆簽章，不能是影本或掃描檔等）。</li>
+                    <li>請受領人提供郵局存簿影本作為附件附上。</li>
+                    <li>若要核銷的是「交通費」，還需一併附上證明：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-1">
+                            <li>可以是臺鐵、高鐵等票根收據。計程車不能核銷。</li>
+                            <li>若無上述票根收據，則一律使用「<a href="https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip114/query" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">臺鐵票價試算</a>」系統，以對方公司最近的車站到斗南站爲基準，將該試算網頁列印附上當作證明。</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <!-- 3. 業師應聘履歷表 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    📄 3. 業師應聘履歷表
+                </h4>
+                <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>業師的資料部分請業師照實填寫。</li>
+                    <li>請業師在「應聘者簽章」處親筆簽章。</li>
+                    <li>課程資料表照實填寫。</li>
+                    <li>將該文件送至系辦蓋完章後，送到負責該計劃的處室處理：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500">
+                            <li>系所承辦人員：<strong>王技佐</strong></li>
+                            <li>系所主管：<strong>系主任</strong></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <!-- 4. 活動集錦 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    📸 4. 活動集錦
+                </h4>
+                <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>照片與授課內容照實填寫。</li>
+                    <li>將該文件送至系辦蓋章：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500">
+                            <li>填表人：<strong>授課老師</strong></li>
+                            <li>填表人所屬單位主管：<strong>系主任</strong></li>
+                        </ul>
+                    </li>
+                </ol>
             `,
             'tender': `
                 <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-1">📄 7. 招標</h3>
@@ -1234,7 +1363,6 @@
     </script>
 
     <!-- Audio & Interaction Logic -->
-    <!-- STREAMING_CHUNK: Coding synth effects for the audio control switch... -->
     <script>
         let isAudioEnabled = false;
         let audioCtx = null;
