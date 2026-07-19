@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歷屆技術學習導覽 - NFU IRS Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Orbitron & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            color: #0f172a;
+        }
+        /* 滿版模糊背景圖片 */
+        .cyber-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -10;
+            object-fit: cover;
+            filter: blur(24px) brightness(0.9);
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+        /* 輕量磨砂玻璃卡片 */
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.12);
+        }
+        /* 磨砂玻璃彈窗背景 */
+        .backdrop-blur-glass {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-white">
+
+    <!-- 滿版模糊背景圖片 -->
+    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200" alt="Tech Guides Background" class="cyber-bg" onerror="this.src='https://placehold.co/1200x800/f1f5f9/cbd5e1?text=Technical+Documentation+Environment'">
+
+    <!-- 頂部導覽 -->
+    <header class="border-b border-white/20 bg-white/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" onclick="playSynth('click')" class="text-xs bg-white/80 hover:bg-white text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition-all font-semibold shadow-sm">
+                    ← 返回首頁
+                </a>
+                <span class="text-sm font-black text-slate-950 tracking-wider">DOCS PORTAL</span>
+            </div>
+            <button id="audio-toggle-btn" onclick="toggleAudio()" class="p-1.5 px-3 border border-white/40 bg-white/70 hover:bg-white text-slate-700 rounded-lg transition-all text-xs font-semibold">
+                <span id="audio-icon">🔇</span> <span class="hidden sm:inline">AUDIO: OFF</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主內容區 -->
+    <main class="max-w-4xl mx-auto px-4 py-10 w-full flex-grow space-y-8 relative z-10">
+        
+        <!-- 核心歡迎區 -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 space-y-4">
+            <div class="border-l-4 border-indigo-600 pl-4">
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">歷屆技術學習導覽系統</h2>
+                <p class="text-xs text-slate-400 font-mono mt-0.5">[ NODE_02 // SYSTEM & ENGINEERING LITERACY ]</p>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed font-light">
+                本系統整合了舊網站中所有關鍵的軟體工程、程式語言、機具對接與成員合作開發守則。不論你是負責機構設計、C# 視窗開發還是機械手臂控制，在進行協作與 Commit 前，請務必精讀以下規範，奠定扎實且標準的技術思維。
+            </p>
+        </section>
+
+        <!-- 技術事務文檔導覽網格 -->
+        <section class="space-y-6">
+            <div class="border-l-4 border-indigo-600 pl-4">
+                <h3 class="text-lg font-extrabold text-slate-900">📚 歷屆技術文檔目錄</h3>
+                <p class="text-xs text-slate-400 font-mono mt-0.5">[ TECHNICAL // REPOSITORY DIRECTORIES ]</p>
+            </div>
+
+            <!-- 6 大核心導覽卡片 -->
+            <!-- STREAMING_CHUNK: Coding the technical guides grids... -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                
+                <!-- 1. STM32 F4學習 -->
+                <button onclick="openDoc('stm32-f4'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            🧠 <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">STM32 F4 學習開發</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            PlatformIO 實戰、開源 LibOpenCM3 暫存器級框架、RCC時脈樹、高精度中斷與週邊串接調校。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // 🧠</span>
+                </button>
+
+                <!-- 2. 軟體工程與程式素養 -->
+                <button onclick="openDoc('soft-eng'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            💻 <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">軟體工程與程式素養</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            DRY 原則、命名法（駝峰與帕斯卡）、Git Commit 命名規範與良好的程式碼重構習慣。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // 💻</span>
+                </button>
+
+                <!-- 3. C# 基礎開發規範 -->
+                <button onclick="openDoc('csharp-std'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            ⚙️ <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">C# 基礎開發規範</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            例外處理 (Try/Catch) 實踐、例外非同步安全更新與優雅代碼結構。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // ⚙️</span>
+                </button>
+
+                <!-- 4. 工具與環境建置 -->
+                <button onclick="openDoc('tools-setup'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            🔧 <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">工具與環境建置</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            Git 版本控制安裝、VS 整合環境配置、Onshape 雲端 CAD 建模、Cura 切片軟體與 RoboPlus 指令工具。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // 🔧</span>
+                </button>
+
+                <!-- 5. HIWIN 機械手臂控制 -->
+                <button onclick="openDoc('hiwin-control'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            🦾 <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">HIWIN 機械手臂控制</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            RASDK 函式庫開發對接、TCP/IP 通訊協定、PTP 與 LIN 精密運動指令與實機錯誤防護排障。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // 🦾</span>
+                </button>
+
+                <!-- 6. GitHub 組織成員守則 -->
+                <button onclick="openDoc('github-rules'); playSynth('click')" onmouseenter="playSynth('hover')" class="glass-card p-5 rounded-xl text-left flex flex-col justify-between h-40">
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                            🐙 <span class="hover:text-indigo-600 transition-colors text-xs sm:text-sm">GitHub 組織成員守則</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                            成員權限管理、標準的分支模型 (Git Flow)、Pull Request 審查程序、安全防範（禁止提交統編與金鑰）。
+                        </p>
+                    </div>
+                    <span class="text-[9px] font-mono text-indigo-600 font-bold tracking-widest uppercase mt-2">READ_MORE // 🐙</span>
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 文檔閱讀器滑出式 Modal -->
+    <div id="doc-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-fade-in">
+        <div class="backdrop-blur-glass border border-white/60 bg-white/90 rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] flex flex-col relative overflow-hidden shadow-2xl font-sans">
+            
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-5 font-mono">
+                <span class="text-slate-800 font-bold text-xs tracking-wider flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 bg-indigo-600 rounded-full animate-pulse"></span>
+                    DOC_NODE: TECHNICAL_DOCUMENTS_v1.0
+                </span>
+                <button onclick="closeDoc(); playSynth('click')" class="text-slate-400 hover:text-slate-950 font-bold transition-colors text-sm">[ CLOSE ]</button>
+            </div>
+            
+            <!-- 可捲動的實體內容區 -->
+            <div id="doc-content-body" class="overflow-y-auto pr-3 space-y-6 text-slate-700 leading-relaxed max-h-[72vh] text-sm sm:text-base">
+                <!-- JS 動態加載 -->
+            </div>
+            
+            <div class="mt-5 pt-4 border-t border-slate-200/60 text-center font-mono flex justify-end">
+                <button onclick="closeDoc(); playSynth('click')" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs tracking-wider rounded-xl transition-all shadow-md">
+                    CONFIRM // 關閉文檔
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="border-t border-white/20 bg-white/60 text-slate-500 py-6 text-center text-[10px] font-mono relative z-10 backdrop-blur-md mt-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <p>NFU INTELLIGENT & ROBOTIC SYSTEMS LABORATORY // SECURED DOCS PORTAL 1.0</p>
+            <p class="mt-1 text-slate-400">© 2026 國立虎尾科技大學 智能與機器人系統實驗室. AUTHORIZED PERSONNEL ONLY.</p>
+        </div>
+    </footer>
+
+    <!-- 技術文檔實體內容資料庫 -->
+    <script>
+        const docDatabase = {
+            'stm32-f4': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">🧠 STM32 F4 嵌入式開發 (LibOpenCM3 實戰)</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ LIBOPENCM3_STM32F4 // PLATFORMIO_DEVELOPMENT ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl text-xs sm:text-sm text-slate-700 leading-relaxed mb-5">
+                    <strong>💡 鐵人賽優秀技術導引：</strong><br>
+                    本教學完整收錄並改編自實驗室 <strong>ziteh 學長</strong> 於第 14 屆 iT 邦幫忙鐵人賽發表的經典系列專題：<br>
+                    <a href="https://ithelp.ithome.com.tw/users/20151756/ironman/5382" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-bold hover:underline inline-flex items-center gap-1">
+                        🔗 簡單入門LibOpenCM3 STM32 嵌入式系統開發系列 (鐵人賽 5382) ➔
+                    </a><br>
+                    相較於官方 HAL 函式庫，<strong>LibOpenCM3</strong> 是一款開源、輕量且底層效率極高的暫存器級開發框架，配合 PlatformIO，是實驗室快速打造高效能控制核心的主力架構！
+                </div>
+
+                <!-- 1. 開發環境與 PlatformIO 設置 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🛠️ 1. PlatformIO 與 LibOpenCM3 環境建置
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
+                    實驗室全面採用 VS Code 整合 <strong>PlatformIO</strong> 工具鏈進行嵌入式開發，免除傳統 Keil uVision 繁瑣的 pack 安裝與授權問題。
+                </p>
+                <ul class="list-decimal list-inside space-y-1.5 text-xs text-slate-500 pl-1 mb-4 leading-relaxed">
+                    <li>在 VS Code 中搜尋並安裝 <strong>PlatformIO IDE</strong> 擴充套件。</li>
+                    <li>建立新專案時，Development Board 選擇 <strong>Nucleo-F446RE</strong> (或實驗室 F407 等晶片)，Framework 務必指定為 <strong>libopencm3</strong>。</li>
+                    <li>PlatformIO 會自動從網路下載對應晶片所需的 GNU ARM 工具鏈，不需人工手動安裝。</li>
+                </ul>
+
+                <!-- 2. 時鐘樹與 System Clock 設定 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🌲 2. 時鐘樹 (Clock Tree) 與系統時脈
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    在 STM32 晶片中，所有週邊皆有獨立的時鐘閘門。正確設定系統時脈 (SYSCLK) 是微控制器運作的第一步。以 HSE 外部高速振盪器配置系統時鐘：
+                </p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-indigo-300 shadow-inner max-w-full overflow-x-auto leading-relaxed space-y-1 mb-4">
+                    <span class="text-slate-500">// 時脈初始：設定外部石英震盪器 (HSE 8MHz) 透過 PLL 倍頻至高精度 84MHz SYSCLK</span><br>
+                    rcc_clock_setup_pll(&amp;rcc_hse_8mhz_3v3[RCC_CLOCK_3V3_84MHZ]);<br>
+                    <br>
+                    <span class="text-slate-500">// 啟用 GPIO 與核心週邊的外圍時脈控制閘</span><br>
+                    rcc_periph_clock_enable(RCC_GPIOA);  <span class="text-slate-500">// 啟用 PORT A 時脈</span><br>
+                    rcc_periph_clock_enable(RCC_USART2); <span class="text-slate-500">// 啟用 2 號序列埠時脈</span>
+                </div>
+
+                <!-- 3. GPIO / EXTI / SysTick 高精度驅動範例 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    ⚡ 3. 核心暫存器級驅動實作 (GPIO / SysTick / USART)
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    以下為 ziteh 鐵人賽課程中提煉的最實用驅動程式碼。掌握這些底層呼叫，能讓你在馬達與多軸通訊中游刃有餘：
+                </p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-indigo-300 shadow-inner max-w-full overflow-x-auto leading-relaxed space-y-1 mb-4">
+                    <span class="text-slate-500">// 1. GPIO 輸出配置與控制 (閃爍板載 D13 / PA5)</span><br>
+                    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO5);<br>
+                    gpio_set(GPIOA, GPIO5);   <span class="text-slate-500">// 輸出 High (拉高點亮)</span><br>
+                    gpio_clear(GPIOA, GPIO5); <span class="text-slate-500">// 輸出 Low (拉低熄滅)</span><br>
+                    <br>
+                    <span class="text-slate-500">// 2. 使用 SysTick 系統滴答計時器，取代傳統粗糙的 busy-loop 延遲</span><br>
+                    static volatile uint32_t systick_delay = 0;<br>
+                    void sys_tick_handler(void) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (systick_delay != 0) { systick_delay--; }<br>
+                    }<br>
+                    void delay_ms(uint32_t ms) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;systick_delay = ms;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;while (systick_delay != 0); <span class="text-slate-500">// 等待中斷遞減完成</span><br>
+                    }<br>
+                    <br>
+                    <span class="text-slate-500">// 3. USART2 串列發送 (串列週邊通訊封包發送)</span><br>
+                    usart_send_blocking(USART2, 'A'); <span class="text-slate-500">// 阻塞式安全發送一個位元組</span>
+                </div>
+
+                <!-- 4. 看門狗與安全復歸 SOP -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5 text-red-700">
+                    ⚠️ 4. 看門狗安全防護 (WWDG) 與除錯機制
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    為了避免機械手臂或 AGV 因主程式死鎖（Hang）造成暴走，必須啟動 WWDG 窗口看門狗計時器進行安全防護。
+                </p>
+                <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-600 pl-1 leading-relaxed">
+                    <li><strong>看門狗原理：</strong> 在主迴圈中設定一個固定的計時時間窗口。若程式在規定窗口外或超時未刷新（餵狗），硬體會強制進行 <strong>MCU 系統重啟 (Reset)</strong>，保護人機安全。</li>
+                    <li><strong>ST-LINK 物理連線安全：</strong> 在插拔燒錄器時，請務必先切斷 STM32 板子外部馬達的高壓供電，防止底層地迴路電位差產生的突波擊穿 MCU 週邊。</li>
+                </ol>
+            `,
+            'soft-eng': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">💻 軟體工程與程式素養</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ SOFTWARE_ENGINEERING // CLEAN_CODE_STANDARDS ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+                    一個好的機器人系統不僅要求硬體運作流暢，軟體的強健性與可維護性更是決定專案成敗的關鍵。實驗室強調「學術、實作、團結、共享」，所有程式碼都應遵循良好的軟體工程規範。
+                </p>
+
+                <!-- 1. DRY 原則 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    ⚙️ 1. DRY (Don't Repeat Yourself) 原則
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
+                    避免重複造輪子。如果同一個運算法則（如馬達 Checksum 計算、TCP 發送封包等）在多個地方被使用，<strong>必須將其封裝為獨立的 Helper Class 或公共函數</strong>，嚴禁直接複製貼上代碼（Copy-Paste Programming）。
+                </p>
+
+                <!-- 2. 命名規範 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🏷️ 2. 標準命名法 (Naming Conventions)
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-3 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                        <strong class="text-slate-900 text-sm flex items-center gap-1.5">🔴 PascalCase (帕斯卡命名)</strong>
+                        <p class="text-slate-500 leading-relaxed text-xs">
+                            單字首字母一律大寫。適用於：<strong>C# 的類別名 (Class)、方法函數名 (Method)、命名空間 (Namespace)</strong> 及屬性 (Property)。<br>
+                            <span class="text-indigo-600 font-mono">範例：class MotorController, void ConnectDevice()</span>
+                        </p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                        <strong class="text-slate-900 text-sm flex items-center gap-1.5">🔵 camelCase (駝峰命名)</strong>
+                        <p class="text-slate-500 leading-relaxed text-xs">
+                            首字小寫，其餘單字首字母大寫。適用於：<strong>區域變數 (Local Variable) 與傳參名 (Parameters)</strong>。<br>
+                            <span class="text-indigo-600 font-mono">範例：int motorId, double targetAngle</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. Git Commit 命名規範 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🚀 3. Git Commit 語意化命名規範
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    為了讓專案歷史紀錄一目了然，所有 Commit 訊息必須附帶標準的前綴標籤：
+                </p>
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li><code class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-mono font-bold">feat:</code> 新增功能特徵 (例如：feat: 新增 AX-12 馬達位置回讀函數)</li>
+                    <li><code class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-mono font-bold">fix:</code> 修補錯誤 Bug (例如：fix: 修正 Checksum 位元組計算溢出錯誤)</li>
+                    <li><code class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-mono font-bold">docs:</code> 僅修改文件文檔 (例如：docs: 更新 C# 控制手臂操作指南)</li>
+                    <li><code class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-mono font-bold">style:</code> 不影響代碼邏輯的排版、空格、分號調整</li>
+                    <li><code class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-mono font-bold">refactor:</code> 程式碼重構（既不是新增特徵，也不是修補錯誤的優化）</li>
+                </ul>
+
+                <!-- 4. 重構習慣 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🧹 4. 程式重構習慣 (Refactoring)
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    每次完成階段性測試後，請主動花 10 分鐘將代碼中的測試暫存變數（如 <code class="font-mono bg-slate-100 px-1 border rounded text-slate-700">int a, b;</code>）重新命名為具備清晰語意的名稱。主動撰寫 C# 三斜線（<code class="font-mono text-indigo-600 bg-slate-50 border px-1 rounded">///</code>）結構化方法註釋，讓下屆學弟妹能夠快速接手你的畢業碩論/專題代碼。
+                </p>
+            `,
+            'csharp-std': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">⚙️ C# 基礎開發規範</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ CSHARP_CODING_STANDARDS // SYSTEM_INTEGRATION ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                    實驗室的 Windows GUI 機台操作系統（如機械手臂操作平台）主要是使用 <strong>C# Windows Forms (WinForms)</strong> 技術開發。為保持開發的穩健度，請嚴格遵守以下開發守則。
+                </p>
+
+                <!-- 1. 例外處理實踐 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🛡️ 1. 例外處理 Try/Catch 的精確使用
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-2">
+                    在進行硬體通訊、TCP/IP Socket 開啟或 SerialPort 讀寫時，由於物理線路可能產生斷線或硬體不預期離線，<strong>一律必須使用 Try/Catch 語法包裝</strong>。
+                </p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-indigo-300 shadow-inner max-w-full overflow-x-auto leading-relaxed">
+                    <span class="text-blue-400">try</span><br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;serialPort1.<span class="text-yellow-400">Open</span>();<br>
+                    }<br>
+                    <span class="text-blue-400">catch</span> (UnauthorizedAccessException ex)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 針對特定的通訊埠被佔用錯誤進行處理</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;MessageBox.<span class="text-yellow-400">Show</span>(<span class="text-blue-400">"通訊埠已被其它程式佔用，請關閉 RoboPlus Manager 後再試！"</span>);<br>
+                    }<br>
+                    <span class="text-blue-400">catch</span> (Exception ex)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 通用錯誤捕捉</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;MessageBox.<span class="text-yellow-400">Show</span>(<span class="text-blue-400">$"無法開啟通訊埠！詳細原因：{ex.Message}"</span>);<br>
+                    }
+                </div>
+
+                <!-- 2. WinForms 多線程安全控制 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5 text-red-700">
+                    ⚠️ 2. WinForms 多線程 UI 安全更新 (Cross-thread violation)
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    在非同步讀取馬達回授位置或進行 TCP 持續聆聽時，若在自建的背景線程 (Thread) 中直接存取視窗控制項（例如：把馬達座標寫入 <code class="font-mono bg-slate-100 px-1 border rounded text-slate-700">textBox1.Text</code>），系統會拋出 <strong>Cross-thread operation not valid</strong> 的嚴重的崩潰錯誤。
+                </p>
+                <div class="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800 leading-relaxed mb-3">
+                    <strong>💡 標準跨線程 UI 更新方案 (Invoke) 範例：</strong>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-indigo-300 shadow-inner max-w-full overflow-x-auto leading-relaxed">
+                    <span class="text-blue-400">private void</span> <span class="text-yellow-400">UpdateStatus</span>(<span class="text-blue-400">string</span> message)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">if</span> (textBox1.InvokeRequired)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// 若是從其它線程調用，則使用 BeginInvoke 進行非同步安全排隊</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;textBox1.<span class="text-yellow-400">BeginInvoke</span>(<span class="text-blue-400">new</span> Action&lt;<span class="text-blue-400">string</span>&gt;(UpdateStatus), message);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">else</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;textBox1.Text = message;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    }
+                </div>
+            `,
+            'tools-setup': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">🔧 工具與環境建置</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ DEVELOPMENT_ENVIRONMENT_SETUP // CORE_TOOLS ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                    工欲善其事，必先利其器。新進人員請依照以下指南迅速在個人電腦上建置好實驗室主力工具與環境：
+                </p>
+
+                <!-- 1. Git 版本控制工具 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🐙 1. Git 安裝與身分配置
+                </h4>
+                <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed pl-1">
+                    <li>前往 <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-bold hover:underline">Git 官網 ➔</a> 下載並安裝。</li>
+                    <li>
+                        開啟 Git Bash 視窗，輸入以下指令配置個人全局身分（請務必設定，否則無法順利進行 Commit 推送）：
+                        <div class="my-2 bg-slate-950 p-3 rounded-lg border border-slate-800 text-indigo-300 font-mono text-[11px] leading-relaxed">
+                            git config --global user.name "你的英文姓名(或GitHub名稱)"<br>
+                            git config --global user.email "你的 E-mail"
+                        </div>
+                    </li>
+                </ol>
+
+                <!-- 2. 整合開發與建模工具 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🛠️ 2. 主力整合開發軟體 (IDEs & Utilities)
+                </h4>
+                <ul class="space-y-3 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>
+                        <strong class="text-slate-800">● Visual Studio Community</strong>：<br>
+                        <span class="text-slate-500 pl-5 inline-block text-xs">C# GUI 視窗開發首選。下載安裝時，務必勾選<strong>「.NET 桌面開發」</strong>與<strong>「使用 C++ 的行動開發」</strong>工作負載。</span>
+                    </li>
+                    <li>
+                        <strong class="text-slate-800">● Onshape 3D Cloud CAD</strong>：<br>
+                        <span class="text-slate-500 pl-5 inline-block text-xs">免安裝的雲端 3D 建模工具。請前往官網註冊學生免費學術帳號。詳細指南請見：<a href="onshape-tutorial.html" class="text-indigo-600 font-bold hover:underline">Onshape 基礎入門 ➔</a></span>
+                    </li>
+                    <li>
+                        <strong class="text-slate-800">● Ultimaker Cura / Bambu Studio</strong>：<br>
+                        <span class="text-slate-500 pl-5 inline-block text-xs">熱熔 3D 列印與切片轉換。Bambu Studio 用於操控 Bambu X1-C，Cura 用於 CR-5 Pro 機台。</span>
+                    </li>
+                    <li>
+                        <strong class="text-slate-800">● RoboPlus Task 1.0</strong>：<br>
+                        <span class="text-slate-500 pl-5 inline-block text-xs">Robotis 專屬的圖形控制器邏寫與韌體恢復工具。請於實驗室 NAS 中下載安裝。</span>
+                    </li>
+                </ul>
+            `,
+            'hiwin-control': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">🦾 HIWIN 機械手臂控制</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ HIWIN_ROBOT_CONTROL_SDK // TCP_IP_INTERFACE ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                    本指南適用於利用 C# 呼叫 <strong>RASDK（本實驗室自主維護之手臂二次開發函式庫）</strong> 對接並操控上游 HIWIN 控制箱進行精密六軸或四軸運動控制。
+                </p>
+
+                <!-- 1. TCP/IP 電腦端連線參數 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🌐 1. TCP/IP 通訊參數配置
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-2">
+                    在進行 C# 軟體開發前，請先確保控制用主機與 HIWIN 控制箱在同一個子網域中。
+                </p>
+                <div class="overflow-x-auto border border-slate-200 rounded-xl my-3">
+                    <table class="min-w-full divide-y divide-slate-200 text-xs text-left">
+                        <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                            <tr>
+                                <td class="px-5 py-3 font-semibold text-slate-900 bg-slate-50">HIWIN 控制箱默認 IP</td>
+                                <td class="px-5 py-3 font-mono">192.168.1.30</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-semibold text-slate-900 bg-slate-50">控制主機建議配置 IP</td>
+                                <td class="px-5 py-3 font-mono">192.168.1.100 (或 192.168.1.X 等同網段)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-semibold text-slate-900 bg-slate-50">RASDK 通訊 Port</td>
+                                <td class="px-5 py-3 font-mono">8000 (預設)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 2. 基本運動函式呼叫 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🏎️ 2. RASDK 核心控制 API (C#)
+                </h4>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-indigo-300 shadow-inner max-w-full overflow-x-auto leading-relaxed space-y-1">
+                    <span class="text-slate-500">// 1. 建立手臂控制器對象並進行 Socket 連線</span><br>
+                    IRobotArm robot = <span class="text-blue-400">new</span> HiwinRobotArm(<span class="text-blue-400">"192.168.1.30"</span>);<br>
+                    robot.<span class="text-yellow-400">Connect</span>();<br>
+                    <br>
+                    <span class="text-slate-500">// 2. 設定運動速度與加速度 (1 ~ 100%)</span><br>
+                    robot.<span class="text-yellow-400">SetSpeed</span>(<span class="text-amber-500">50</span>);<br>
+                    <br>
+                    <span class="text-slate-500">// 3. PTP (點對點關節運動) - 移動至特定空間軸座標</span><br>
+                    <span class="text-blue-400">double</span>[] targetPose = <span class="text-blue-400">new double</span>[<span class="text-amber-500">6</span>] { <span class="text-amber-500">100.0</span>, <span class="text-amber-500">250.0</span>, <span class="text-amber-500">300.0</span>, <span class="text-amber-500">0.0</span>, <span class="text-amber-500">90.0</span>, <span class="text-amber-500">0.0</span> };<br>
+                    robot.<span class="text-yellow-400">Ptp</span>(targetPose);<br>
+                    <br>
+                    <span class="text-slate-500">// 4. LIN (線性直線運動) - 精密直線路徑加工</span><br>
+                    robot.<span class="text-yellow-400">Lin</span>(targetPose);<br>
+                    <br>
+                    <span class="text-slate-500">// 5. 斷開連線安全關閉</span><br>
+                    robot.<span class="text-yellow-400">Disconnect</span>();
+                </div>
+
+                <!-- 3. 安全防護與警報排除 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5 text-red-700">
+                    🚨 3. 實機硬體安全與警報復歸
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-2">
+                    在實機運轉前，<strong>請確認控制箱上的實體「緊急停止鈕」已轉開</strong>。
+                </p>
+                <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-600 pl-1 leading-relaxed">
+                    <li>若因關節運動超限撞限（如 Over-travel 撞軟極限），請先至手持教導盒 (Teach Pendant) 切換至手動模式，解除鎖死。</li>
+                    <li>點擊教導盒上的 <strong>「Alarm Reset」</strong>，清除軟體內部的警報日誌，再使用 C# 發送伺服馬達重新致能（Enable）訊號。</li>
+                    <li>嚴禁在伺服馬達處於斷能（Servo Off）或帶有異常警報紅燈時，直接用外力強行搬動機械手臂的實體關節，此動作極易損害齒輪箱！</li>
+                </ol>
+            `,
+            'github-rules': `
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">🐙 GitHub 組織成員守則</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ GITHUB_ORGANIZATION_RULES // VERSION_CONTROL ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                    本守則旨在規範全體實驗室成員（包含碩士班、專題生）在 [github.com/nfu-robotlab] 組織旗下共同進行協作、共同維護專案代碼時的版控標準：
+                </p>
+
+                <!-- 1. 分支模型 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-5 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🌲 1. 標準分支模型 (Simplified Git Flow)
+                </h4>
+                <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                    嚴禁直接將未經測試的程式碼 Commit & Push 推送到 <code class="font-mono bg-slate-100 px-1 border rounded text-indigo-600">main</code> 或 <code class="font-mono bg-slate-100 px-1 border rounded text-indigo-600">master</code> 分支！請遵循以下原則：
+                </p>
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li><strong class="text-slate-900">● main 分支</strong>：唯一的正式發表版本（Stable Production）。只有在功能完全開發完畢、經過實機測試，且通過學長審查後才能合併。</li>
+                    <li><strong class="text-slate-900">● dev 分支</strong>：共享的開發整合分支（Integration）。所有組員開發的新特徵應推送到此進行初步整合與編譯。</li>
+                    <li><strong class="text-slate-900">● feature/ 獨立分支</strong>：當你預計要增加一個特定的功能時，請先從 dev 分支開闢一個屬於你個人、以 <code class="font-mono bg-slate-50 border rounded text-slate-700">feature/your-feature-name</code> 為名的獨立工作分支。</li>
+                </ul>
+
+                <!-- 2. Pull Request (PR) 審查機制 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
+                    🔍 2. Pull Request 合併與 Code Review 審查
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
+                    當你的功能特徵分支開發完成且推送後，不要自行在本地進行 Merge，請主動至 GitHub 線上建立一個 **Pull Request (PR)**：
+                </p>
+                <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-600 pl-1 leading-relaxed">
+                    <li>在 PR 敘述欄內寫明本次 Commit 解決了哪些 Bug、或是新增了哪些技術特徵。</li>
+                    <li>在右側 **Reviewers** 欄位中，指派負責該專案的學長或助理助教（例如指派：王瑞智）。</li>
+                    <li>等待學長線上檢視、確認代碼無明顯標籤缺失、不合規死迴圈或衝突後，點擊 Merge，此時新程式碼才會正式收錄。</li>
+                </ol>
+
+                <!-- 3. 安全防範：嚴禁提交敏感金鑰 -->
+                <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5 text-red-700">
+                    ❌ 3. 安全大忌：嚴格禁止提交敏感金鑰與密碼
+                </h4>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-xs text-red-800 space-y-2 mb-3 leading-relaxed">
+                    <p class="font-bold">⚠️ 當專案包含第三方雲端 API (如 OpenAI key, RealSense SDK 金鑰) 或私有連線密碼時，絕對禁止將其直接 Hardcoded 在程式碼中並 Commit 上傳！</p>
+                    <p class="font-bold">⚠️ 上傳前請務必將相關敏感金鑰移至本地設定檔（或寫入 gitignore 中忽略上傳），否則一旦被自動化網頁爬蟲掃描抓取，實驗室將面臨巨大的資安與盜刷風險。</p>
+                </div>
+            `
+        };
+
+        // 彈窗控制邏輯
+        function openDoc(topicId) {
+            const modal = document.getElementById('doc-modal');
+            const body = document.getElementById('doc-content-body');
+            
+            if (modal && body && docDatabase[topicId]) {
+                body.innerHTML = docDatabase[topicId];
+                modal.classList.remove('hidden');
+                // 滾動回到最頂端
+                body.scrollTop = 0;
+            }
+        }
+
+        function closeDoc() {
+            const modal = document.getElementById('doc-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+    </script>
+
+    <!-- Audio & Interaction Logic -->
+    <script>
+        let isAudioEnabled = false;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleAudio() {
+            initAudio();
+            isAudioEnabled = !isAudioEnabled;
+            
+            const btn = document.getElementById('audio-toggle-btn');
+            const icon = document.getElementById('audio-icon');
+            
+            if (isAudioEnabled) {
+                icon.innerText = "🔊";
+                btn.className = "p-1.5 px-3 border border-indigo-500 bg-indigo-500 text-white rounded-lg transition-all flex items-center gap-2 text-xs font-semibold shadow-md shadow-indigo-500/10";
+                btn.querySelector('span:last-child').innerText = "AUDIO: ON";
+                playSynth('boot');
+            } else {
+                icon.innerText = "🔇";
+                btn.className = "p-1.5 px-3 border border-white/40 bg-white/70 hover:bg-white text-slate-700 rounded-lg transition-all text-xs font-semibold";
+                btn.querySelector('span:last-child').innerText = "AUDIO: OFF";
+            }
+        }
+
+        function playSynth(type) {
+            if (!isAudioEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+
+                if (type === 'hover') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(2400, now);
+                    gain.gain.setValueAtTime(0.015, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.start(now);
+                    osc.stop(now + 0.04);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(1200, now);
+                    osc.frequency.exponentialRampToValueAtTime(400, now + 0.12);
+                    gain.gain.setValueAtTime(0.04, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'boot') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.setValueAtTime(880, now + 0.08);
+                    gain.gain.setValueAtTime(0.03, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+    </script>
+</body>
+</html>
