@@ -82,6 +82,7 @@
         </section>
 
         <!-- 行政事務文檔導覽網格 -->
+        <!-- STREAMING_CHUNK: Coding the dashboard directories... -->
         <section class="space-y-6">
             <div class="border-l-4 border-orange-500 pl-4">
                 <h3 class="text-lg font-extrabold text-slate-900">📂 行政事務文檔導覽</h3>
@@ -251,7 +252,7 @@
     </footer>
 
     <!-- 行政文檔實體內容資料庫 -->
-    <!-- STREAMING_CHUNK: Instantiating the full content database, resolving conflicts with proper HTML elements... -->
+    <!-- STREAMING_CHUNK: Instantiating the clean, conflict-free Javascript database... -->
     <script>
         const docDatabase = {
             'intro': `
@@ -481,7 +482,7 @@
                         <p class="font-bold text-slate-800 text-sm sm:text-base">● 整張收據：</p>
                         <ul class="list-disc list-inside pl-4 text-slate-500 space-y-1 text-xs sm:text-sm">
                             <li>單張收據總金額 <strong>$10,000 以上（含）</strong> 不得使用業務費核銷。</li>
-                            <li>單張收據總金額 <strong>$100,000 以上（含）</strong> 需招裝或科研採購。
+                            <li>單張收據總金額 <strong>$100,000 以上（含）</strong> 需招標或科研採購。
                                 <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-400 space-y-0.5">
                                     <li>同一個廠商在一個月內的收據總金額不得超過 $100,000（含）。</li>
                                 </ul>
@@ -533,8 +534,8 @@
                     <li>
                         <strong class="text-slate-800">● 蓋章與欄位資訊：</strong>
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-1">
-                            <li>收據上需要蓋有「統一發票專用章」、「店章」或「負責人章」。（※ 電子發票證明聯免蓋章）。</li>
-                            <li>收據上需要明確填入以下欄位資訊：<strong>日期、品名（需以中文填寫，不能只有型號或英文）、數量、單價、金額、總計</strong>。</li>
+                            <li>收據上需要蓋有「統一發票專用章」、「店章」 or 「負責人章」。（※ 電子發票證明聯免蓋章）。</li>
+                            <li>收據上需要明確填入以下欄位資訊：<strong>日期、品名（需以中文填寫，不能只有型號 or 英文）、數量、單價、金額、總計</strong>。</li>
                             <li>開立「統一發票」需應稅商品價值之 5%，請和賣家確認好所標價格是否含稅。</li>
                         </ul>
                     </li>
@@ -554,7 +555,7 @@
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
                         <p class="font-bold text-slate-800">🧾 發票與收據對照限制：</p>
                         <ol class="list-decimal list-inside pl-4 text-slate-500 space-y-1 text-xs sm:text-sm">
-                            <li>發票上各品項之品名需含有中文（如：無刷馬達、電源供應器），不能只有型號 or 英文品名。</li>
+                            <li>發票上各品項之品名需含有中文（如：無刷馬達、電源供應器），不能只有型號 or 英文品名.</li>
                             <li>在優先滿足第 1 點的情況下，發票和報價單等各處之品項、產品名稱/型號、價錢及數量等需一致，至少需要能夠清楚判斷爲相同之品項。</li>
                             <li>發票開立日期必須晚於<strong>報價單開立日期及學校請購流程完成日期</strong>。</li>
                             <li>發票上需蓋有公司/負責人章 or 帶有前者之統一發票專用章，且不能爲影本。電子發票證明聯不在此限。</li>
@@ -591,7 +592,10 @@
                 <div class="border-t border-slate-200/60 my-4"></div>
 
                 <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
-                    雜支、實驗/課程材料費、印刷費等。在收款人相同的情況下，可以多張收據一起核銷，但總金額不要超過 <strong>$10,000</strong>。受款人不同請分開核銷。
+                    雜支、實驗/課程材料費、印刷費等。
+                </p>
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                    在收款人相同的情況下，可以多張收據一起核銷，但總金額不要超過 <strong>$10,000</strong>。受款人不同請分開核銷。
                 </p>
 
                 <!-- 單價$3,000以下 -->
@@ -607,12 +611,16 @@
                                 👨‍🏫 1. 老師權限
                             </span>
                             <span class="text-[10px] font-mono text-slate-400 bg-white px-2 py-0.5 rounded border">
-                                科技部 / 部門經費 / 產學合作
+                                通常包含：1. 科技部計畫經費 / 2. 部門經費 / 3. 產學合作計畫經費
                             </span>
                         </div>
                         <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-600 space-y-2 leading-relaxed">
                             <li>到「<a href="https://accweb.nfu.edu.tw/APSWIS_Q/Login_AD_Q.asp" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">主計室-網路請購系統</a>」，以老師的帳號登入。</li>
-                            <li>依照需求，點選上方的「部門請購查詢」或「計劃請購查詢」。（核銷部門經費選前者，核銷計劃經費選後者）</li>
+                            <li>依照需求，點選上方的「部門請購查詢」或「計劃請購查詢」。
+                                <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                                    <li>若要核銷「部門經費」則選擇「部門請購查詢」，要核銷「計劃經費」則選擇「計劃請購查詢」。</li>
+                                </ul>
+                            </li>
                             <li>按「新增請購」。</li>
                             <li>勾選「一萬以下直接核銷」後按「下一步」。</li>
                             <li>填寫「用途說明」：
@@ -632,9 +640,9 @@
                             <li>視情況勾選「代墊」，並填寫「發票/收據號碼」、「發票/收據日期」、「受款人代碼」、「受款人姓名」及「含稅金額」，每張收據分開填寫：
                                 <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-1">
                                     <li>若此收據的金額要匯到老師的戶頭，請勾選「代墊」；若要匯給廠商，則取消勾選「代墊」。同一份核銷中，請統一一個受款人，不同受款人的收據請分開核銷。</li>
-                                    <li>在「發票/收據號碼」中填寫發票號碼（如：<code class="font-mono bg-white px-1 border rounded text-orange-600">64967512</code> 之類的格式），若不是統一發票，則按一下上方的「填入收據」按鈕。</li>
+                                    <li>在「發票/收據號碼」中填寫發票號碼（如：<code class="font-mono bg-white px-1 border rounded text-orange-600">WX91434527</code>），若不是統一發票，則按一下上方的「填入收據」按鈕。</li>
                                     <li>在「發票/收據日期」填入民國年月日的七碼日期（如：111年12月31日填爲<code class="font-mono bg-white px-1 border rounded">1111231</code>）。</li>
-                                    <li>依照「代墊」與否，在「受款人代碼」中填寫老師的員工代號<code class="font-mono bg-white px-1 border rounded text-orange-600">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入。</li>
+                                    <li>依照「代墊」與否，在「受款人代碼」中填寫老師的員工代號<code class="font-mono bg-white px-1 border rounded text-orange-600">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入老師或廠商。</li>
                                     <li>在「含稅金額」中填寫該收據的總含稅金額。</li>
                                 </ul>
                             </li>
@@ -652,7 +660,7 @@
                                 🧑‍🎓 2. 學生/助教權限
                             </span>
                             <span class="text-[10px] font-mono text-slate-400 bg-white px-2 py-0.5 rounded border">
-                                師徒制 / 教學實踐 / 深碗學習
+                                通常包含各種學校計劃，例如：1. 師徒制 / 2. 教學實踐 / 3. 深碗學習
                             </span>
                         </div>
                         <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-600 space-y-2 leading-relaxed">
@@ -661,10 +669,10 @@
                             <li>勾選「一萬以下直接核銷」後按「下一步」。</li>
                             <li>依據計劃的說明，填寫「欲轉給請購人代碼」。</li>
                             <li>依據計劃的說明，填寫「購案說明」。</li>
-                            <li>依照收據內容填寫「品名/規格/用途」、「單位」、「數量」及「總價」。（詳細說明請參考上述老師權限的第 7 點）</li>
-                            <li>點選「編輯收款人明細」。視情況勾選「代墊」，並填寫「發票/收據號碼」、「發票/收據日期」、「受款人代碼」、「受款人姓名」及「含稅金額」，每張收據分開填寫。（詳細說明請參考上述老師權限的第 9 點）</li>
+                            <li>依照收據內容填寫「品名/規格/用途」、「單位」、「數量」及「總價」。（詳細說明請參考上述：一萬以下直接核銷 &gt; 單價$3,000以下 &gt; 老師權限的第 7 點）</li>
+                            <li>點選「編輯收款人明細」。視情況勾選「代墊」，並填寫「發票/收據號碼」、「發票/收據日期」、「受款人代碼」、「受款人姓名」及「含稅金額」，每張收據分開填寫。（詳細說明請參考上述：一萬以下直接核銷 &gt; 單價$3,000以下 &gt; 老師權限的第 9 點）</li>
                             <li>按下「存入」。</li>
-                            <li>列印。若為「高教深耕」底下的計劃，請選擇「列印高教深耕計畫用黏貼憑證」。若不確定請向負責此計劃的處室詢問。</li>
+                            <li>列印，若為「高教深耕」底下的計劃的話，請選擇「列印高教深耕計畫用黏貼憑證」。若不確定請向負責此計劃的處室詢問。</li>
                             <li>計劃經費有些會註明要加會的處室，請在黏貼憑證用紙上的「加會單位」欄位填上指定的處室。
                                 <div class="mt-1.5 p-2.5 bg-white border border-slate-200 rounded text-[11px] text-slate-500 leading-relaxed italic">
                                     💡 <strong>範例：</strong>110B 的深碗學習注意事項有寫到：「請事先至本校預作請購系統請購核銷之費用，請購人代碼為 <strong class="text-orange-600">F10013</strong>，並將核章後之請購單資料送至本校行政大樓 4F 深耕辦公室。」，所以要在「加會單位」中填上「<strong>深耕辦公室</strong>」。
@@ -679,10 +687,8 @@
                 <h4 class="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 flex items-center gap-1.5 border-b border-slate-200/60 pb-1.5">
                     🛠️ 單價 $3,000 ~ $10,000
                 </h4>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-                    此區間購買流程與 $3,000 以下一致，可直接購買。但在最後的行政程序上略有不同：
-                </p>
                 <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 bg-slate-50 p-3.5 rounded-xl border border-slate-200 leading-relaxed">
+                    <li>購買步驟如 3000 以下，直接購買。</li>
                     <li>在最後要「列印黏貼專用憑證用紙」時，上面點選 <strong>「連結財產增加單作業」</strong>。</li>
                     <li>選擇 <strong>「非消耗品(新增)」</strong>。</li>
                     <li>後續照著 1 萬以上之財產增加步驟辦理登記。</li>
@@ -693,8 +699,7 @@
                     ⚙️ 維修實驗室器材費
                 </h4>
                 <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-xs sm:text-sm text-red-800 leading-relaxed">
-                    <strong>🚨 器材舊品回收原則：</strong><br>
-                    整體維修核銷流程與上述一致，但 <strong>【需要廠商將替換下來的舊零組件寄回學校】</strong>，以便作為送交主計室與保管組核銷時的實物證明！
+                    整體流程與上述一致，但 <strong>【需要廠商將替換下來的部分寄回學校以利行政流程】</strong>。
                 </div>
             `,
             'equipment-costs': `
@@ -778,13 +783,13 @@
                     <li>按「編輯收款人」。</li>
                     <li>填寫「受款人代碼」、「受款人姓名」及「含稅金額」：
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 leading-relaxed space-y-1">
-                            <li>依照「代墊`與否，在「受款人代碼」中填寫老師的員工代號 <code class="font-mono bg-white px-1 border rounded">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入。<strong>通常「設備費」不會代墊。</strong></li>
+                            <li>依照「代墊」與否，在「受款人代碼」中填寫老師的員工代號 <code class="font-mono bg-white px-1 border rounded">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入。<strong>通常「設備費」不會代墊。</strong></li>
                             <li>在「含稅金額」中填寫該報價單的總含稅金額。</li>
                         </ul>
                     </li>
-                    <li>確認右上方的「編輯經費」、「編輯品名」及「編輯受款人」的加總金額正確且一致。</li>
+                    <li>確認右上方的「編輯經費」、「編輯品名」及「編輯受款人」的加總金額正確且一致.</li>
                     <li>按下「存入」。</li>
-                    <li>列印請購單。</li>
+                    <li>列印請購單.</li>
                 </ol>
 
                 <!-- 科技部計畫十萬元以上 -->
@@ -973,7 +978,7 @@
                             <li>「職別(稱)」爲「教授」。</li>
                             <li>「保費身份別」選擇「(1)校內教職員工」。</li>
                             <li>「單位」選擇「月」。</li>
-                            <li>「數量」依據情況選擇. 一次申請兩個月就填2。</li>
+                            <li>「數量」依據情況選擇。一次申請兩個月就填2。</li>
                             <li>「單價」填入「15000」。「機關負擔」下的「補充保費」會自動計算。補充保費由「管理費」支出。</li>
                         </ul>
                     </li>
@@ -1015,7 +1020,7 @@
                             <li>「聲明」選擇「本人無專職工作」。</li>
                             <li>「工作內容」照實填寫。通常會寫「協助計劃進行」。</li>
                             <li>「學術研究倫理教育課程-證書字號」照實填寫。此證書需爲完成6小時學術倫理教育課程證明的證書。</li>
-                            <li>按「儲存更新」。</li>
+                            <li>按「儲仁更新」。</li>
                         </ul>
                     </li>
                     <li>回到「計劃人員聘用 &gt; 人員聘用（兼任/臨時人員）」頁面。</li>
@@ -1142,7 +1147,7 @@
                 <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
                     <li>到「虎尾科大首頁」</li>
                     <li>到「主計室」</li>
-                    <li>找到「下載專專區」裡面的「表格下載」</li>
+                    <li>找到「下載專區」裡面的「表格下載」</li>
                     <li>下載「科技部經費變更申請表」</li>
                     <li>填寫內容，主計室系統選到該計畫，點開「收支明細」
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-400">
@@ -1253,7 +1258,7 @@
                     🧾 2. 領款收據暨受領人資料表
                 </h4>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-                    「鐘點費」與「交通費}」需要分開來做成 2 份「領款收據暨受領人資料表」。
+                    「鐘點費」與「交通費」需要分開來做成 2 份「領款收據暨受領人資料表」。
                 </p>
                 <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
                     <li>到「<a href="http://account.nfu.edu.tw/files/11-1009-2831.php" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">主計室-下載專區</a>」下載本表「領款收據暨受領人資料表」。</li>
@@ -1479,7 +1484,7 @@
                             <li>職等：簡任</li>
                         </ul>
                     </li>
-                    <li>「起末地點」其中一方只能爲學校（如斗六、斗南車站或雲林高鐵）。即使車票上不是學校。</li>
+                    <li>「起末地點」其中一方只能爲學校（如斗六、斗南車站 or 雲林高鐵）。即使車票上不是學校。</li>
                     <li>「工作紀要」照實填寫。（如：參加研討會、拜訪廠商）。</li>
                     <li>「交通費」及「住宿費」等照實填寫：
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 leading-relaxed">
@@ -1626,7 +1631,7 @@
                     <li>若時間上與老師的上課時間衝突，請先向老師確認調課事宜。</li>
                     <li>到「學校網頁 &gt; 教師 &gt; 行政資源 &gt; <a href="https://perap2.nfu.edu.tw/EIP/Login/LoginGetNFU.resource.aspx" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">差勤線上簽核系統</a>」並登入老師的帳號。</li>
                     <li>在上方點選「差勤」，再於左上點選「差假申請 &gt; 因公出國申請單」。</li>
-                    <li>各部分如實填寫：
+                    <li>各部分如實填寫。
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
                             <li>「經費來源」依要使用的計劃勾選。若是使用「學校經費」的話要附上簽呈電子檔給系辦。一般是使用科技部計劃經費。</li>
                             <li>「出差起訖時間」只承認「1日0時」，不足 1 日的無法通過。</li>
@@ -1636,7 +1641,7 @@
                     </li>
                     <li>有時會有顯示錯誤，請先在「是否學術歷程」切換一下「是/否」（一般出差如會面老師的話填「否」即可）。</li>
                     <li>於最後頁面將請假單據下載下來，與「差旅費報告表」一起送出審核。
-                        <div class="my-3 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5 shadow-sm max-w-md">
+                        <div class="my-3 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5 shadow-sm max-w-md mx-auto">
                             <img src="https://i.imgur.com/B09UV74.png" alt="差勤請假單範例" class="w-full h-auto rounded shadow-inner" onerror="this.src='https://placehold.co/400x120/f1f5f9/cbd5e1?text=Leave+Application+Specimen'">
                             <p class="text-[10px] text-slate-400 text-center italic mt-1">▲ 請假公文列印示意圖</p>
                         </div>
