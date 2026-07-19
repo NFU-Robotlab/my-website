@@ -251,6 +251,7 @@
     </footer>
 
     <!-- 行政文檔實體內容資料庫 -->
+    <!-- STREAMING_CHUNK: Instantiating the full content database, resolving conflicts with proper HTML elements... -->
     <script>
         const docDatabase = {
             'intro': `
@@ -480,7 +481,7 @@
                         <p class="font-bold text-slate-800 text-sm sm:text-base">● 整張收據：</p>
                         <ul class="list-disc list-inside pl-4 text-slate-500 space-y-1 text-xs sm:text-sm">
                             <li>單張收據總金額 <strong>$10,000 以上（含）</strong> 不得使用業務費核銷。</li>
-                            <li>單張收據總金額 <strong>$100,000 以上（含）</strong> 需招標或科研採購。
+                            <li>單張收據總金額 <strong>$100,000 以上（含）</strong> 需招裝或科研採購。
                                 <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-400 space-y-0.5">
                                     <li>同一個廠商在一個月內的收據總金額不得超過 $100,000（含）。</li>
                                 </ul>
@@ -532,7 +533,7 @@
                     <li>
                         <strong class="text-slate-800">● 蓋章與欄位資訊：</strong>
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-1">
-                            <li>收據上需要蓋有「統一發票專用章」、「店章」 or 「負責人章」。（※ 電子發票證明聯免蓋章）。</li>
+                            <li>收據上需要蓋有「統一發票專用章」、「店章」或「負責人章」。（※ 電子發票證明聯免蓋章）。</li>
                             <li>收據上需要明確填入以下欄位資訊：<strong>日期、品名（需以中文填寫，不能只有型號或英文）、數量、單價、金額、總計</strong>。</li>
                             <li>開立「統一發票」需應稅商品價值之 5%，請和賣家確認好所標價格是否含稅。</li>
                         </ul>
@@ -763,21 +764,21 @@
                     <li>按「新增請購」。</li>
                     <li>勾選「科研採購」後按「下一步」。</li>
                     <li>填寫「用途說明」：
-                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 space-y-0.5">
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
                             <li>科技部計畫如：<strong>機器人實驗室，購買&lt;欲購買物品名稱&gt;</strong></li>
                             <li>系上經費如：<strong>機器人實驗室王榮爵老師，購買&lt;欲購買物品名稱&gt;</strong></li>
                         </ul>
                     </li>
                     <li>選擇「計劃編號」、「經費用途」、「金額」。（金額可以最後再填）</li>
                     <li>依照報價單內容填寫「品名/規格/用途」、「單位」、「數量」及「總價」：
-                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 leading-relaxed">
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 leading-relaxed">
                             <li>若報價單上的品名沒有中文或看不出是什麼品項的話，請自行補充，並同樣以原子筆標註在收據上。如：原本收據上品名只有「SG90」，則自行補充爲「SG90伺服馬達」。<strong>最好是請廠商開立符合我們需求的報價單。</strong></li>
                         </ul>
                     </li>
                     <li>按「編輯收款人」。</li>
                     <li>填寫「受款人代碼」、「受款人姓名」及「含稅金額」：
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 leading-relaxed space-y-1">
-                            <li>依照「代墊」與否，在「受款人代碼」中填寫老師的員工代號 <code class="font-mono bg-white px-1 border rounded">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入。<strong>通常「設備費」不會代墊。</strong></li>
+                            <li>依照「代墊`與否，在「受款人代碼」中填寫老師的員工代號 <code class="font-mono bg-white px-1 border rounded">B32008</code>（代墊）或廠商的統一編號（非代墊）。填寫完後按下 Tab 鍵會自動填入「受款人姓名」，若沒有自動產生就自行填入。<strong>通常「設備費」不會代墊。</strong></li>
                             <li>在「含稅金額」中填寫該報價單的總含稅金額。</li>
                         </ul>
                     </li>
@@ -972,7 +973,7 @@
                             <li>「職別(稱)」爲「教授」。</li>
                             <li>「保費身份別」選擇「(1)校內教職員工」。</li>
                             <li>「單位」選擇「月」。</li>
-                            <li>「數量」依據情況選擇。一次申請兩個月就填2。</li>
+                            <li>「數量」依據情況選擇. 一次申請兩個月就填2。</li>
                             <li>「單價」填入「15000」。「機關負擔」下的「補充保費」會自動計算。補充保費由「管理費」支出。</li>
                         </ul>
                     </li>
@@ -1013,7 +1014,7 @@
                             <li>「勞退自提比例」選擇「0」。</li>
                             <li>「聲明」選擇「本人無專職工作」。</li>
                             <li>「工作內容」照實填寫。通常會寫「協助計劃進行」。</li>
-                            <li>「學術研究倫教育課程-證書字號」照實填寫。此證書需爲完成6小時學術倫理教育課程證明的證書。</li>
+                            <li>「學術研究倫理教育課程-證書字號」照實填寫。此證書需爲完成6小時學術倫理教育課程證明的證書。</li>
                             <li>按「儲存更新」。</li>
                         </ul>
                     </li>
@@ -1141,7 +1142,7 @@
                 <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
                     <li>到「虎尾科大首頁」</li>
                     <li>到「主計室」</li>
-                    <li>找到「下載專區」裡面的「表格下載」</li>
+                    <li>找到「下載專專區」裡面的「表格下載」</li>
                     <li>下載「科技部經費變更申請表」</li>
                     <li>填寫內容，主計室系統選到該計畫，點開「收支明細」
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-400">
@@ -1193,7 +1194,7 @@
                     <li><strong>領款收據暨受領人資料表：</strong> 鐘點費、交通費各一。</li>
                     <li><strong>業師應聘履歷表。</strong></li>
                     <li><strong>活動集錦。</strong></li>
-                    <li class="list-none italic text-slate-400 text-[11px] sm:text-xs mt-1">* 備註：每個計劃要求的文件不一定相同，有些不會要求「業師應聘履歷表」 or 「活動集錦」等。</li>
+                    <li class="list-none italic text-slate-400 text-[11px] sm:text-xs mt-1">* 備註：每個計劃要求的文件不一定相同，有些不會要求「業師應聘履歷表」或「活動集錦」等。</li>
                 </ul>
 
                 <!-- 1. 印領清冊 -->
@@ -1252,7 +1253,7 @@
                     🧾 2. 領款收據暨受領人資料表
                 </h4>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-                    「鐘點費」與「交通費」需要分開來做成 2 份「領款收據暨受領人資料表」。
+                    「鐘點費」與「交通費}」需要分開來做成 2 份「領款收據暨受領人資料表」。
                 </p>
                 <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
                     <li>到「<a href="http://account.nfu.edu.tw/files/11-1009-2831.php" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">主計室-下載專區</a>」下載本表「領款收據暨受領人資料表」。</li>
@@ -1478,8 +1479,8 @@
                             <li>職等：簡任</li>
                         </ul>
                     </li>
-                    <li>「起末地點」的其中一站<strong>只能是本校所在地</strong>（如：雲林高鐵、斗南、斗六車站），即使實際購買的車票不是此站亦須對齊。</li>
-                    <li>「工作紀要」照實填寫（如：參加研討會、拜訪廠商）。</li>
+                    <li>「起末地點」其中一方只能爲學校（如斗六、斗南車站或雲林高鐵）。即使車票上不是學校。</li>
+                    <li>「工作紀要」照實填寫。（如：參加研討會、拜訪廠商）。</li>
                     <li>「交通費」及「住宿費」等照實填寫：
                         <ul class="list-disc list-inside pl-5 mt-1 text-[11px] sm:text-xs text-slate-500 leading-relaxed">
                             <li><strong>住宿費上限：</strong> 目前一天核銷上限為 <strong>$2000 元</strong>。若收據大於 $2000 同樣只能申報 $2000。</li>
@@ -1522,7 +1523,7 @@
                     🚗 業師交通費
                 </h4>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-                    若要請領外部演講專家的來回高鐵或火車交通費，請參閱：<a href="#" onclick="openDoc('lecturer'); return false;" class="text-orange-600 font-bold hover:underline">6. 業師相關文件 ➔</a>
+                    若要請領外部演講專家的來回高鐵 or 火車交通費，請參閱：<a href="#" onclick="openDoc('lecturer'); return false;" class="text-orange-600 font-bold hover:underline">6. 業師相關文件 ➔</a>
                 </p>
             `,
             'employment': `
@@ -1553,10 +1554,168 @@
                 </div>
             `,
             'go-abroad': `
-                <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-1">📄 11. 國外差旅費</h3>
-                <p class="text-xs text-slate-400 font-mono">[ FOREIGN_TRAVEL_EXPENSES // 國外學術會議與差旅 ]</p>
-                <div class="border-t border-slate-200 my-3"></div>
-                <p>需妥善保留登機證正本，並於返國後上傳因公出國報告書。</p>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1 flex items-center gap-1.5">📄 11. 國外差旅費(交通、住宿、誤餐費)</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-mono">[ FOREIGN_TRAVEL_EXPENSES // 國外會議與出差核銷 ]</p>
+                <div class="border-t border-slate-200/60 my-4"></div>
+
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                    需依序完成以下步驟：
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center font-bold text-xs mb-6">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold">1. 簽呈</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold">2. 調課</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold">3. 申請老師差勤</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold">4. 印領清冊/差旅</div>
+                </div>
+
+                <!-- 1. 簽呈 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-6 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    📝 1. 簽呈
+                </h4>
+                <ol class="list-decimal list-inside space-y-3 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>
+                        到實驗室NAS <code class="font-mono bg-slate-100 px-1 rounded text-slate-700">&gt; Public &gt; 事務 &gt; 共用 &gt; 行政事務教學</code>，找到以下檔案：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                            <li>國科會計畫國外差旅費報支注意事項</li>
+                            <li>NFU國內外出差申請注意事項</li>
+                            <li>國外差旅費簽呈範例</li>
+                            <li>中央政府各機關派赴國外各地區出差人員生活費日支數額表</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>「國科會計畫國外差旅費報支注意事項」</strong>：該檔案為國立高雄科大提供，發函日約在 2023/03/28。相關報支依據可能有所變動，請自行上網查詢。重點導覽：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                            <li>第 3 ~ 6 頁：結報注意事項</li>
+                            <li>第 7 ~ 9 頁：交通費</li>
+                            <li>第 10 ~ 12 頁：生活費</li>
+                            <li>第 13 ~ 14 頁：辦公費</li>
+                            <li>第 16 頁：補助出席國際會議</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>「國外差旅費簽呈範例」</strong>：依上面的內容做為範例，盡可能的詳細敘述出國的行程，這部分大多需要向老師確認。
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-1">
+                            <li>預估金額的匯率，先依填寫當天匯率作評估，之後會需要再補一份由出國前一天的匯率乘的實際金額。</li>
+                            <li>根據「NFU國內外出差申請注意事項」路途假相關規定，啟程天的生活費須依據到達時間做決定（通常都直接報滿），回程日生活費則只有原日支費的百分之 70。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        找到<strong>「中央政府各機關派赴國外各地區出差人員生活費日支數額表」</strong>：實際支出金額由當下決定，請自行上網下載最新版本。
+                    </li>
+                    <li>將「簽呈」、「機票」、「邀請函」email 給瑞智即完成本階段。</li>
+                </ol>
+
+                <!-- 2. 調課 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    🏫 2. 調課
+                </h4>
+                <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>到「學校網站」 &gt; 點選「教師」。</li>
+                    <li>找到「校務行政e化資訊平台」並登入老師帳號。</li>
+                    <li>點選「課程服務」 &gt; 按「課程調補課申請」。</li>
+                    <li>選擇原上課日期並選擇要調課的時間。</li>
+                    <li>可以利用 <a href="https://m.nfu.edu.tw/plab/" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">教室使用時間表 ➔</a> 查詢可用的教室。</li>
+                    <li>挑選好時間並送出。</li>
+                </ol>
+
+                <!-- 3. 申請老師的差勤 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    📅 3. 申請老師的差勤
+                </h4>
+                <ol class="list-decimal list-inside space-y-3 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>若時間上與老師的上課時間衝突，請先向老師確認調課事宜。</li>
+                    <li>到「學校網頁 &gt; 教師 &gt; 行政資源 &gt; <a href="https://perap2.nfu.edu.tw/EIP/Login/LoginGetNFU.resource.aspx" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">差勤線上簽核系統</a>」並登入老師的帳號。</li>
+                    <li>在上方點選「差勤」，再於左上點選「差假申請 &gt; 因公出國申請單」。</li>
+                    <li>各部分如實填寫：
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                            <li>「經費來源」依要使用的計劃勾選。若是使用「學校經費」的話要附上簽呈電子檔給系辦。一般是使用科技部計劃經費。</li>
+                            <li>「出差起訖時間」只承認「1日0時」，不足 1 日的無法通過。</li>
+                            <li>「出差事由」記得要填上理由。</li>
+                            <li>路程假需與出席研討會分開請假，這當中會涉及到不同的補助金額。</li>
+                        </ul>
+                    </li>
+                    <li>有時會有顯示錯誤，請先在「是否學術歷程」切換一下「是/否」（一般出差如會面老師的話填「否」即可）。</li>
+                    <li>於最後頁面將請假單據下載下來，與「差旅費報告表」一起送出審核。
+                        <div class="my-3 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5 shadow-sm max-w-md">
+                            <img src="https://i.imgur.com/B09UV74.png" alt="差勤請假單範例" class="w-full h-auto rounded shadow-inner" onerror="this.src='https://placehold.co/400x120/f1f5f9/cbd5e1?text=Leave+Application+Specimen'">
+                            <p class="text-[10px] text-slate-400 text-center italic mt-1">▲ 請假公文列印示意圖</p>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>務必確認出國與返國時間（時差）</strong>：
+                        <div class="mt-1.5 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-800 leading-relaxed font-bold">
+                            🚨 <strong>真實踩雷案例：</strong><br>
+                            請假的公文只請到 29 號，但實際上返抵台灣時間是 30 號的凌晨 4 點 40 分，導致公文不合程序必須重新補簽公文。
+                        </div>
+                        <div class="my-3 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5 shadow-sm max-w-md">
+                            <img src="https://i.imgur.com/VFR1b1U.png" alt="返國時間差錯範例" class="w-full h-auto rounded shadow-inner" onerror="this.src='https://placehold.co/400x200/f1f5f9/cbd5e1?text=Timezone+Error+Specimen'">
+                            <p class="text-[10px] text-slate-400 text-center italic mt-1">▲ 因時差計算錯誤而遭退件之公文範例</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <!-- 4. 印領清冊/差旅費 -->
+                <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-8 mb-3 border-b border-slate-200/60 pb-1.5 text-orange-600">
+                    💵 4. 印領清冊/差旅費
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-600 mb-3 font-semibold">需要先準備以下資料：</p>
+                <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-500 pl-1 leading-relaxed mb-4">
+                    <li>老師請假的假單</li>
+                    <li>通過的出國簽呈</li>
+                    <li>台銀美元對台匯率（整個月的）</li>
+                    <li>中央政府各機關派赴國外各地區出差人員生活費日支數額表</li>
+                </ul>
+
+                <p class="text-xs sm:text-sm text-slate-500 mb-3">以下以使用科技部計劃經費爲例：</p>
+                <ol class="list-decimal list-inside space-y-3 text-xs sm:text-sm text-slate-600 pl-1 leading-relaxed">
+                    <li>到「<a href="https://accweb.nfu.edu.tw/APSWIS_Q/Login_AD_Q.asp" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">主計室-網路請購系統（老師）</a>」。</li>
+                    <li>按「新增請購」。</li>
+                    <li>選「印領清冊/差旅費」 &gt; 「國外差旅費」，按「下一步」。</li>
+                    <li>填寫「用途說明」，若是計畫主持人或共同主持人必須要寫上，後面雜費才可核銷。
+                        <div class="mt-1 p-2 bg-white/60 border rounded text-[11px] sm:text-xs text-slate-500 leading-relaxed italic">
+                            💡 <strong>範例：</strong>【111B1－056】肌力/肌耐力增強型動力外骨骼，參加資訊教育學門專題研究計畫成果發表會(人事室出差事由)，擔任計畫共同主持人並發表成果。<br>
+                            * 若老師有提早出發或是延後回程都可以報交通費。例如：27~30日的研討會，老師選擇 26 號先去 31 號回程是 OK 的，若有此情形需要特別註記在「用途說明」內。
+                        </div>
+                    </li>
+                    <li>選擇「計劃編號」。</li>
+                    <li>選擇「經費用途」：選取<strong>國外差旅費</strong>。</li>
+                    <li>依序填入下方的「身份證號」、「姓名」等。若有多天，則每天都需要填寫。
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                            <li>「身份證號」填老師校內編號 <code class="font-mono bg-white px-1 border rounded">B32008</code></li>
+                            <li>「單位」填電子工程</li>
+                            <li>「職稱」填教授</li>
+                            <li>「職等」填簡任</li>
+                        </ul>
+                    </li>
+                    <li>「起末地點」其中一方只能爲學校（如斗六、斗南車站或雲林高鐵）。
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 space-y-0.5">
+                            <li><strong>正確：</strong>老師搭高鐵從高雄到桃園，只能報虎尾到桃園。</li>
+                            <li><strong>正確：</strong>老師搭高鐵從台中到桃園，只能報台中到桃園。</li>
+                        </ul>
+                    </li>
+                    <li>「工作紀要」照實填寫（如：參加研討會、拜訪廠商）。每天都要填寫。</li>
+                    <li>「交通費」及「住宿費」等照實填寫。
+                        <ul class="list-disc list-inside pl-5 mt-1 text-[11px] text-slate-500 leading-relaxed space-y-1">
+                            <li><strong>生活費計算：</strong>生活費根據出差的目的地會有所不同，請依照「中央政府各機關派赴國外各地區出差人員生活費日支數額表」，乘上出國前一天台銀網站公布的 <a href="https://rate.bot.com.tw/xrt/history/USD?Lang=zh-TW" target="_blank" rel="noopener noreferrer" class="text-orange-600 font-bold hover:underline">「美金對台歷史匯率」➔</a>。依據當日的「即期匯率」的「本行賣出」，作為申請經費的匯率。</li>
+                            <li>交通費要票根才能核銷。</li>
+                            <li>如果包車前往機場，需要事先上簽呈並填寫完整原因。</li>
+                        </ul>
+                    </li>
+                    <li>點擊「編輯代墊人」，點擊「詳如清冊」，填入總金額（含可以核銷的交通費、住宿費及雜費）。</li>
+                    <li>存入並列印「一般出差報告表」。</li>
+                </ol>
+
+                <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
+                    <p class="font-bold text-slate-900 text-xs sm:text-sm mb-1.5">🎓 若出差目的為「與特定教授/專家會面與討論」：</p>
+                    <p class="text-xs text-indigo-900 leading-relaxed">
+                        核銷時必須附上該老師確實存在與任職的證明。例如列印對方學校該系的官方「師資名單師資介紹網頁」，且網頁畫面上必須清晰包含學校Logo、該系名稱及該師名稱，作為合規佐證！
+                    </p>
+                </div>
+
+                <div class="my-4 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5 shadow-sm max-w-sm mx-auto">
+                    <img src="https://i.imgur.com/iXn5rCQ.jpg" alt="國外出差報告表簽章範例" class="w-full h-auto rounded" onerror="this.src='https://placehold.co/300x250/f1f5f9/cbd5e1?text=Travel+Report+Specimen'">
+                    <p class="text-[10px] text-slate-400 text-center italic mt-1.5">▲ 國外出差報告表列印與簽章範例</p>
+                </div>
             `
         };
 
