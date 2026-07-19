@@ -93,14 +93,12 @@
     <!-- 滿版模糊背景圖片 -->
     <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200" alt="Robotics Lab Background" class="cyber-bg" onerror="this.src='https://placehold.co/1200x800/1e293b/64748b?text=Robotics+Lab+Environment'">
 
-    <!-- 💡 STREAMING_CHUNK: Updating the navigation logo with your newly uploaded GitHub image... -->
     <!-- 頂部精密金屬感導覽列 -->
     <header class="border-b border-white/20 bg-white/60 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <!-- 串接您剛剛上傳到 GitHub 的新 Logo 圖片 -->
                 <div class="w-8 h-8 rounded-lg overflow-hidden border border-white bg-slate-100 flex items-center justify-center shadow-sm">
-                    <img src="unnamed.png" alt="NFU IRS Lab Logo" class="w-full h-full object-cover" onerror="this.src='unnamed.png'">
+                    <img src="https://raw.githubusercontent.com/NFU-Robotlab/my-website/main/unnamed.png" alt="NFU IRS Lab Logo" class="w-full h-full object-cover" onerror="this.src='unnamed.png'">
                 </div>
                 
                 <span class="text-base font-black tracking-tight text-slate-950">
@@ -121,67 +119,164 @@
         </div>
     </header>
 
-    <!-- 💡 STREAMING_CHUNK: Building the central minimalist frosted glass panel... -->
-    <!-- 主內容區：置中單欄大氣排版 -->
-    <main class="max-w-4xl mx-auto px-4 py-12 w-full flex-grow flex flex-col justify-center items-center relative z-10 animate-fade-in">
+    <!-- 主內容區：網頁級雙專欄極簡美學版面 -->
+    <main class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow flex flex-col justify-center items-center relative z-10 animate-fade-in">
         
-        <div class="glass-card rounded-2xl p-8 md:p-10 w-full max-w-2xl space-y-8 relative overflow-hidden">
-            <!-- 裝飾背景網格 -->
-            <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-25 pointer-events-none"></div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-start">
             
-            <!-- 卡片標籤 -->
-            <div class="w-full flex justify-between items-center border-b border-slate-200/50 pb-3 font-mono text-[10px] text-slate-500">
-                <span>用程式賦予思考，用機械改變世界。</span>
-                <span class="text-orange-500 font-semibold">VER 1.5</span>
+            <!-- 【左側：網頁獨立選單專欄】(Sidebar Column, md:col-span-4) -->
+            <div class="md:col-span-4 space-y-6">
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden space-y-5">
+                    <!-- 裝飾背景網格 -->
+                    <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-25 pointer-events-none"></div>
+                    
+                    <div class="accent-border pl-3">
+                        <h3 class="text-xs font-bold text-slate-800 tracking-wider uppercase">🧭 導覽選單</h3>
+                        <p class="text-[9px] text-slate-400 font-mono mt-0.5">[ NAV_MENU // SELECTIONS ]</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <!-- 選單 1: 實驗室介紹 -->
+                        <button onclick="openAboutModal(); playSynth('click')" onmouseenter="playSynth('hover')" class="group p-4 bg-white/70 hover:bg-white border border-slate-200 hover:border-orange-500 rounded-xl transition-all shadow-sm flex items-center justify-between text-left w-full">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl">🏢</span>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition-colors">實驗室介紹</p>
+                                    <p class="text-[9px] text-slate-400 leading-none mt-0.5">ABOUT_US // INTRO</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 group-hover:text-orange-500 transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </button>
+
+                        <!-- 選單 2: 歷屆學習導覽 -->
+                        <a href="https://github.com/nfu-irs-lab/docs-legacy" target="_blank" rel="noopener noreferrer" onclick="playSynth('click')" onmouseenter="playSynth('hover')" class="group p-4 bg-white/70 hover:bg-white border border-slate-200 hover:border-orange-500 rounded-xl transition-all shadow-sm flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl">🧭</span>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition-colors">歷屆學習導覽</p>
+                                    <p class="text-[9px] text-slate-400 leading-none mt-0.5">LEARNING_GUIDES</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 group-hover:text-orange-500 transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <!-- 歡迎與簡介區塊 -->
-            <div onmouseenter="playSynth('hover')" class="space-y-4">
-                <div class="accent-border pl-4">
-                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-950">
-                        歡迎來到 NFU IRS Lab
-                    </h2>
-                    <p class="text-xs text-slate-400 font-mono mt-0.5">
-                        [ INTRO // 智慧型機器人系統實驗室 ]
-                    </p>
-                </div>
-                
-                <p class="text-slate-600 text-sm leading-relaxed font-light">
-                    我們是一群熱愛機器人與科技實作的創作者，專注於機構設計、嵌入式系統、感測控制、AI 與自動化技術。在這裡，我們把課堂知識化為能移動、能感知、能思考的作品，透過一次次設計、測試與改良，讓創意真正走進現實。
-                </p>
-                
-                <div class="p-4 bg-white/50 rounded-xl border border-white/60 text-xs text-slate-600 leading-relaxed">
-                    💡 <span class="font-bold text-slate-950">SYSTEM NOTICE // 新進人員必讀：</span><br>
-                    請確實按照訓練專區，由淺入深地完成 Onshape 3D 建模、設備加工、Robotis 控制及 C# 封包通訊等四大核心技術訓練。
+            <!-- 【右側：歡迎來到 NFU IRS Lab 獨立專欄】(Main Welcome Column, md:col-span-8) -->
+            <div class="md:col-span-8 space-y-6">
+                <div class="glass-card rounded-2xl p-8 md:p-10 relative overflow-hidden space-y-8">
+                    <!-- 裝飾背景網格 -->
+                    <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-25 pointer-events-none"></div>
+                    
+                    <div class="w-full flex justify-between items-center border-b border-slate-200/50 pb-3 font-mono text-[10px] text-slate-500">
+                        <span>PORTAL SYSTEM // 實驗室訓練門戶</span>
+                        <span class="text-orange-500 font-semibold">VER 1.6</span>
+                    </div>
+
+                    <div onmouseenter="playSynth('hover')" class="space-y-4">
+                        <div class="accent-border pl-4">
+                            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-950">
+                                歡迎來到 NFU IRS Lab
+                            </h2>
+                            <p class="text-xs text-slate-400 font-mono mt-0.5">
+                                [ INTRO // 智慧型機器人系統實驗室 ]
+                            </p>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm leading-relaxed font-light">
+                            本網站用於展示智慧型機器人系統實驗室的研究成果、專案簡介與新進成員培訓資源。我們專注於高溫/高扭矩伺服馬達通訊控制、連桿機構力學設計，以及 Windows GUI 機械手臂操作平台的開源與研究。
+                        </p>
+                        
+                        <div class="p-4 bg-white/50 rounded-xl border border-white/60 text-xs text-slate-600 leading-relaxed">
+                            💡 <span class="font-bold text-slate-950">SYSTEM NOTICE // 新進人員必讀：</span><br>
+                            請確實按照訓練專區，由淺入深地完成 Onshape 3D 建模、設備加工、Robotis 控制及 C# 封包通訊等四大核心技術訓練。
+                        </div>
+                    </div>
+
+                    <!-- 控制與入口 -->
+                    <div class="space-y-4 pt-4 border-t border-slate-200/50">
+                        <p class="text-slate-600 text-xs font-mono tracking-wider">[ INTERFACE_READY // 2026-07-19 ]</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3 w-full">
+                            <button onclick="openRolesModal(); playSynth('click')" class="flex-1 text-center px-6 py-3.5 bg-white/80 border border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5">
+                                💼 實驗室職務
+                            </button>
+                            <a href="training.html" onclick="playSynth('click')" class="flex-1 text-center bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-1">
+                                🎓 新進人員訓練 &gt;
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- 控制與入口 -->
-            <div class="space-y-4 pt-4 border-t border-slate-200/50">
-                <p class="text-slate-600 text-xs font-mono tracking-wider">[ INTERFACE_READY // 2026-07-17 ]</p>
-                
-                <div class="flex flex-col sm:flex-row gap-3 w-full">
-                    <button onclick="openRolesModal(); playSynth('click')" class="flex-1 text-center px-6 py-3.5 bg-white/80 border border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5">
-                        💼 實驗室職務
-                    </button>
-                    <a href="training.html" onclick="playSynth('click')" class="flex-1 text-center bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-1">
-                        🎓 新進人員訓練 &gt;
-                    </a>
-                </div>
-            </div>
         </div>
         
     </main>
 
     <!-- 頁尾宣告 -->
     <footer class="border-t border-white/20 bg-white/60 text-slate-500 py-6 text-center text-[10px] font-mono relative z-10 backdrop-blur-md">
-        <div class="max-w-4xl mx-auto px-4">
-            <p>NFU INTELLIGENT & ROBOTIC SYSTEMS LABORATORY // SECURED PORTAL 1.5</p>
+        <div class="max-w-5xl mx-auto px-4">
+            <p>NFU INTELLIGENT & ROBOTIC SYSTEMS LABORATORY // SECURED PORTAL 1.6</p>
             <p class="mt-1 text-slate-400">© 2026 國立虎尾科技大學 智能與機器人系統實驗室. AUTHORIZED PERSONNEL ONLY.</p>
         </div>
     </footer>
 
-    <!-- 💡 STREAMING_CHUNK: Coding the functional role database interactive modal popup... -->
+    <!-- 實驗室介紹彈窗 (About Us Modal Popup) -->
+    <div id="about-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="backdrop-blur-glass border border-white/60 bg-white/85 rounded-2xl p-6 max-w-2xl w-full relative overflow-hidden shadow-2xl font-sans">
+            
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-4 font-mono">
+                <span class="text-slate-800 font-bold text-xs tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                    DATA: ABOUT_IRS_LAB_v1.0
+                </span>
+                <button onclick="closeAboutModal(); playSynth('click')" class="text-slate-400 hover:text-slate-950 font-semibold transition-colors text-xs">[ CLOSE ]</button>
+            </div>
+            
+            <div class="space-y-4 text-left">
+                <h3 class="text-xl font-black text-slate-900 tracking-tight">國立虎尾科技大學 智能與機器人系統實驗室</h3>
+                
+                <div class="p-3.5 bg-orange-50 rounded-xl border border-orange-100 text-xs text-slate-700 leading-relaxed">
+                    👨‍🏫 <strong>指導教授</strong>：王榮爵 教授 (Professor Jung-Chuan Wang) <br>
+                    📍 <strong>實驗室位置</strong>：電資學院 電子大樓 5F 控制系統研究室 (ATC0206)
+                </div>
+
+                <div class="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p class="font-bold text-slate-800">🔬 核心研究領域 (Research Topics)：</p>
+                    <ol class="list-decimal list-inside space-y-2 pl-1">
+                        <li>
+                            <strong class="text-slate-900">智慧型移動機器人 (AGV / AMR) 與無人載具</strong>：<br>
+                            <span class="text-slate-500 pl-4 block">專注於多感測器融合 SLAM 空間建圖、避障導航及運動軌跡精密補償控制。</span>
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">智慧序列馬達通訊控制</strong>：<br>
+                            <span class="text-slate-500 pl-4 block">利用 Dynamixel AX/MX/XM 等高溫高扭矩伺服馬達，研析 Protocol 自行打包發送與閉迴路精密控制。</span>
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">多軸機械手臂與開源 SDK 開發</strong>：<br>
+                            <span class="text-slate-500 pl-4 block">自主開發機械手臂函式庫 (RASDK)，提供 HIWIN、TM 機器人與多關節夾爪的快速二次開發對接。</span>
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">3D 機器視覺整合</strong>：<br>
+                            <span class="text-slate-500 pl-4 block">結合 Intel RealSense 深度攝影機、ArUco 空間二維碼定位與電腦視覺，完成高精度視覺物體辨識與抓取。</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <p class="text-[11px] text-slate-400 italic text-center border-t border-slate-200/50 pt-3">
+                    學術、實作、團結、共享。培育自動化與智慧機器人跨領域高階研發人才。
+                </p>
+            </div>
+            
+            <div class="mt-5 pt-3 border-t border-slate-200/60 text-center font-mono">
+                <button onclick="closeAboutModal(); playSynth('click')" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs tracking-wider rounded-xl transition-all shadow-md">
+                    TERMINATE_SESSION // 關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 實驗室職務彈窗 (Minimalist Glassmorphism Modal) -->
     <div id="roles-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="backdrop-blur-glass border border-white/60 bg-white/85 rounded-2xl p-6 max-w-xl w-full relative overflow-hidden shadow-2xl font-sans">
@@ -222,10 +317,10 @@
                             ⚡
                         </div>
                         <h4 class="text-sm font-bold text-slate-900 group-hover:text-slate-800 transition-colors">
-                            技術助教
+                            技術助教與安全維護
                         </h4>
                         <p class="text-[11px] text-slate-500 mt-1.5 leading-relaxed">
-                            GitHub 維護、課程協助教學。
+                            GitHub 維護、高階設備安全點檢與實驗室 5S 螺絲管理。
                         </p>
                     </div>
                     <div class="text-[10px] font-mono text-slate-700 font-semibold flex items-center gap-1 mt-2">
@@ -236,13 +331,12 @@
             
             <div class="mt-5 pt-3 border-t border-slate-200/60 text-center font-mono">
                 <button onclick="closeRolesModal(); playSynth('click')" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs tracking-wider rounded-xl transition-all shadow-md">
-                     關閉
+                    TERMINATE_SESSION // 關閉
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 💡 STREAMING_CHUNK: Coding Web Audio API synthesizer for acoustic button feedbacks... -->
     <!-- Audio & Interaction Scripts -->
     <script>
         let isAudioEnabled = false;
@@ -336,6 +430,21 @@
 
         function closeRolesModal() {
             const modal = document.getElementById('roles-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // 實驗室介紹彈窗控制邏輯
+        function openAboutModal() {
+            const modal = document.getElementById('about-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeAboutModal() {
+            const modal = document.getElementById('about-modal');
             if (modal) {
                 modal.classList.add('hidden');
             }
